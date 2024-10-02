@@ -1,7 +1,8 @@
 import './App.css';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
-import SignUpPage from './pages/SignupPage';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import SocialSignup from './pages/SocialSignup';
 
 function App() {
   return (
@@ -9,9 +10,9 @@ function App() {
       <div className='w-[600px] h-screen mx-auto font-[Pretendard]'>
         <div className="h-full border border-custom-softgrey">
           <Routes>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignUpPage />} />
-            <Route path="/social/sign-up" element={<SignUpPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/social/sign-up" element={<SocialSignup />} />
           </Routes>
         </div>
       </div>
