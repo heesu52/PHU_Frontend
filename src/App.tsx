@@ -1,14 +1,23 @@
-import './App.css'
+import './App.css';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import SocialSignup from './pages/SocialSignup';
 
 function App() {
-
   return (
-    <div className='w-[600px] h-screen mx-auto font-[Pretendard]'>
-      <div className="h-full border border-custom-softgrey">
-        <span>메인 페이지</span>
+    <Router>
+      <div className='w-[600px] h-screen mx-auto font-[Pretendard]'>
+        <div className="h-full border border-custom-softgrey">
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/social/sign-up" element={<SocialSignup />} />
+          </Routes>
+        </div>
       </div>
-    </div>
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;
