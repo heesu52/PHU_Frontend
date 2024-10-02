@@ -3,8 +3,10 @@ import Input from "../components/common/Input";
 import SubmitButton from "../components/common/button/SubmitButton";
 import Button from "../components/common/button/Button";
 import NavigationBar from "../components/common/button/NavigationBar";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
+    const navigate = useNavigate();
     // formData 상태를 객체로 초기화
     const [formData, setFormData] = useState({
         name: '',
@@ -45,6 +47,7 @@ function SignUp() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        navigate('/login');
         console.log("회원가입 정보:", formData);
     };
 
@@ -156,6 +159,7 @@ function SignUp() {
                     size="large"              
                     className={`mt-6 mb-3 ${isFormValid ? 'bg-custom-blue' : 'bg-custom-skyblue'}`} 
                     disabled={!isFormValid}  // 폼이 유효하지 않으면 버튼 비활성화
+                    
                 />
             </form>
         </div>
