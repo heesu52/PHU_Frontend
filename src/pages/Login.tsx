@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Input from "../components/common/Input";
 import SubmitButton from "../components/common/button/SubmitButton";
 import NavigationBar from "../components/common/button/NavigationBar";
-import { GoogleLoginApi, LoginApi } from "../store/api/userApi";
+import { GoogleLoginApi, LoginApi } from "../store/api/index";
 //import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 
 function LoginPage() {
@@ -16,18 +16,16 @@ function LoginPage() {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await LoginApi(email, password);
-    if (res) {
-      navigate("/social/sign-up");
-    } else if (res.data.code === "M002") {
-      setErrorMessage(res.data.message);
+    const response = await LoginApi(email, password);
+    navigate("/");
+    if (response?.data?.code === "M002") {
+      setErrorMessage(response?.data?.message);
     }
   };
 
   const onGoogleLogin = async () => {
     const res = await GoogleLoginApi();
-    if (res) {
-      console.log(res.data);
+    if (res) {;
       navigate("/social/sign-up");
     }
   };

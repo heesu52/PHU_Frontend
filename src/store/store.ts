@@ -7,8 +7,8 @@ interface ApiUrlState {
 }
 
 export const useApiUrlStore = create<ApiUrlState>((set) => ({
-    //apiUrl: 'https://fitee.site/api',
-    apiUrl: 'http://localhost:8080/',  // 초기 상태 값
+    apiUrl: 'https://fitee.site',
+    //apiUrl: 'http://localhost:8080',  // 초기 상태 값
     setApiUrl: (url: string) => set((state) => ({ ...state, apiUrl: url })),  // apiUrl을 설정하는 함수
 }));
 

@@ -1,37 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Input from "../components/common/Input";
 import SubmitButton from "../components/common/button/SubmitButton";
 import Button from "../components/common/button/Button";
 import NavigationBar from "../components/common/button/NavigationBar";
 import { useNavigate } from "react-router-dom";
-import { SocialSignUpApi } from "../store/api";
-import { useUserDataStore } from "../store/store";  // zustand store import
-
+import { SocialSignUpApi } from "../store/api/index";
+// import { useUserDataStore } from "../store/store";  
 function SocialSignUp() {
   const navigate = useNavigate();
-  const userData = useUserDataStore((state) => state.userData); // zustand로부터 userData 가져오기
+  //const userData = useUserDataStore(); 
 
-  // formData 상태를 객체로 초기화, email과 name은 userData에서 가져옵니다.
   const [formData, setFormData] = useState({
-    name: userData.name || "", // 상태가 있을 경우 userData에서 가져오기
+    name: "", 
     age: "",
-    email: userData.email || "", // 상태가 있을 경우 userData에서 가져오기
+    email: "", 
     password: "",
     gender: "",
     tel: "",
     part: "",
   });
 
-  // useEffect를 사용해 userData가 변경될 경우 formData 업데이트
-  useEffect(() => {
-    setFormData((prevData) => ({
-      ...prevData,
-      name: userData.name || "",
-      email: userData.email || "",
-    }));
-  }, [userData]); // userData가 변경될 때마다 formData 업데이트
-
-  // 모든 필드가 비어 있지 않으면 form이 유효하도록 설정
   const isFormValid =
     formData.name !== "" &&
     formData.age !== "" &&
@@ -67,7 +55,7 @@ function SocialSignUp() {
 
   return (
     <div>
-      <NavigationBar label="회원가입" />
+      <NavigationBar label="소셜회원가입" />
       <form className="flex flex-col items-center mt-5" onSubmit={handleSubmit}>
         <div className="flex flex-col">
           <span className="text-[14px] text-[#858585] mb-1">이름</span>

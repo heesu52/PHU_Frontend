@@ -4,7 +4,7 @@ import SubmitButton from "../components/common/button/SubmitButton";
 import Button from "../components/common/button/Button";
 import NavigationBar from "../components/common/button/NavigationBar";
 import { useNavigate } from "react-router-dom";
-import { SignUpApi } from "../store/api";
+import { SignUpApi } from "../store/api/index";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -47,9 +47,8 @@ function SignUp() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    navigate('/login');
     SignUpApi(formData);
-    navigate("/login");
-    console.log("회원가입 정보:", formData);
   };
 
   return (
@@ -123,10 +122,10 @@ function SignUp() {
             <Button
               label="여성"
               size="medium"
-              value="women"
-              onClick={() => handleButtonClick("gender", "women")}
+              value="FEMALE"
+              onClick={() => handleButtonClick("gender", "FEMALE")}
               className={
-                formData.gender === "women"
+                formData.gender === "FEMALE"
                   ? "bg-custom-blue text-white"
                   : "border border-custom-softgrey text-custom-softgrey"
               }
@@ -134,10 +133,10 @@ function SignUp() {
             <Button
               label="남성"
               size="medium"
-              value="men"
-              onClick={() => handleButtonClick("gender", "men")}
+              value="MALE"
+              onClick={() => handleButtonClick("gender", "MALE")}
               className={
-                formData.gender === "men"
+                formData.gender === "MALE"
                   ? "bg-custom-blue text-white"
                   : "border border-custom-softgrey text-custom-softgrey"
               }
@@ -150,10 +149,10 @@ function SignUp() {
             <Button
               label="트레이너"
               size="medium"
-              value="trainer"
-              onClick={() => handleButtonClick("part", "trainer")}
+              value="TRAINER"
+              onClick={() => handleButtonClick("part", "TRAINER")}
               className={
-                formData.part === "trainer"
+                formData.part === "TRAINER"
                   ? "bg-custom-blue text-white"
                   : "border border-custom-softgrey"
               }
@@ -161,10 +160,10 @@ function SignUp() {
             <Button
               label="회원"
               size="medium"
-              value="member"
-              onClick={() => handleButtonClick("part", "member")}
+              value="MEMBER"
+              onClick={() => handleButtonClick("part", "MEMBER")}
               className={
-                formData.part === "member"
+                formData.part === "MEMBER"
                   ? "bg-custom-blue text-white"
                   : "border border-custom-softgrey"
               }
