@@ -17,9 +17,10 @@ function Login() {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const response = await LoginApi(email, password);
-    navigate("/");
-    if (response?.data?.code === "M002") {
-      setErrorMessage(response?.data?.message);
+    if (response?.success) {
+      navigate("/list"); 
+    } else {
+      setErrorMessage("존재하지 않는 아이디 또는 비밀번호 입니다.");  
     }
   };
 
@@ -50,7 +51,7 @@ function Login() {
           required
         />
         {errormessage && (
-          <div className="mb-4 text-red-500">{errormessage}</div>
+          <div className="text-red-500 ">{errormessage}</div>
         )}
         <SubmitButton
           label="로그인"

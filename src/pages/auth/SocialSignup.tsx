@@ -1,4 +1,4 @@
-import SocialSignUpComponent from "../SocialSignup";
+import SocialSignUpComponent from "../../components/auth/SocialSignup";
 
 function SocialSignUpPage() {
   
