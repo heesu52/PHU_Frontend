@@ -1,30 +1,23 @@
 import axios, {AxiosError} from "axios";
-import { useApiUrlStore } from "../store";
+import { useApiUrlStore } from "../../store";
 
 const apiUrl = useApiUrlStore.getState().apiUrl; 
 
 //소셜 로그인 api
-export const GoogleLoginApi = async () => {
+export const GoogleLoginApi = () => {
     try {
-        const res = await axios.post(`${apiUrl}/oauth2/authorization/google`, {
-        });
-        console.log(res.data)
-        if (res.status === 200) {
-            console.log("로그인 성공");
-            return res.data;
-        }
+      // 구글 로그인 URL로 리디렉션
+      window.location.href = 'https://fitee.site/oauth2/authorization/google';
     } catch (error) {
-        console.error("구글 로그인 에러", error);
+      console.error("구글 로그인 에러", error);
     }
-};
+  };
 
 //로그인 api
 export const LoginApi = async (email: string, password: string) => {
     try {
-      const res = await axios.post(`${apiUrl}/login`, {
-        email,
-        password,
-      });
+      const res = await axios.post(`${apiUrl}/login`,
+        { email, password}, {withCredentials:true});
   
       if (res.status === 200) {
         console.log("로그인 성공");

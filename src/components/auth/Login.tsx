@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Input from "../components/common/Input";
-import SubmitButton from "../components/common/button/SubmitButton";
-import NavigationBar from "../components/common/button/NavigationBar";
-import { GoogleLoginApi, LoginApi } from "../store/api/index";
-//import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import Input from "../../components/common/Input";
+import SubmitButton from "../../components/common/button/SubmitButton";
+import NavigationBar from "../../components/common/bar/NavigationBar";
+import googleLogin from "../../assets/google.svg"
+import { GoogleLoginApi, LoginApi } from "../../store/api/index";
 
-function LoginPage() {
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errormessage, setErrorMessage] = useState("");
@@ -24,10 +24,7 @@ function LoginPage() {
   };
 
   const onGoogleLogin = async () => {
-    const res = await GoogleLoginApi();
-    if (res) {;
-      navigate("/social/sign-up");
-    }
+    GoogleLoginApi();
   };
 
   return (
@@ -74,16 +71,16 @@ function LoginPage() {
             회원 가입
           </a>
         </div>
-
         <div className="flex items-center justify-center mb-4">
-          <div
+          <img
+            src={googleLogin}
             onClick={onGoogleLogin}
-            className="w-5 h-10 border border-blue-300"
-          />
+            className="cursor-pointer"
+            />
         </div>
       </form>
     </div>
   );
 }
 
-export default LoginPage;
+export default Login;

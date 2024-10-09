@@ -1,37 +1,35 @@
 import { useState } from "react";
-import Input from "../components/common/Input";
-import SubmitButton from "../components/common/button/SubmitButton";
-import Button from "../components/common/button/Button";
-import NavigationBar from "../components/common/button/NavigationBar";
+import Input from "../../components/common/Input";
+import SubmitButton from "../../components/common/button/SubmitButton";
+import Button from "../../components/common/button/Button";
+import NavigationBar from "../../components/common/bar/NavigationBar";
 import { useNavigate } from "react-router-dom";
-import { SignUpApi } from "../store/api/index";
+import { SocialSignUpApi } from "../../store/api";
+ 
 
-function SignUp() {
+function SocialSignUp() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    name: "",
-    age: "",
-    email: "",
+
+  const [socialformData, setSoicalFormData] = useState({
+    age: 0,
     password: "",
     gender: "",
     tel: "",
     part: "",
+    social_id: ""
   });
 
-  // 모든 필드가 비어 있지 않으면 form이 유효하도록 설정
   const isFormValid =
-    formData.name !== "" &&
-    formData.age !== "" &&
-    formData.email !== "" &&
-    formData.password !== "" &&
-    formData.tel !== "" &&
-    formData.gender !== "" &&
-    formData.part !== "";
+  socialformData.age !== 0 &&
+  socialformData.password !== "" &&
+  socialformData.tel !== "" &&
+  socialformData.gender !== "" &&
+  socialformData.part !== "";
 
   // 필드 값 변경 처리
   const handleChange = (e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
+    setSoicalFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
@@ -39,21 +37,22 @@ function SignUp() {
 
   // 성별 및 파트 버튼 클릭 시 처리
   const handleButtonClick = (name: string, value: string) => {
-    setFormData((prevData) => ({
+    setSoicalFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: value, // 성별 또는 파트 값을 해당 필드에 설정
     }));
   };
+
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     navigate('/login');
-    SignUpApi(formData);
+    SocialSignUpApi(socialformData);
   };
 
   return (
     <div>
-      <NavigationBar label="회원가입" />
+      <NavigationBar label="소셜회원가입" />
       <form className="flex flex-col items-center mt-5" onSubmit={handleSubmit}>
         <div className="flex flex-col">
           <span className="text-[14px] text-[#858585] mb-1">이름</span>
@@ -61,19 +60,19 @@ function SignUp() {
             size="large"
             type="text"
             name="name"
-            value={formData.name}
             className="mb-4"
             onChange={handleChange}
-            required
+            readOnly={true}
+            disabled={true}
           />
         </div>
         <div className="flex flex-col">
           <span className="text-[14px] text-[#858585] mb-1">나이</span>
           <Input
             size="large"
-            type="text"
+            type="number"
             name="age"
-            value={formData.age}
+            value={socialformData.age}
             className="mb-4"
             onChange={handleChange}
             required
@@ -85,10 +84,10 @@ function SignUp() {
             size="large"
             type="email"
             name="email"
-            value={formData.email}
             className="mb-4"
             onChange={handleChange}
-            required
+            readOnly={true}
+            disabled={true}
           />
         </div>
         <div className="flex flex-col">
@@ -97,7 +96,7 @@ function SignUp() {
             size="large"
             type="password"
             name="password"
-            value={formData.password}
+            value={socialformData.password}
             className="mb-4"
             onChange={handleChange}
             required
@@ -110,7 +109,7 @@ function SignUp() {
             type="text"
             name="tel"
             placeholder="( - 제외 )"
-            value={formData.tel}
+            value={socialformData.tel}
             className="mb-4"
             onChange={handleChange}
             required
@@ -125,7 +124,7 @@ function SignUp() {
               value="FEMALE"
               onClick={() => handleButtonClick("gender", "FEMALE")}
               className={
-                formData.gender === "FEMALE"
+                socialformData.gender === "FEMALE"
                   ? "bg-custom-blue text-white"
                   : "border border-custom-softgrey text-custom-softgrey"
               }
@@ -136,7 +135,7 @@ function SignUp() {
               value="MALE"
               onClick={() => handleButtonClick("gender", "MALE")}
               className={
-                formData.gender === "MALE"
+                socialformData.gender === "MALE"
                   ? "bg-custom-blue text-white"
                   : "border border-custom-softgrey text-custom-softgrey"
               }
@@ -149,10 +148,10 @@ function SignUp() {
             <Button
               label="트레이너"
               size="medium"
-              value="TRAINER"
+              value="trainer"
               onClick={() => handleButtonClick("part", "TRAINER")}
               className={
-                formData.part === "TRAINER"
+                socialformData.part === "TRAINER"
                   ? "bg-custom-blue text-white"
                   : "border border-custom-softgrey"
               }
@@ -163,7 +162,7 @@ function SignUp() {
               value="MEMBER"
               onClick={() => handleButtonClick("part", "MEMBER")}
               className={
-                formData.part === "MEMBER"
+                socialformData.part === "MEMBER"
                   ? "bg-custom-blue text-white"
                   : "border border-custom-softgrey"
               }
@@ -183,4 +182,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SocialSignUp;

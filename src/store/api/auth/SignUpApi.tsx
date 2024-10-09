@@ -1,5 +1,5 @@
 import axios, {AxiosError} from "axios";
-import { useApiUrlStore } from "../store";
+import { useApiUrlStore } from "../../store";
 
 
 const apiUrl = useApiUrlStore.getState().apiUrl; 
@@ -43,25 +43,25 @@ export const SignUpApi = async (formData: {
   };
   
 
-//소셜 로그인 회원가입Api
-export const SocialSignUpApi = async (formData: {
-    name: string;
-    age: string;
-    email: string;
+  export const SocialSignUpApi = async (socialformData: {
+    age: number;
     password: string;
     gender: string;
     tel: string;
-    part: string;}) => {
+    part: string;
+}) => {
     try {
-        const res = await axios.post(`${apiUrl}/sign-up/social`, {
-            name: formData.name,
-            age: formData.age,
-            email: formData.email,
-            password: formData.password,
-            gender: formData.gender,
-            tel: formData.tel,
-            part: formData.part
-        });
+
+        const res = await axios.post(
+            `${apiUrl}/sign-up/social`,
+            {
+                age: socialformData.age,
+                password: socialformData.password,
+                gender: socialformData.gender,
+                tel: socialformData.tel,
+                part: socialformData.part
+            },
+        );
         if (res.status === 200) {
             console.log("회원가입 성공", res.data);
         } else if (res.data.code === 'M001') {
@@ -71,4 +71,5 @@ export const SocialSignUpApi = async (formData: {
         console.error("회원가입 에러", error);
     }
 };
+
 

@@ -1,25 +1,24 @@
 import { useState } from "react";
-import Input from "../components/common/Input";
-import SubmitButton from "../components/common/button/SubmitButton";
-import Button from "../components/common/button/Button";
-import NavigationBar from "../components/common/button/NavigationBar";
+import Input from "../../components/common/Input";
+import SubmitButton from "../../components/common/button/SubmitButton";
+import Button from "../../components/common/button/Button";
+import NavigationBar from "../../components/common/bar/NavigationBar";
 import { useNavigate } from "react-router-dom";
-import { SocialSignUpApi } from "../store/api/index";
-// import { useUserDataStore } from "../store/store";  
-function SocialSignUp() {
-  const navigate = useNavigate();
-  //const userData = useUserDataStore(); 
+import { SignUpApi } from "../../store/api/index";
 
+function SignUp() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: "", 
+    name: "",
     age: "",
-    email: "", 
+    email: "",
     password: "",
     gender: "",
     tel: "",
     part: "",
   });
 
+  // 모든 필드가 비어 있지 않으면 form이 유효하도록 설정
   const isFormValid =
     formData.name !== "" &&
     formData.age !== "" &&
@@ -42,20 +41,19 @@ function SocialSignUp() {
   const handleButtonClick = (name: string, value: string) => {
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value, // 성별 또는 파트 값을 해당 필드에 설정
+      [name]: value,
     }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    SocialSignUpApi(formData);
-    navigate("/login");
-    console.log("회원가입 정보:", formData);
+    navigate('/login');
+    SignUpApi(formData);
   };
 
   return (
     <div>
-      <NavigationBar label="소셜회원가입" />
+      <NavigationBar label="회원가입" />
       <form className="flex flex-col items-center mt-5" onSubmit={handleSubmit}>
         <div className="flex flex-col">
           <span className="text-[14px] text-[#858585] mb-1">이름</span>
@@ -73,7 +71,7 @@ function SocialSignUp() {
           <span className="text-[14px] text-[#858585] mb-1">나이</span>
           <Input
             size="large"
-            type="text"
+            type="number"
             name="age"
             value={formData.age}
             className="mb-4"
@@ -124,10 +122,10 @@ function SocialSignUp() {
             <Button
               label="여성"
               size="medium"
-              value="women"
-              onClick={() => handleButtonClick("gender", "women")}
+              value="FEMALE"
+              onClick={() => handleButtonClick("gender", "FEMALE")}
               className={
-                formData.gender === "women"
+                formData.gender === "FEMALE"
                   ? "bg-custom-blue text-white"
                   : "border border-custom-softgrey text-custom-softgrey"
               }
@@ -135,10 +133,10 @@ function SocialSignUp() {
             <Button
               label="남성"
               size="medium"
-              value="men"
-              onClick={() => handleButtonClick("gender", "men")}
+              value="MALE"
+              onClick={() => handleButtonClick("gender", "MALE")}
               className={
-                formData.gender === "men"
+                formData.gender === "MALE"
                   ? "bg-custom-blue text-white"
                   : "border border-custom-softgrey text-custom-softgrey"
               }
@@ -151,10 +149,10 @@ function SocialSignUp() {
             <Button
               label="트레이너"
               size="medium"
-              value="trainer"
-              onClick={() => handleButtonClick("part", "trainer")}
+              value="TRAINER"
+              onClick={() => handleButtonClick("part", "TRAINER")}
               className={
-                formData.part === "trainer"
+                formData.part === "TRAINER"
                   ? "bg-custom-blue text-white"
                   : "border border-custom-softgrey"
               }
@@ -162,10 +160,10 @@ function SocialSignUp() {
             <Button
               label="회원"
               size="medium"
-              value="member"
-              onClick={() => handleButtonClick("part", "member")}
+              value="MEMBER"
+              onClick={() => handleButtonClick("part", "MEMBER")}
               className={
-                formData.part === "member"
+                formData.part === "MEMBER"
                   ? "bg-custom-blue text-white"
                   : "border border-custom-softgrey"
               }
@@ -185,4 +183,4 @@ function SocialSignUp() {
   );
 }
 
-export default SocialSignUp;
+export default SignUp;
