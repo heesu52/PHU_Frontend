@@ -18,7 +18,7 @@ function Login() {
     e.preventDefault();
     const response = await LoginApi(email, password);
     if (response?.success) {
-      navigate("/login"); 
+      navigate("/list"); 
     }
     else {
       if (response?.errorCode === "M002"){
