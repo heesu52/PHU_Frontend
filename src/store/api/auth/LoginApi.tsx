@@ -1,4 +1,4 @@
-import axios, {AxiosError} from "axios";
+import axios from "axios";
 import { useApiUrlStore } from "../../store";
 
 const apiUrl = useApiUrlStore.getState().apiUrl; 
@@ -14,54 +14,52 @@ export const GoogleLoginApi = () => {
   };
 
 
-//로그인 api
+// 로그인 api
 export const LoginApi = async (email: string, password: string) => {
   try {
-    const res = await axios.post(`${apiUrl}/login`,
-      { email, password }, { withCredentials: true });
+    const res = await axios.post(`${apiUrl}/login`, { email, password }, { withCredentials: true });
 
     if (res.status === 200) {
       console.log("로그인 성공");
       return { success: true };
     }
   } catch (error) {
-    if (error instanceof AxiosError) {
+    if (axios.isAxiosError(error)) {
       const errorCode = error.response?.data?.code; // 응답 코드 확인
 
-      if (errorCode === 'J001') {
-        // 엑세스 토큰 만료 시 리프레시 토큰으로 재발급 시도
-        console.log("엑세스 토큰 만료, 리프레시 토큰으로 재발급 시도");
-        await RefreshTokenApi(); // 리프레시 토큰 발급 API 호출
-        console.log("엑세스 토큰 만료");
-        return; 
+      // 중복 이메일을 입력했을 경우
+      if (errorCode === "M002") {
+        console.log(error.response?.data.message);
+        return { 
+          success: false, 
+          errorCode: "M002", 
+          message: "존재하지 않는 이메일이거나 비밀번호입니다" 
+        };
       }
-
-      // 다른 AxiosError 처리
-      console.error(error.response?.data?.message);
       return { success: false };
     } else {
-      // AxiosError가 아닌 경우 (예: 네트워크 오류, 기타 예외 처리)
       console.error("로그인 실패:", error);
     }
   }
 };
 
+// 리프레시 토큰 발급 api
+export const RefreshTokenApi = async () => {
+  try {
+    const res = await axios.post(`${apiUrl}/reissue`,
+       {}, { withCredentials: true });
 
-  //리프레시 토큰 발급  api
-  export const RefreshTokenApi = async () => {
-    try {
-      const res = await axios.post(`${apiUrl}/reissue`,
-        { withCredentials: true });
-  
-      if (res.status === 200) {
-        console.log("토큰 재발급 성공");
-      }
-    } catch (error) {
-      console.error("리프레시 토큰 재발급 실패", error)
+    if (res.status === 200) {
+      console.log("토큰 재발급 성공");
+      return { success: true };
     }
-  };
-  
+  } catch (error) {
+    console.error("리프레시 토큰 재발급 실패", error);
+    return { success: false };
+  }
+};
 
+  
 
 //로그아웃 api
 export const LogoutApi = async () => {

@@ -8,6 +8,7 @@ import { SignUpApi } from "../../store/api/index";
 
 function SignUp() {
   const navigate = useNavigate();
+  const [errormessage, setErrorMessage] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     age: "",
@@ -45,10 +46,16 @@ function SignUp() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    navigate('/login');
-    SignUpApi(formData);
+    
+    
+    const response = await SignUpApi(formData);
+    if (response?.success) {
+      navigate('/login');
+    } else {
+      setErrorMessage("중복된 이메일 입니다.");  
+    }
   };
 
   return (
@@ -78,7 +85,6 @@ function SignUp() {
             onChange={handleChange}
             required
           />
-        </div>
         <div className="flex flex-col">
           <span className="text-[14px] text-[#858585] mb-1">이메일</span>
           <Input
@@ -91,6 +97,10 @@ function SignUp() {
             required
           />
         </div>
+        </div>
+        {errormessage && (
+          <div className="text-red-500 ">{errormessage}</div>
+        )}
         <div className="flex flex-col">
           <span className="text-[14px] text-[#858585] mb-1">비밀번호</span>
           <Input
