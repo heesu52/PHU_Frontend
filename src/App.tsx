@@ -3,10 +3,12 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
 import SocialSignup from './pages/auth/SocialSignup';
+import axiosInstance from './components/auth/AxiosProvider';
 
 function App() {
   return (
     <Router>
+      <axiosInstance/>
       <div className='w-[600px] h-screen mx-auto font-[Pretendard]'>
         <div className="h-full border border-custom-softgrey">
           <Routes>

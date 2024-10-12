@@ -18,10 +18,13 @@ function Login() {
     e.preventDefault();
     const response = await LoginApi(email, password);
     if (response?.success) {
-      navigate("/list"); 
-    } else {
-      setErrorMessage("존재하지 않는 아이디 또는 비밀번호 입니다.");  
+      navigate("/login"); 
     }
+    else {
+      if (response?.errorCode === "M002"){
+        setErrorMessage(response.message);
+      }
+    } 
   };
 
   const onGoogleLogin = async () => {
