@@ -14,7 +14,7 @@ function Login() {
 
   const isFormValid = email.trim() !== "" && password.trim() !== "";
 
-  const onSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const response = await LoginApi(email, password);
     if (response?.success) {
@@ -31,7 +31,7 @@ function Login() {
   return (
     <div>
       <NavigationBar label="로그인" />
-      <form className="flex flex-col items-center mt-5" onSubmit={onSubmit}>
+      <form className="flex flex-col items-center mt-5" onSubmit={handleSubmit}>
         <Input
           size="large"
           placeholder="이메일"

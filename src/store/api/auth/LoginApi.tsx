@@ -25,6 +25,7 @@ export const LoginApi = async (email: string, password: string) => {
       return { success: true };
     }
   } catch (error) {
+     // AxiosError에 대한 처리
     if (error instanceof AxiosError) {
       const errorCode = error.response?.data?.code; // 응답 코드 확인
 
@@ -35,10 +36,11 @@ export const LoginApi = async (email: string, password: string) => {
         console.log("엑세스 토큰 만료");
         return; 
       }
-
-      // 다른 AxiosError 처리
-      console.error(error.response?.data?.message);
-      return { success: false };
+      if (errorCode === "M001"){
+        console.error(error.response?.data?.message);
+        return { success: false };
+      }
+     
     } else {
       // AxiosError가 아닌 경우 (예: 네트워크 오류, 기타 예외 처리)
       console.error("로그인 실패:", error);
