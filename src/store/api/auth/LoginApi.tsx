@@ -31,7 +31,7 @@ export const LoginApi = async (email: string, password: string) => {
 
       if (errorCode === 'J001') {
         // 엑세스 토큰 만료 시 리프레시 토큰으로 재발급 시도
-        console.log("엑세스 토큰 만료, 리프레시 토큰으로 재발급 시도");
+        window.alert("로그인 토큰이 만료되었습니다.")
         await RefreshTokenApi(); // 리프레시 토큰 발급 API 호출
         console.log("엑세스 토큰 만료");
         return; 
