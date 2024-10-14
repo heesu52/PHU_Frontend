@@ -2,7 +2,7 @@ import { useState } from "react";
 import Input from "../../components/common/Input";
 import SubmitButton from "../../components/common/button/SubmitButton";
 import Button from "../../components/common/button/Button";
-import NavigationBar from "../../components/common/bar/NavigationBar";
+import HeaderBar from "../../components/common/bar/ArrowHeaderBar";
 import { useNavigate } from "react-router-dom";
 import { SignUpApi } from "../../store/api/index";
 
@@ -60,7 +60,7 @@ function SignUp() {
 
   return (
     <div>
-      <NavigationBar label="회원가입" />
+      <HeaderBar label="회원가입"/>
       <form className="flex flex-col items-center mt-5" onSubmit={handleSubmit}>
         <div className="flex flex-col">
           <span className="text-[14px] text-[#858585] mb-1">이름</span>
