@@ -1,4 +1,4 @@
-import SettingComponent from "./Setting";
+import SettingComponent from "../../components/my/Setting";
 
 function SettingPage() {
   return (

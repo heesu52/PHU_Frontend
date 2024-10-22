@@ -1,6 +1,6 @@
 import ProfileComponent from "../../components/my/Profile";
 
-function MyPage() {
+function ProfilePage() {
   return (
     <div>
       <ProfileComponent />
@@ -8,4 +8,4 @@ function MyPage() {
   );
 }
 
-export default MyPage;
+export default ProfilePage;

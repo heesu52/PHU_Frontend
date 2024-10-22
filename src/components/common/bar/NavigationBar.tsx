@@ -1,15 +1,21 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import memberlsit from '../../../assets/person-lines-fill.svg';
-import calendar from '../../../assets/calendar-check.svg';
-import chat from '../../../assets/chat-left-dots.svg';
-import my from '../../../assets/person-circle.svg';
+import memberlsit from '../../../assets/list.svg';
+import calendar from '../../../assets/calendar.svg';
+import chat from '../../../assets/chat.svg';
+import my from '../../../assets/my.svg';
+import clickmemberlsit from '../../../assets/clicklist.svg';
+import clickcalendar from '../../../assets/clickcalendar.svg';
+import clickchat from '../../../assets/clickchat.svg';
+import clickmy from '../../../assets/clickmy.svg';
+
 
 function ArrowHeaderBar() {
     const navigate = useNavigate();
-    const location = useLocation(); // 현재 경로를 가져오기
+    const location = useLocation(); 
 
     const handleIconClick = (path: string) => {
         navigate(path);
+      
     };
 
     return (
@@ -17,35 +23,35 @@ function ArrowHeaderBar() {
             <div className="flex items-center justify-between w-full ml-10 mr-10">
                 <div className='flex flex-col items-center justify-center cursor-pointer' onClick={() => handleIconClick('/list')}>
                     <img 
-                        src={memberlsit} 
+                        src={location.pathname === '/list' ? clickmemberlsit : memberlsit} 
                         alt="회원 목록" 
-                        className={`w-[25px] h-[25px] ${location.pathname === '/list' ? 'text-red-500' : 'text-custom-softgrey'}`} 
+                        className={"w-[25px] h-[25px]"} 
                     />
-                    <span className={location.pathname === '/list' ? 'text-red-500' : 'text-custom-softgrey'}>회원 목록</span>
+                    <span className={location.pathname === '/list' ? 'text-custom-indigo' : 'text-custom-softgrey'}>회원 목록</span>
                 </div>
                 <div className='flex flex-col items-center justify-center cursor-pointer' onClick={() => handleIconClick('/calendar')}>
                     <img 
-                        src={calendar} 
+                        src={location.pathname === '/calendar' ? clickcalendar : calendar} 
                         alt="캘린더" 
-                        className={`w-[25px] h-[25px] ${location.pathname === '/calendar' ? 'text-red-500' : 'text-custom-softgrey'}`} 
+                        className={"w-[25px] h-[25px]"} 
                     />
-                    <span className={location.pathname === '/calendar' ? 'text-red-500' : 'text-custom-softgrey'}>캘린더</span>
+                    <span className={location.pathname === '/calendar' ? 'text-custom-indigo' : 'text-custom-softgrey'}>캘린더</span>
                 </div>
                 <div className='flex flex-col items-center justify-center cursor-pointer' onClick={() => handleIconClick('/chat')}>
                     <img 
-                        src={chat} 
+                        src={location.pathname === '/chat' ? clickchat : chat} 
                         alt="채팅" 
-                        className={`w-[25px] h-[25px] ${location.pathname === '/chat' ? 'text-red-500' : 'text-custom-softgrey'}`} 
+                        className={"w-[25px] h-[25px]"} 
                     />
-                    <span className={location.pathname === '/chat' ? 'text-red-500' : 'text-custom-softgrey'}>채팅</span>
+                    <span className={location.pathname === '/chat' ? 'text-custom-indigo' : 'text-custom-softgrey'}>채팅</span>
                 </div>
                 <div className='flex flex-col items-center justify-center cursor-pointer' onClick={() => handleIconClick('/my')}>
                     <img 
-                        src={my} 
+                        src={location.pathname === '/my' ? clickmy : my} 
                         alt="마이" 
-                        className={`w-[25px] h-[25px] bg-orange-300 ${location.pathname === '/my' ? 'custom-indigo' : 'text-custom-softgrey'}`} 
+                        className={"w-[25px] h-[25px]"} 
                     />
-                    <span className={location.pathname === '/my' ? 'text-red-500' : 'text-custom-softgrey'}>마이</span>
+                    <span className={location.pathname === '/my' ? 'text-custom-indigo font-bold' : 'text-custom-softgrey'}>마이</span>
                 </div>
             </div>
         </div>
