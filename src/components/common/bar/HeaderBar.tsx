@@ -1,19 +1,21 @@
-
 interface HeaderBarProps {
-  label: string;  // 동적으로 변경할 label 텍스트
-  icon : string;
+  label: string; 
+  icon: string; 
+  onIconClick?: () => void; 
 }
 
-function HeaderBar({ label, icon, }: HeaderBarProps) {
-
-
-    
+function HeaderBar({ label, icon, onIconClick }: HeaderBarProps) {
   return (
     <div className="w-full h-[55px] border border-b-custom-softgrey bg-custom-softblue flex items-center justify-between">
       <div className="ml-5 text-center">
-        <span className="text-[20px] font-semibold">{label}</span>
+        <span className="text-lg font-medium">{label}</span>
       </div>
-      <img src={icon} alt="icon" className="w-[20px] h-[20px] mr-5" />
+      <img 
+        src={icon} 
+        alt="icon" 
+        className="w-[18px] h-[18px] mr-5 cursor-pointer" 
+        onClick={onIconClick} 
+      />
     </div>
   );
 }

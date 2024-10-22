@@ -14,9 +14,9 @@ function ArrowHeaderBar({ label }: ArrowHeaderBarProps) {
     
   return (
     <div className="w-full h-[55px] border border-b-custom-softgrey bg-custom-softblue flex items-center">
-      <img src={arrowimg} alt="arrow" className="w-[20px] h-[20px] ml-4" onClick={handleGoBack}/>
+      <img src={arrowimg} alt="arrow" className="w-[18px] h-[18px] ml-4" onClick={handleGoBack}/>
       <div className="ml-3 text-center">
-        <span className="text-[20px] font-semibold">{label}</span>
+        <span className="text-lg font-medium">{label}</span>
       </div>
     </div>
   );

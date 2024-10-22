@@ -15,7 +15,6 @@ function ArrowHeaderBar() {
 
     const handleIconClick = (path: string) => {
         navigate(path);
-      
     };
 
     return (
