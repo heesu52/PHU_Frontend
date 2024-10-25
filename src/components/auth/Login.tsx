@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../../components/common/Input";
 import SubmitButton from "../../components/common/button/SubmitButton";
-import NavigationBar from "../../components/common/bar/NavigationBar";
+import HeaderBar from "../../components/common/bar/ArrowHeaderBar";
 import googleLogin from "../../assets/google.svg"
 import { GoogleLoginApi, LoginApi } from "../../store/api/index";
 
@@ -18,7 +18,7 @@ function Login() {
     e.preventDefault();
     const response = await LoginApi(email, password);
     if (response?.success) {
-      navigate("/list"); 
+      navigate("/my"); 
     }
     else {
       if (response?.errorCode === "M002"){
@@ -33,7 +33,7 @@ function Login() {
 
   return (
     <div>
-      <NavigationBar label="로그인" />
+      <HeaderBar label="로그인" />
       <form className="flex flex-col items-center mt-5" onSubmit={handleSubmit}>
         <Input
           size="large"

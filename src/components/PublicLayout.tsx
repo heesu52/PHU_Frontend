@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom'; // Outlet 임포트
-import axiosInstance from '../../store/api/auth/axiosInstance';
+import axiosInstance from '../store/api/auth/axiosInstance';
 
 const PublicLayout: React.FC = () => {
   useEffect(() => {
