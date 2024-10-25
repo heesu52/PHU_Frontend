@@ -2,9 +2,15 @@ import HeaderBar from "../common/bar/ArrowHeaderBar";
 import NavigationBar from "../common/bar/NavigationBar";
 import profile from "../../assets/basic-profile.svg"
 import mark from "../../assets/TRAINER 마크.svg"
+import { useNavigate } from "react-router-dom";
 
 function Setting() {
+    const navigate = useNavigate(); 
 
+    const handleIconClick = (path: string) => {
+        navigate(path);
+    };
+    
   return (
     <div>
       <HeaderBar label="프로필 설정"/>
@@ -23,7 +29,7 @@ function Setting() {
         </div>
       </div>
       <ul className="m-6">
-        <li className="p-3 mb-1 text-sm border-b cursor-default">내 정보 변경</li>
+        <li className="p-3 mb-1 text-sm border-b cursor-default" onClick={()=>handleIconClick('/my/edit')}>내 정보 변경</li>
         <li className="p-3 mb-1 text-sm border-b cursor-default">로그아웃</li>
         <li className="p-3 mb-1 text-sm border-b cursor-default">회원 탈퇴</li>
       </ul>
