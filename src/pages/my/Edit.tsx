@@ -45,7 +45,7 @@ function Edit() {
     <div>
       <HeaderBar label="내 정보 변경"/>
       <div>
-      <form className="flex flex-col items-center mt-5 border" onSubmit={handleSubmit}>
+      <form className="flex flex-col items-center mt-5 " onSubmit={handleSubmit}>
         <div className="flex flex-col">
           <span className="text-[14px] text-[#858585] mb-1">이름</span>
           <Input
@@ -111,7 +111,7 @@ function Edit() {
           </div>
         </div>
       </form>
-      <div className="border">
+      <div className="flex items-end justify-center">
         <SubmitButton
           label="확인"
           size="large"
