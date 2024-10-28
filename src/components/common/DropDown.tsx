@@ -14,16 +14,16 @@ function Dropdown({ options }: DropdownProps) {
   const navigate = useNavigate();
 
   const handleNavigate = (path?: string, onClick?: () => void) => {
-    if (path) {
-      navigate(path);
-    }
     if (onClick) {
-      onClick();
+      onClick(); // onClick이 있을 경우 실행
+    }
+    if (path) {
+      navigate(path); // path가 있을 경우 이동
     }
   };
 
   return (
-    <ul className="absolute right-0 z-10 mt-2 bg-white border rounded-md shadow-md border-custom-softgrey">
+    <ul className="absolute ml-[430px] z-10 bg-white border rounded-md shadow-md border-custom-softgrey">
       {options.map((option, index) => (
         <li
           key={index}

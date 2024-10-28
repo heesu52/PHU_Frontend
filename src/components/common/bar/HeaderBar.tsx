@@ -6,7 +6,7 @@ interface HeaderBarProps {
 
 function HeaderBar({ label, icon, onIconClick }: HeaderBarProps) {
   return (
-    <div className="relative w-full h-[55px] border border-b-custom-softgrey bg-custom-softblue flex items-center justify-between">
+    <div className="sticky top-0 w-full max-w-[var(--max-width)] h-[55px] border border-b-custom-softgrey bg-custom-softblue flex items-center justify-between">
       <div className="ml-5 text-center">
         <span className="text-lg font-medium">{label}</span>
       </div>

@@ -9,7 +9,7 @@ import clickchat from '../../../assets/clickchat.svg';
 import clickmy from '../../../assets/clickmy.svg';
 
 
-function ArrowHeaderBar() {
+function NavigationBar() {
     const navigate = useNavigate();
     const location = useLocation(); 
 
@@ -18,7 +18,7 @@ function ArrowHeaderBar() {
     };
 
     return (
-        <div className="w-[600px] h-[65px] border border-t-custom-softgrey flex items-center fixed bottom-0">
+        <div className="fixed w-full max-w-[var(--max-width)] h-[65px] border border-t-custom-softgrey flex items-center bottom-0 bg-white">
             <div className="flex items-center justify-between w-full ml-10 mr-10">
                 <div className='flex flex-col items-center justify-center cursor-pointer' onClick={() => handleIconClick('/list')}>
                     <img 
@@ -57,4 +57,4 @@ function ArrowHeaderBar() {
     );
 }
 
-export default ArrowHeaderBar;
+export default NavigationBar;

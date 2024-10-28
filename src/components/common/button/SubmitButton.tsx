@@ -22,7 +22,7 @@ function SubmitButton({ className, onClick, value, label, size = 'large', disabl
         onClick={onClick}
             value={value} 
             type="submit"
-            className={`text-[16px] h-[45px] font-semibold flex items-center justify-center text-white p-4 rounded-[5px] ${sizeClasses[size]}  ${className}`}
+            className={`text-base h-[45px] flex items-center justify-center text-white p-4 rounded-[5px] ${sizeClasses[size]}  ${className}`}
             disabled={disabled}  // disabled 속성 추가
         >
             {label}
