@@ -7,6 +7,7 @@ import SocialSignupPage from './pages/auth/SocialSignup';
 import MyPage from './pages/my/Profile';
 import SettingPage from "./pages/my/Setting"
 import EditPage from './pages/my/Edit';
+import MemberListPage from './components/list/MemberList';
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
             <Route path="/my" element={<MyPage />} />
             <Route path="/my/setting" element={<SettingPage />} />
             <Route path='/my/edit' element={<EditPage/>} />
+
+            <Route path='/list' element={<MemberListPage/>} />
           </Routes>
         </div>
       </div>

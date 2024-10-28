@@ -1,22 +1,26 @@
 import HeaderBar from "../common/bar/HeaderBar";
 import settingimg from "../../assets/setting.svg";
 import NavigationBar from "../common/bar/NavigationBar";
-import profile from "../../assets/basic-profile.svg"
-import mark from "../../assets/TRAINER 마크.svg"
+import profile from "../../assets/basic-profile.svg";
+import mark from "../../assets/TRAINER 마크.svg";
 import { useNavigate } from "react-router-dom";
 
 function Profile() {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleIconClick = (path: string) => {
-      navigate(path);
+    navigate(path);
   };
 
   return (
     <div>
-      <HeaderBar label="마이 페이지" icon={settingimg} onIconClick={() => handleIconClick('/my/setting')}/>
+      <HeaderBar
+        label="마이 페이지"
+        icon={settingimg}
+        onIconClick={() => handleIconClick("/my/setting")}
+      />
       <div className="flex items-center w-full p-5 mb-5">
-        <img src={profile} alt="icon" className="w-[60px] h-[60px] mr-3"/>
+        <img src={profile} alt="icon" className="w-[60px] h-[60px] mr-3" />
         <div className="flex flex-col">
           <div className="flex items-center mb-1">
             <span className="text-base">장희수</span>
