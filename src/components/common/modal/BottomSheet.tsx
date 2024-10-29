@@ -27,7 +27,7 @@ function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
       <div
         className={`fixed bottom-0 w-[600px] h-[250px] bg-white border shadow-lg rounded-md transition-transform duration-300 transform ${
           isOpen ? 'translate-y-0' : 'translate-y-full'
-        } z-20`}
+        } z-50`}
       >
         <div className="flex flex-col items-center justify-between p-1">
           <img

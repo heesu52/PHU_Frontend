@@ -8,9 +8,10 @@ interface DropdownOption {
 
 interface DropdownProps {
   options: DropdownOption[];
+  onClose: () => void;
 }
 
-function Dropdown({ options }: DropdownProps) {
+function Dropdown({ options, onClose }: DropdownProps) {
   const navigate = useNavigate();
 
   const handleNavigate = (path?: string, onClick?: () => void) => {
@@ -20,14 +21,15 @@ function Dropdown({ options }: DropdownProps) {
     if (path) {
       navigate(path); // path가 있을 경우 이동
     }
+    onClose();
   };
 
   return (
-    <ul className="absolute ml-[430px] z-10 bg-white border rounded-md shadow-md border-custom-softgrey">
+    <ul className="absolute z-10 bg-white border rounded-md shadow-md top-10 right-5 border-custom-softgrey">
       {options.map((option, index) => (
         <li
           key={index}
-          className="text-xs border-b cursor-pointer w-[100px] flex justify-center p-3 border-custom-softgrey hover:bg-custom-softblue "
+          className="text-xs border-b cursor-pointer w-[100px] flex justify-center p-3 border-custom-softgrey hover:bg-custom-softblue"
           onClick={() => handleNavigate(option.path, option.onClick)}
         >
           {option.label}
@@ -36,5 +38,6 @@ function Dropdown({ options }: DropdownProps) {
     </ul>
   );
 }
+
 
 export default Dropdown;
