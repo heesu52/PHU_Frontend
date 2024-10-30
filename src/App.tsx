@@ -30,7 +30,7 @@ function App() {
             <Route path='/member' element={<MemberListPage/>} />
 
             <Route path='/member/info' element={<MemberInfoPage/>} />
-            <Route path='/member/chart' element={<MemberDaliyChartPage/>} />
+            <Route path='/member/daily' element={<MemberDaliyChartPage/>} />
             <Route path='/member/summary' element={<MemberSummaryPage/>} />
           </Routes>
         </div>
