@@ -7,7 +7,10 @@ import SocialSignupPage from './pages/auth/SocialSignup';
 import MyPage from './pages/my/Profile';
 import SettingPage from "./pages/my/Setting"
 import EditPage from './pages/my/Edit';
-import MemberListPage from './components/list/MemberList';
+import MemberListPage from './pages/list/List';
+import MemberInfoPage from './pages/member/Info';
+import MemberDaliyChartPage from './pages/member/DailyChart';
+import MemberSummaryPage from './pages/member/AISummary';
 
 function App() {
   return (
@@ -25,6 +28,10 @@ function App() {
             <Route path='/my/edit' element={<EditPage/>} />
 
             <Route path='/list' element={<MemberListPage/>} />
+
+            <Route path='/member' element={<MemberInfoPage/>} />
+            <Route path='/chart' element={<MemberDaliyChartPage/>} />
+            <Route path='/summary' element={<MemberSummaryPage/>} />
           </Routes>
         </div>
       </div>

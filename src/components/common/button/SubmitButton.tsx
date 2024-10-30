@@ -16,7 +16,6 @@ function SubmitButton({ className, onClick, value, label, size = 'large', disabl
         small: 'w-[92px]',
     };
 
-
     return (
         <button
         onClick={onClick}
