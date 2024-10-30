@@ -13,7 +13,7 @@ function ArrowHeaderBar({ label }: ArrowHeaderBarProps) {
     };
     
   return (
-    <div className="w-full h-[55px] border border-b-custom-softgrey bg-custom-softblue flex items-center">
+    <div className="sticky top-0 w-full max-w-[var(--max-width)] h-[55px] border border-b-custom-softgrey bg-custom-softblue flex items-center">
       <img src={arrowimg} alt="arrow" className="w-[18px] h-[18px] ml-4" onClick={handleGoBack}/>
       <div className="ml-3 text-center">
         <span className="text-lg font-medium">{label}</span>

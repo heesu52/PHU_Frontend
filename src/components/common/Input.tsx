@@ -15,8 +15,8 @@ interface InputProps {
 function Input({ className, onChange, placeholder, value, name, type = 'text', size = 'large', required= false, readOnly=false,disabled=false}: InputProps) {
     // 크기에 따른 너비 설정
     const sizeClasses = {
-        large: 'w-[550px]',
-        medium: 'w-[236px]',
+        large: 'w-[500px]',
+        medium: 'w-[300px]',
         small: 'w-[92px]',
     };
 
