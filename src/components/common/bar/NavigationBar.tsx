@@ -22,11 +22,11 @@ function NavigationBar() {
             <div className="flex items-center justify-between w-full ml-10 mr-10">
                 <div className='flex flex-col items-center justify-center cursor-pointer' onClick={() => handleIconClick('/member')}>
                     <img 
-                        src={location.pathname === '/member' ? clickmemberlsit : memberlsit} 
-                        alt="회원 목록" 
+                        src={location.pathname.includes('/member') ? clickmemberlsit : memberlsit} 
+                        alt="회원" 
                         className={"w-[25px] h-[25px]"} 
                     />
-                    <span className={location.pathname === '/list' ? 'text-custom-indigo' : 'text-custom-softgrey'}>회원 목록</span>
+                    <span className={location.pathname.includes('/member') ? 'text-custom-indigo' : 'text-custom-softgrey'}>회원</span>
                 </div>
                 <div className='flex flex-col items-center justify-center cursor-pointer' onClick={() => handleIconClick('/calendar')}>
                     <img 
