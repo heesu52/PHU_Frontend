@@ -1,9 +1,10 @@
-import TabBar from "../common/bar/TabBar";
+import TabBar from "../common/bar/Tabbar";
 import meatball from "../../assets/three-dots.svg";
 import NavigationBar from "../common/bar/NavigationBar";
 import Dropdown from "../common/DropDown";
 import { useState } from "react";
 import plusbtn from "../../assets/plus-circle-fill.svg";
+import MemberInfoComponent from "./Info/MemberInfo";
 //import { useNavigate } from "react-router-dom";
 
 function Info() {
@@ -27,7 +28,7 @@ function Info() {
   return (
     <div className="relative flex flex-col items-center justify-center">
       <TabBar
-        label="정우혁 회원님 (25세)"
+        label="정우혁"
         icon={meatball}
         onIconClick={toggleDropdown}
       />
@@ -40,6 +41,9 @@ function Info() {
           onClose={() => setIsDropdownOpen(false)}
         />
       )}
+      <div className="w-full h-[calc(100vh-185px)] bg-[#f6f6f6] flex justify-center items-center">
+      <MemberInfoComponent/>
+      </div>
       <img src={plusbtn} className="fixed bottom-0 mb-20 w-7 h-7" onClick={toggleBottomSheet} />
       {isBottomSheetOpen && (
         <div
@@ -47,7 +51,6 @@ function Info() {
           onClick={toggleBottomSheet}
         />
       )}
-      
       <NavigationBar />
     </div>
   );

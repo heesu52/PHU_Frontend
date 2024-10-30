@@ -27,11 +27,11 @@ function App() {
             <Route path="/my/setting" element={<SettingPage />} />
             <Route path='/my/edit' element={<EditPage/>} />
 
-            <Route path='/list' element={<MemberListPage/>} />
+            <Route path='/member' element={<MemberListPage/>} />
 
-            <Route path='/member' element={<MemberInfoPage/>} />
-            <Route path='/chart' element={<MemberDaliyChartPage/>} />
-            <Route path='/summary' element={<MemberSummaryPage/>} />
+            <Route path='/member/info' element={<MemberInfoPage/>} />
+            <Route path='/member/chart' element={<MemberDaliyChartPage/>} />
+            <Route path='/member/summary' element={<MemberSummaryPage/>} />
           </Routes>
         </div>
       </div>

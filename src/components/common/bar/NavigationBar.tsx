@@ -20,9 +20,9 @@ function NavigationBar() {
     return (
         <div className="fixed w-full max-w-[var(--max-width)] h-[65px] border border-t-custom-softgrey flex items-center bottom-0 bg-white">
             <div className="flex items-center justify-between w-full ml-10 mr-10">
-                <div className='flex flex-col items-center justify-center cursor-pointer' onClick={() => handleIconClick('/list')}>
+                <div className='flex flex-col items-center justify-center cursor-pointer' onClick={() => handleIconClick('/member')}>
                     <img 
-                        src={location.pathname === '/list' ? clickmemberlsit : memberlsit} 
+                        src={location.pathname === '/member' ? clickmemberlsit : memberlsit} 
                         alt="회원 목록" 
                         className={"w-[25px] h-[25px]"} 
                     />

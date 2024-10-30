@@ -9,7 +9,7 @@ function AISummary() {
       <HeaderBar
         label="회원목록"
         icon={meatball}
-        size="large"
+      
       />
     </div>
   );
