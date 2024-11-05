@@ -31,9 +31,10 @@ function EditMemberInfo({ onSubmit }: EditMemberInfoProps) {
           <div className="text-base">목표</div>
           <textarea
             ref={goalRef}
-            className="border w-[400px] min-h-[70px] rounded-lg text-sm border-custom-skyblue bg-white resize-none overflow-hidden indent-1 p-1"
+            className="border w-[450px] min-h-[70px] rounded-lg text-sm border-custom-skyblue bg-white resize-none overflow-hidden indent-1 p-1"
             onInput={() => adjustTextareaHeight(goalRef)}
             placeholder="ex) 목표 몸무게, 감량하고 싶은 부ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ위"
+            maxLength={150}
           />
         </div>
         
@@ -41,9 +42,10 @@ function EditMemberInfo({ onSubmit }: EditMemberInfoProps) {
           <div className="text-base">특이사항</div>
           <textarea
             ref={notesRef}
-            className="border w-[400px] min-h-[70px] rounded-lg text-sm border-custom-skyblue bg-white resize-none overflow-hidden indent-2 p-1"
+            className="border w-[450px] min-h-[70px] rounded-lg text-sm border-custom-skyblue bg-white resize-none overflow-hidden indent-2 p-1"
             onInput={() => adjustTextareaHeight(notesRef)}
             placeholder="ex) 어깨가 불편함, 식단을 하지 않음"
+            maxLength={150}
           />
         </div>
         

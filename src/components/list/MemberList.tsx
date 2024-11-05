@@ -36,7 +36,7 @@ function MemberList() {
 
   const handleIconClick = (path: string) => {
     navigate(path);
-};
+  };
 
   return (
     <div className="relative flex flex-col items-center justify-center">

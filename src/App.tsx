@@ -9,14 +9,15 @@ import SettingPage from "./pages/my/Setting"
 import EditPage from './pages/my/Edit';
 import MemberListPage from './pages/list/List';
 import MemberInfoPage from './pages/member/Info';
-import MemberDaliyChartPage from './pages/member/DailyChart';
+import MemberDaliyChartListPage from './pages/member/dailychart/DailyChartList';
+import MemberDailyChartPage from './pages/member/dailychart/Chart';
 import MemberSummaryPage from './pages/member/AISummary';
 
 function App() {
   return (
     <Router>
-      <div className='w-[600px] h-screen mx-auto font-[Pretendard]'>
-        <div className="h-full border border-custom-softgrey">
+      <div className='w-[600px] h-screen mx-auto font-[Pretendard] overflow-y-auto'>
+        <div className="h-screen border border-custom-softgrey ">
           <Routes>
             {/* <Route element={<PublicLayout/>}/>   */}
             <Route path="/login" element={<LoginPage />} />
@@ -30,7 +31,8 @@ function App() {
             <Route path='/member' element={<MemberListPage/>} />
 
             <Route path='/member/info' element={<MemberInfoPage/>} />
-            <Route path='/member/daily' element={<MemberDaliyChartPage/>} />
+            <Route path='/member/daily' element={<MemberDaliyChartListPage/>} />
+            <Route path='/member/daily/:id' element={<MemberDailyChartPage/>} />
             <Route path='/member/summary' element={<MemberSummaryPage/>} />
           </Routes>
         </div>

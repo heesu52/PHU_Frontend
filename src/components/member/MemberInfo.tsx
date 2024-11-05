@@ -4,25 +4,19 @@ import NavigationBar from "../common/bar/NavigationBar";
 import Dropdown from "../common/DropDown";
 import { useState } from "react";
 import MemberInfoComponent from "./Info/Member";
-import MemberDeleteModal from "../common/modal/MemberDeleteModal";
 import EditMemberInfo from "./Info/EditMember";
 
 function Info() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditInfo, setIsEditInfo] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
   };
 
-  const toggleModal = () => {
-    setIsModalOpen((prev) => !prev);
-  };
 
   const handleEditInfo = () => {
     setIsEditInfo(true);
-    console.log("클릭됨")
   };
 
   const handleSubmit = () => {
@@ -39,8 +33,7 @@ function Info() {
       {isDropdownOpen && (
         <Dropdown
           options={[
-            { label: "정보 수정", onClick: handleEditInfo },
-            { label: "정보 삭제", onClick: toggleModal },
+            { label: "정보 수정", onClick: handleEditInfo }
           ]}
           onClose={() => setIsDropdownOpen(false)}
         />
@@ -52,7 +45,6 @@ function Info() {
           <MemberInfoComponent />
         )}
       </div>
-      {isModalOpen && <MemberDeleteModal onClose={toggleModal} />}
       <NavigationBar />
     </div>
   );
