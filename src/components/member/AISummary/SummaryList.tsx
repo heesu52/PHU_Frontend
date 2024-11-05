@@ -1,7 +1,7 @@
 import threedots from "../../../assets/three-dots.svg"
 import { useNavigate } from "react-router-dom";
 
-function ChartList () {
+function SummaryList () {
     const navigate = useNavigate();
 
     const handleIconClick = (path: string) => {
@@ -20,19 +20,15 @@ function ChartList () {
         <ul className="flex flex-col items-center space-y-3 text-xs cursor-default">
             <li className="w-[80%] h-[55px] bg-white shadow-md rounded-xl flex items-center justify-center cursor-default">
                 <div className="flex w-full" onClick={()=>handleIconClick(':id')}>
-                    <p className="flex-1 text-center">2024.11.01</p> 
-                    <p className="flex-1 text-center">어깨 / 가슴</p> 
-                    <p className="flex-1 text-center">50kg</p> 
-                    <p className="flex-1 text-center">PT</p> 
+                    <p className="flex-0.5 text-center ml-3">2024.11.01</p> 
+                    <p className="flex-1 text-center">2023. 12. 05 오전 9:48 녹음</p> 
                 </div>
                 <img className="mr-2 rotate-90 cursor-pointer" src={threedots}/>
             </li>
-            <li className="w-[80%] h-[55px] bg-white shadow-md rounded-xl flex items-center justify-center ">
-                <div className="flex w-full">
-                    <p className="flex-1 text-center">2024.11.01</p> 
-                    <p className="flex-1 text-center">어깨 / 가슴</p> 
-                    <p className="flex-1 text-center">50kg</p> 
-                    <p className="flex-1 text-center">개인운동</p> 
+            <li className="w-[80%] h-[55px] bg-white shadow-md rounded-xl flex items-center justify-center cursor-default">
+                <div className="flex w-full" onClick={()=>handleIconClick(':id')}>
+                    <p className="flex-0.5 text-center ml-3">2024.11.01</p> 
+                    <p className="flex-1 text-center">2023. 12. 05 오전 9:48 녹음</p> 
                 </div>
                 <img className="mr-2 rotate-90 cursor-pointer" src={threedots}/>
             </li>
@@ -40,4 +36,4 @@ function ChartList () {
        </div>
     )
 }
-export default ChartList;
+export default SummaryList;

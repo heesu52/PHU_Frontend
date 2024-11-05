@@ -9,9 +9,11 @@ import SettingPage from "./pages/my/Setting"
 import EditPage from './pages/my/Edit';
 import MemberListPage from './pages/list/List';
 import MemberInfoPage from './pages/member/Info';
-import MemberDaliyChartListPage from './pages/member/dailychart/DailyChartList';
-import MemberDailyChartPage from './pages/member/dailychart/Chart';
-import MemberSummaryPage from './pages/member/AISummary';
+import DaliyChartListPage from './pages/member/dailychart/DailyChartList';
+import DailyChartPage from './pages/member/dailychart/Chart';
+import DailyChartEditChartPage from './components/member/DailyChart/EditChart';
+import AISummaryListPage from './pages/member/AISummary/SummaryList';
+import SummaryPage from './pages/member/AISummary/Summary'
 
 function App() {
   return (
@@ -31,9 +33,11 @@ function App() {
             <Route path='/member' element={<MemberListPage/>} />
 
             <Route path='/member/info' element={<MemberInfoPage/>} />
-            <Route path='/member/daily' element={<MemberDaliyChartListPage/>} />
-            <Route path='/member/daily/:id' element={<MemberDailyChartPage/>} />
-            <Route path='/member/summary' element={<MemberSummaryPage/>} />
+            <Route path='/member/daily' element={<DaliyChartListPage/>} />
+            <Route path='/member/daily/:id' element={<DailyChartPage/>} />
+            <Route path='/member/daily/edit' element={<DailyChartEditChartPage/>} />
+            <Route path='/member/summary' element={<AISummaryListPage/>} />
+            <Route path='/member/summary/:id' element={<SummaryPage/>} />
           </Routes>
         </div>
       </div>

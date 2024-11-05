@@ -1,16 +1,29 @@
-import HeaderBar from "../common/bar/HeaderBar";
-import meatball from "../../assets/three-dots.svg";
+import { useState } from "react";
+import TabBar from "../common/bar/Tabbar";
+import NavigationBar from "../common/bar/NavigationBar";
+import MemberDeleteModal from "../common/modal/MemberDeleteModal";
+import SummaryList from "./AISummary/SummaryList";
 
 function AISummary() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+
+  const toggleModal = () => {
+    setIsModalOpen((prev) => !prev);
+  };
+
+ 
 
   return (
     <div className="relative flex flex-col items-center justify-center">
-      <HeaderBar
-        label="회원목록"
-        icon={meatball}
-      
+      <TabBar
+        label="정우혁"
       />
+      <div className="w-full h-[calc(100vh-185px)] bg-[#f6f6f6] justify-center flex py-4">
+        <SummaryList/>
+      </div>
+      {isModalOpen && <MemberDeleteModal onClose={toggleModal} />}
+      <NavigationBar />
     </div>
   );
 }

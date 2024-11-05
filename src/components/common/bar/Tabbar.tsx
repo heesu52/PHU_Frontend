@@ -2,7 +2,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 interface HeaderBarProps {
     label: string; 
-    icon: string; 
+    icon?: string; 
     onIconClick?: () => void; 
   }
   

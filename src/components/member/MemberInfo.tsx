@@ -4,7 +4,7 @@ import NavigationBar from "../common/bar/NavigationBar";
 import Dropdown from "../common/DropDown";
 import { useState } from "react";
 import MemberInfoComponent from "./Info/Member";
-import EditMemberInfo from "./Info/EditMember";
+import EditMemberCpmonent from "./Info/EditMember";
 
 function Info() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -40,7 +40,7 @@ function Info() {
       )}
       <div className="w-full h-[calc(100vh-185px)] bg-[#f6f6f6] flex justify-center items-center">
         {isEditInfo ? (
-          <EditMemberInfo onSubmit={handleSubmit} />
+          <EditMemberCpmonent onSubmit={handleSubmit} />
         ) : (
           <MemberInfoComponent />
         )}

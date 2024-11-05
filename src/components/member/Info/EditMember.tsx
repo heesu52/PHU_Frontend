@@ -51,7 +51,7 @@ function EditMemberInfo({ onSubmit }: EditMemberInfoProps) {
         
       </div>
       <div className="flex justify-center">
-        <SubmitButton label="수정" size="small" onClick={onSubmit} className=" bg-custom-blue"/>
+        <SubmitButton label="수정" size="small" onClick={onSubmit} className="bg-blue-500 "/>
       </div>
       
     </div>
