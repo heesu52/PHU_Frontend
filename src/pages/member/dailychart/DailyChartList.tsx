@@ -1,4 +1,4 @@
-import ChartListComponent from "../../../components/member/MemberDailyChart";
+import ChartListComponent from "../../../components/member/DailyChart/MemberDailyChart";
 
 function DailyChartlistPage() {
   return (

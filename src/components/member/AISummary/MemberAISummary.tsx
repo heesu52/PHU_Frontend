@@ -1,8 +1,8 @@
 import { useState } from "react";
-import TabBar from "../common/bar/Tabbar";
-import NavigationBar from "../common/bar/NavigationBar";
-import MemberDeleteModal from "../common/modal/MemberDeleteModal";
-import SummaryList from "./AISummary/SummaryList";
+import TabBar from "../../common/bar/Tabbar";
+import NavigationBar from "../../common/bar/NavigationBar";
+import MemberDeleteModal from "../../common/modal/MemberDeleteModal";
+import SummaryList from "./SummaryList";
 
 function AISummary() {
   const [isModalOpen, setIsModalOpen] = useState(false);

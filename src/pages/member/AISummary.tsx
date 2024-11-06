@@ -1,4 +1,4 @@
-import AISummaryComponent from "../../components/member/MemberAISummary";
+import AISummaryComponent from "../../components/member/AISummary/MemberAISummary";
 
 function AISummaryPage() {
   return (

@@ -30,9 +30,9 @@ function Chat() {
   }
 
   return (
-    <div className="relative flex flex-col items-center justify-center">
+    <div className="relative flex flex-col items-center justify-center bg-[#f6f6f6]">
       <HeaderBar
-        label="채팅"
+        label="캘린더"
         icon={meatball}
         onIconClick={toggleDropdown}
       />
@@ -47,8 +47,7 @@ function Chat() {
       )}
       {/* Centered content */}
         <div className="flex flex-col items-center justify-center h-[600px]">
-        <img src={notfound} className="w-[350px]"/>
-        <p className="text-lg text-center">채팅 기능은 조금만 기다려주세요!</p>
+        
         </div>
       
       {/* MemberDeleteModal */}

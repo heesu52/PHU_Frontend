@@ -1,10 +1,10 @@
-import TabBar from "../common/bar/Tabbar";
-import meatball from "../../assets/three-dots.svg";
-import NavigationBar from "../common/bar/NavigationBar";
-import Dropdown from "../common/DropDown";
+import TabBar from "../../common/bar/Tabbar";
+import meatball from "../../../assets/three-dots.svg"
+import NavigationBar from "../../common/bar/NavigationBar";
+import Dropdown from "../../common/DropDown";
 import { useState } from "react";
-import MemberInfoComponent from "./Info/Member";
-import EditMemberCpmonent from "./Info/EditMember";
+import MemberInfoComponent from "./Member";
+import EditMemberCpmonent from "./EditMember";
 
 function Info() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

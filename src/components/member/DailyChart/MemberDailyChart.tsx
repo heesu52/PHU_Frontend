@@ -1,8 +1,8 @@
 import { useState } from "react";
-import TabBar from "../common/bar/Tabbar";
-import NavigationBar from "../common/bar/NavigationBar";
-import MemberDeleteModal from "../common/modal/MemberDeleteModal";
-import ChartList from "./DailyChart/ChartList";
+import TabBar from "../../common/bar/Tabbar";
+import NavigationBar from "../../common/bar/NavigationBar";
+import MemberDeleteModal from "../../common/modal/MemberDeleteModal";
+import ChartList from "./ChartList"
 
 function DailyChart() {
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -1,4 +1,4 @@
-import SummaryListComponent from "../../../components/member/MemberAISummary";
+import SummaryListComponent from "../../../components/member/AISummary/MemberAISummary";
 
 function SummaryListPage() {
   return (
