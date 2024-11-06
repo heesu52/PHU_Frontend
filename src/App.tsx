@@ -14,6 +14,8 @@ import DailyChartPage from './pages/member/dailychart/Chart';
 import DailyChartEditChartPage from './components/member/DailyChart/EditChart';
 import AISummaryListPage from './pages/member/AISummary/SummaryList';
 import SummaryPage from './pages/member/AISummary/Summary'
+import EditSummaryPage from './components/member/AISummary/EditSummary';
+import ChatPage from './pages/chat/Chat';
 
 function App() {
   return (
@@ -38,6 +40,9 @@ function App() {
             <Route path='/member/daily/edit' element={<DailyChartEditChartPage/>} />
             <Route path='/member/summary' element={<AISummaryListPage/>} />
             <Route path='/member/summary/:id' element={<SummaryPage/>} />
+            <Route path='/member/summary/edit' element={<EditSummaryPage/>} />
+
+            <Route path='/chat' element={<ChatPage/>} />
           </Routes>
         </div>
       </div>

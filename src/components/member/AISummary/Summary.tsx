@@ -25,7 +25,7 @@ function Summary() {
     };
 
     const handleIconClick = () => {
-        navigate("/member/daily/edit");
+        navigate("/member/summary/edit");
       };
 
 

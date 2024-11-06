@@ -97,7 +97,7 @@ function EditChart() {
           </div>
         </div>
 
-        <div className="flex justify-end mr-4">
+        <div className="flex justify-end mt-3 ml-auto">
           <SubmitButton label="수정" size="small" className="bg-blue-500" />
         </div>
       </div>
