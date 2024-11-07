@@ -1,34 +1,38 @@
-interface ButtonProps {
+interface RadioBtnProps {
     className?: string;
-    onClick?: (value: string) => void;  
-    label: string;         
-    size?: 'large' | 'medium' | 'small'; // 크기 선택
-    type?: 'button'; 
-    value?: string;
+    onChange?: (value: string) => void;
+    label: string;
+    name: string; 
+    value: string; 
+    checked?: boolean; 
 }
 
-function Button({ className, onClick, value, label, size = 'medium',}: ButtonProps) {
-    // 크기에 따른 너비 설정
-    const sizeClasses = {
-        large: 'w-[550px]',
-        medium: 'w-[116px]',
-        small: 'w-[92px]',
-    };
-
-    const handleClick = () => {
-        if (onClick && value) {
-            onClick(value);  // value를 onClick으로 전달
+function Button({ className, onChange, label, name, value, checked = false }: RadioBtnProps) {
+    const handleChange = () => {
+        if (onChange) {
+            onChange(value); // 선택된 값 전달
         }
     };
 
     return (
-        <button
-        onClick={handleClick}
-            value={value} 
-            type="button"
-            className={`text-[16px] h-[45px] font-semibold flex items-center justify-center text-custom-softgrey p-4 rounded-[5px] ${sizeClasses[size]}  ${className}`}>
-            {label}
-        </button>
+        <div className={`flex items-center gap-1 ${className}`}>
+            <input
+                id={value}
+                type="radio"
+                name={name}
+                value={value}
+                checked={checked}
+                onChange={handleChange}
+                className="hidden" // 기본 라디오 버튼 숨김
+            />
+            <div 
+                className={`w-20 h-8 border border-custom-softgrey rounded-md flex items-center justify-center cursor-pointer 
+                ${checked ? "bg-blue-500" : "bg-transparent"}`} // 선택 시 배경색 변경
+                onClick={handleChange} // 클릭 시 onChange 호출
+            >
+                <span className={`text-sm font-medium ${checked ? "text-white" : "text-custom-softgrey"}`}>{label}</span>
+            </div>
+        </div>
     );
 }
 

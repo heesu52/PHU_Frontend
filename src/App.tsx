@@ -9,14 +9,20 @@ import SettingPage from "./pages/my/Setting"
 import EditPage from './pages/my/Edit';
 import MemberListPage from './pages/list/List';
 import MemberInfoPage from './pages/member/Info';
-import MemberDaliyChartPage from './pages/member/DailyChart';
-import MemberSummaryPage from './pages/member/AISummary';
+import DaliyChartListPage from './pages/member/dailychart/DailyChartList';
+import DailyChartPage from './pages/member/dailychart/Chart';
+import DailyChartEditChartPage from './components/member/DailyChart/EditChart';
+import AISummaryListPage from './pages/member/AISummary/SummaryList';
+import SummaryPage from './pages/member/AISummary/Summary'
+import EditSummaryPage from './components/member/AISummary/EditSummary';
+import ChatPage from './pages/chat/Chat';
+import CalendarPage from './pages/calendar/Calendar';
 
 function App() {
   return (
     <Router>
-      <div className='w-[600px] h-screen mx-auto font-[Pretendard]'>
-        <div className="h-full border border-custom-softgrey">
+      <div className='w-[600px] h-screen mx-auto font-[Pretendard] overflow-y-auto'>
+        <div className="h-screen border border-custom-softgrey ">
           <Routes>
             {/* <Route element={<PublicLayout/>}/>   */}
             <Route path="/login" element={<LoginPage />} />
@@ -27,11 +33,19 @@ function App() {
             <Route path="/my/setting" element={<SettingPage />} />
             <Route path='/my/edit' element={<EditPage/>} />
 
-            <Route path='/list' element={<MemberListPage/>} />
+            <Route path='/member' element={<MemberListPage/>} />
 
-            <Route path='/member' element={<MemberInfoPage/>} />
-            <Route path='/chart' element={<MemberDaliyChartPage/>} />
-            <Route path='/summary' element={<MemberSummaryPage/>} />
+            <Route path='/member/info' element={<MemberInfoPage/>} />
+            <Route path='/member/daily' element={<DaliyChartListPage/>} />
+            <Route path='/member/daily/:id' element={<DailyChartPage/>} />
+            <Route path='/member/daily/edit' element={<DailyChartEditChartPage/>} />
+            <Route path='/member/summary' element={<AISummaryListPage/>} />
+            <Route path='/member/summary/:id' element={<SummaryPage/>} />
+            <Route path='/member/summary/edit' element={<EditSummaryPage/>} />
+
+            <Route path='/calendar' element={<CalendarPage/>} />
+            
+            <Route path='/chat' element={<ChatPage/>} />
           </Routes>
         </div>
       </div>

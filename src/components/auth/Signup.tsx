@@ -131,25 +131,17 @@ function SignUp() {
           <div className="flex justify-center gap-20 mb-4">
             <Button
               label="여성"
-              size="medium"
+              name="gender"
               value="FEMALE"
-              onClick={() => handleButtonClick("gender", "FEMALE")}
-              className={
-                formData.gender === "FEMALE"
-                  ? "bg-custom-blue text-white"
-                  : "border border-custom-softgrey text-custom-softgrey"
-              }
+              onChange={() => handleButtonClick("gender", "FEMALE")}
+              checked={formData.gender === "FEMALE"}
             />
             <Button
               label="남성"
-              size="medium"
+              name="gender"
               value="MALE"
-              onClick={() => handleButtonClick("gender", "MALE")}
-              className={
-                formData.gender === "MALE"
-                  ? "bg-custom-blue text-white"
-                  : "border border-custom-softgrey text-custom-softgrey"
-              }
+              onChange={() => handleButtonClick("gender", "MALE")}
+              checked={formData.gender === "MALE"}
             />
           </div>
         </div>
@@ -158,25 +150,17 @@ function SignUp() {
           <div className="flex justify-center gap-20">
             <Button
               label="트레이너"
-              size="medium"
+              name="part"
               value="TRAINER"
-              onClick={() => handleButtonClick("part", "TRAINER")}
-              className={
-                formData.part === "TRAINER"
-                  ? "bg-custom-blue text-white"
-                  : "border border-custom-softgrey"
-              }
+              onChange={() => handleButtonClick("part", "TRAINER")}
+              checked={formData.part === "TRAINER"}
             />
             <Button
               label="회원"
-              size="medium"
+              name="part"
               value="MEMBER"
-              onClick={() => handleButtonClick("part", "MEMBER")}
-              className={
-                formData.part === "MEMBER"
-                  ? "bg-custom-blue text-white"
-                  : "border border-custom-softgrey"
-              }
+              onChange={() => handleButtonClick("part", "MEMBER")}
+              checked={formData.part === "MEMBER"}
             />
           </div>
         </div>

@@ -29,7 +29,7 @@ function Dropdown({ options, onClose }: DropdownProps) {
       {options.map((option, index) => (
         <li
           key={index}
-          className="text-xs border-b cursor-pointer w-[100px] flex justify-center p-3 border-custom-softgrey hover:bg-custom-softblue"
+          className="text-xs border-b cursor-pointer w-[100px] flex justify-center p-3 border-custom-softgrey hover:font-bold hover:text-custom-blue"
           onClick={() => handleNavigate(option.path, option.onClick)}
         >
           {option.label}

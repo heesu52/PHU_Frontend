@@ -1,16 +1,16 @@
-import TabBar from "../common/bar/TabBar";
+import HeaderBar from "../common/bar/HeaderBar";
 import meatball from "../../assets/three-dots.svg";
 import NavigationBar from "../common/bar/NavigationBar";
 import Dropdown from "../common/DropDown";
 import { useState } from "react";
-import plusbtn from "../../assets/plus-circle-fill.svg";
-//import { useNavigate } from "react-router-dom";
+import notfound from "../../assets/404notfound.jpg"
+import MemberDeleteModal from "../common/modal/MemberDeleteModal";
 
-function Info() {
-  //const navigate = useNavigate();
+function Chat() {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isdeletebtnOpen, setIsdeletebtnOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -20,37 +20,41 @@ function Info() {
     setIsBottomSheetOpen(!isBottomSheetOpen);
   };
 
-  const toggledeleteBtn = () => {
-    setIsdeletebtnOpen(!isdeletebtnOpen);
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+    setIsdeletebtnOpen(false);
   };
 
+  const toggledeleteBtn = () => {
+    setIsdeletebtnOpen(!isdeletebtnOpen);
+  }
+
   return (
-    <div className="relative flex flex-col items-center justify-center">
-      <TabBar
-        label="정우혁 회원님 (25세)"
+    <div className="relative flex flex-col items-center justify-center bg-[#f6f6f6]">
+      <HeaderBar
+        label="캘린더"
         icon={meatball}
         onIconClick={toggleDropdown}
       />
       {isDropdownOpen && (
         <Dropdown
           options={[
-            { label: "정보 수정", onClick: toggledeleteBtn },
-            { label: "정보 삭제", onClick: toggleBottomSheet },
+            { label: "회원 수정", onClick: toggledeleteBtn },
+            { label: "회원 추가", onClick: toggleBottomSheet },
           ]}
           onClose={() => setIsDropdownOpen(false)}
         />
       )}
-      <img src={plusbtn} className="fixed bottom-0 mb-20 w-7 h-7" onClick={toggleBottomSheet} />
-      {isBottomSheetOpen && (
-        <div
-          className="fixed inset-0 z-40 bg-black opacity-30"
-          onClick={toggleBottomSheet}
-        />
-      )}
+      {/* Centered content */}
+        <div className="flex flex-col items-center justify-center h-[600px]">
+        
+        </div>
       
+      {/* MemberDeleteModal */}
+      {isModalOpen && <MemberDeleteModal onClose={toggleModal} />}
       <NavigationBar />
     </div>
   );
 }
 
-export default Info;
+export default Chat;

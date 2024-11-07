@@ -36,7 +36,7 @@ function MemberList() {
 
   const handleIconClick = (path: string) => {
     navigate(path);
-};
+  };
 
   return (
     <div className="relative flex flex-col items-center justify-center">
@@ -57,9 +57,8 @@ function MemberList() {
       <div className="flex items-center w-full">
         <ul className="w-full">
           {/* 회원 리스트 */}
-          <li className="border-b h-[55px] flex items-center justify-between hover:bg-custom-softblue"
-          onClick={() => handleIconClick('/member')}>
-            <div className="flex items-center justify-center p-3 ml-5">
+          <li className="border-b h-[55px] flex items-center justify-between hover:bg-custom-softblue">
+            <div className="flex items-center justify-center p-3 ml-5 cursor-pointer" onClick={() => handleIconClick('/member/info')}>
               <img src={profile} alt="icon" className="w-[30px] h-[30px] mr-3" />
               <span>정우혁</span>
             </div>
