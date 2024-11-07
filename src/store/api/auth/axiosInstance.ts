@@ -11,6 +11,7 @@ const axiosInstance = axios.create({
 //요청 인터셉터
 axiosInstance.interceptors.request.use(
   (config) => {
+    console.log("Interceptor start", config.url);
     return config;
   },
   (error) => {
@@ -33,6 +34,7 @@ axiosInstance.interceptors.response.use(
         const refreshResponse = await RefreshTokenApi();
 
         if (refreshResponse?.success) {
+          localStorage.removeItem('token');
           return axiosInstance(originalRequest);
         }
       } catch (refreshError) {

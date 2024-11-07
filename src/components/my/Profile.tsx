@@ -4,13 +4,28 @@ import NavigationBar from "../common/bar/NavigationBar";
 import profile from "../../assets/basic-profile.svg";
 import mark from "../../assets/TRAINER 마크.svg";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getUserApi } from "../../store/api";
 
 function Profile() {
   const navigate = useNavigate();
-
+  const [name, sestName] = useState("");
+  
   const handleIconClick = (path: string) => {
     navigate(path);
   };
+
+  //사용자의 이름 가져오기
+  useEffect(()=>{
+    const fetchUserInfo = async () => {
+      const userName = await getUserApi();
+      if(userName){
+        sestName(userName);
+      }
+    };
+
+    fetchUserInfo();
+  },[]);
 
   return (
     <div>
@@ -23,7 +38,7 @@ function Profile() {
         <img src={profile} alt="icon" className="w-[60px] h-[60px] mr-3" />
         <div className="flex flex-col">
           <div className="flex items-center mb-1">
-            <span className="text-base">장희수</span>
+            <span className="text-base">{name}</span>
             <img src={mark} className="w-[50px] h-[20px] ml-1"></img>
           </div>
           <span className="text-sm text-custom-darkgrey">회원 수 : 24명 </span>

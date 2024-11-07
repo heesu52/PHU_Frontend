@@ -1,18 +1,28 @@
-
 interface InputProps {
     className?: string;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     placeholder?: string;
-    value?: string | number;
-    type?: string; // 기본적으로 텍스트 타입, 필요 시 다른 타입 지원 가능
+    value?: string | number;  // string 또는 number 값 처리
+    type?: 'text' | 'password' | 'email' | 'number' | 'tel' | 'search'; 
     name?: string;
-    size?: 'large' | 'medium' | 'small'; // 크기 선택
+    size?: 'large' | 'medium' | 'small';  // 크기 선택
     required?: boolean;
     readOnly?: boolean;
     disabled?: boolean;
 }
 
-function Input({ className, onChange, placeholder, value, name, type = 'text', size = 'large', required= false, readOnly=false,disabled=false}: InputProps) {
+function Input({
+    className,
+    onChange,
+    placeholder,
+    value,
+    name,
+    type,
+    size = 'large',
+    required = false,
+    readOnly = false,
+    disabled = false,
+}: InputProps) {
     // 크기에 따른 너비 설정
     const sizeClasses = {
         large: 'w-[500px]',
@@ -33,7 +43,7 @@ function Input({ className, onChange, placeholder, value, name, type = 'text', s
             onChange={onChange}
             required={required}
             readOnly={readOnly}
-            disabled ={disabled}
+            disabled={disabled}
         />
     );
 }

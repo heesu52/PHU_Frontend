@@ -17,16 +17,18 @@ export const GoogleLoginApi = () => {
 // 로그인 api
 export const LoginApi = async (email: string, password: string) => {
   try {
-    const res = await axios.post(`${apiUrl}/login`, { email, password }, { withCredentials: true });
+    const response = await axios.post(`${apiUrl}/login`, { email, password }, { withCredentials: true });
 
-    if (res.status === 200) {
+    if (response.status === 200) {
       console.log("로그인 성공");
+      console.log(response.data);
+      const token = response.data.token;
+      localStorage.setItem('token', token);
       return { success: true };
     }
   } catch (error) {
     if (axios.isAxiosError(error)) {
       const errorCode = error.response?.data?.code; // 응답 코드 확인
-
       // 중복 이메일을 입력했을 경우
       if (errorCode === "M002") {
         console.log(error.response?.data.message);
@@ -51,6 +53,8 @@ export const RefreshTokenApi = async () => {
 
     if (res.status === 200) {
       console.log("토큰 재발급 성공");
+      const newTocken = res.data.token;
+      localStorage.setItem('token', newTocken);
       return { success: true };
     }
   } catch (error) {
@@ -69,6 +73,8 @@ export const LogoutApi = async () => {
         });
         if (res.status === 200) {
             console.log(res.data);
+            localStorage.removeItem('token');
+            window.alert("로그아웃이 되었습니다.")
         }
     } catch (error) {
         console.error(error);
