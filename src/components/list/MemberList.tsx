@@ -10,6 +10,7 @@ import BottomSheet from "../common/modal/BottomSheet";
 import MemberDeleteModal from "../common/modal/MemberDeleteModal";
 import { useNavigate } from "react-router-dom";
 import { getPTListApi } from "../../store/api/user/member/MemberApi";
+import { useListDataStore } from "../../store/store";
 
 function MemberList() {
   const navigate = useNavigate();
@@ -18,13 +19,7 @@ function MemberList() {
   const [isdeletebtnOpen, setIsdeletebtnOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [seletMemberId, setSelectMemberId] = useState<number | null>(null); 
-  const [listData, setListData] = useState([
-    {
-      id: 0,
-      name: "",
-      email: ""
-    }
-  ]);
+  const {listData, setListData}= useListDataStore();
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -91,7 +86,7 @@ function MemberList() {
                 </div>
                 <div className="flex">
                   <div className="w-[215px] h-[30px] border border-custom-blue rounded-lg mr-5 flex items-center justify-center">
-                    <span className="text-xs">{member.email}</span> {/* 회원 이메일 */}
+                    <span className="text-xs">{member.tel}</span> {/* 회원 이메일 */}
                   </div>
                   {isdeletebtnOpen && (
                     <img src={deletebtm} className="mr-5" onClick={() => handleDeleteClick(member.id)} /> 

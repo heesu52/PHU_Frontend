@@ -11,6 +11,7 @@ interface BottomSheetProps {
 
 function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
   const [email, setEmail] = useState("");
+  const [errormessage, setErrorMessage] = useState("");
   useEffect(() => {
     // BottomSheet가 열릴 때 스크롤을 비활성화
     if (isOpen) {
@@ -37,8 +38,19 @@ function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
       window.alert("회원이 추가되었습니다.");
       onClose(); // 추가 후 BottomSheet 닫기
     } else {
-      console.log("회원 추가 실패");
-    }
+      if (response?.errorCode === "M003"){
+        setErrorMessage(response.message);
+      }
+      if (response?.errorCode === "M004"){
+        setErrorMessage(response.message);
+      }
+      if (response?.errorCode === "M005"){
+        setErrorMessage(response.message);
+      }
+      if (response?.errorCode === "M006"){
+        setErrorMessage(response.message);
+      }
+    } 
   };
 
   return (
@@ -66,6 +78,9 @@ function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
             onChange={handleEmailChange}
             required
           />
+          {errormessage && (
+          <div className="text-red-500 ">{errormessage}</div>
+          )}
           <SubmitButton
             label="확인"
             size="small"

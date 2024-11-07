@@ -21,7 +21,45 @@ export const addPTMemberApi = async (email: string) => {
         return {success:true};
       }
     } catch (error) {
-      console.error("회원 추가 실패:", error);
+      if (axios.isAxiosError(error)) {
+        const errorCode = error.response?.data?.code; // 응답 코드 확인
+        // 중복 이메일을 입력했을 경우
+        if (errorCode === "M006") {
+          console.log(error.response?.data.message);
+          return { 
+            success: false, 
+            errorCode: "M006", 
+            message: "트레이너는 추가할 수 없습니다." 
+          };
+        }
+        if (errorCode === "M003") {
+          console.log(error.response?.data.message);
+          return { 
+            success: false, 
+            errorCode: "M003", 
+            message: "찾을 수 없는 회원입니다." 
+          };
+        }
+        if (errorCode === "M004") {
+          console.log(error.response?.data.message);
+          return { 
+            success: false, 
+            errorCode: "M004", 
+            message: "해당 기능은 트레이너만 가능합니다." 
+          };
+        }
+        if (errorCode === "M005") {
+          console.log(error.response?.data.message);
+          return { 
+            success: false, 
+            errorCode: "M005", 
+            message: "이미 리스트에 존재하는 회원입니다." 
+          };
+        }
+        return { success: false };
+      } else {
+        console.error("로그인 실패:", error);
+      }
     }
   };
 

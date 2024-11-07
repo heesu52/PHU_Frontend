@@ -5,7 +5,7 @@ import profile from "../../assets/basic-profile.svg";
 import mark from "../../assets/TRAINER 마크.svg";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getUserApi } from "../../store/api";
+import { getUserApi, getPTListApi } from "../../store/api";
 
 function Profile() {
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ function Profile() {
             <span className="text-base">{name}</span>
             <img src={mark} className="w-[50px] h-[20px] ml-1"></img>
           </div>
-          <span className="text-sm text-custom-darkgrey">회원 수 : 24명 </span>
+          <span className="text-sm text-custom-darkgrey"> </span>
         </div>
       </div>
       <div className="flex flex-col items-center">

@@ -51,3 +51,21 @@ export const useMemberDataStore = create<MemberDataState>((set) => ({
   memberData: [],
   setMemberData: (memberData) => set({ memberData }),
 }))
+
+
+  /* 회원 리스트 data */
+  interface ListDataState {
+    listData: ListData[]
+    setListData: (listData: ListData[]) => void
+  }
+  interface ListData {
+    id: number,
+    name: string,
+    email: string,
+    tel: string,
+  }
+  
+  export const useListDataStore = create<ListDataState>((set) => ({
+    listData: [],
+    setListData: (listData) => set({ listData }),
+  }))
