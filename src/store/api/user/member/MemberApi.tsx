@@ -4,19 +4,21 @@ import { useApiUrlStore } from "../../../store";
 const apiUrl = useApiUrlStore.getState().apiUrl; 
 
 // 회원추가 조회 api
-export const postMemberApi = async (email: string) => {
+export const addPTMemberApi = async (email: string) => {
     try {
       const access = localStorage.getItem('token')
-      const response = await axios.post(`${apiUrl}/pt/member/add`,{
-        email: email},
+      const response = await axios.post(`${apiUrl}/member/add`,
+        {email: email},
         {headers: 
-            { Authorization: `Bearer ${access}`,
-            "Content-Type": "application/json"
+        
+            { Authorization: access,
+            "Content-Type": "application/json",
         }
       });
       
       if (response.status === 200) {
-        console.log(response.data);
+        console.log("회원추가 성공")
+        return {success:true};
       }
     } catch (error) {
       console.error("회원 추가 실패:", error);
@@ -28,7 +30,7 @@ export const getPTListApi = async () => {
   try {
     const access = localStorage.getItem('token')
     const response = await axios.get(`${apiUrl}/pt/member`,{
-      headers: {Authorization: `Bearer ${access}`},
+      headers: {Authorization: access},
     });
     
     if (response.status === 200) {
@@ -45,7 +47,7 @@ export const getPTMemberApi = async (memberId: number) => {
     try {
       const access = localStorage.getItem('token')
       const response = await axios.get(`${apiUrl}/pt/member/${memberId}`,{
-        headers: {Authorization: `Bearer ${access}`},
+        headers: {Authorization: access},
       });
       
       if (response.status === 200) {

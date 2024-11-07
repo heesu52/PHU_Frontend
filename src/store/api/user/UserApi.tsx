@@ -9,7 +9,7 @@ export const getUserApi = async () => {
   try {
     const access = localStorage.getItem('token')
     const response = await axios.get(`${apiUrl}/member`,{
-      headers: {Authorization: `Bearer ${access}`},
+      headers: {Authorization: access},
     });
     
     if (response.status === 200) {

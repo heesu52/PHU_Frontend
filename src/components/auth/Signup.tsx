@@ -54,7 +54,7 @@ function SignUp() {
       navigate('/login');
     } else {
       // 중복된 이메일 경우 에러메세지
-      setErrorMessage(response?.message);
+      setErrorMessage(response?.message || "회원가입에 실패했습니다");
     }
   };
 

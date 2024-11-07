@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import compactup from "../../../assets/compact-up.svg";
 import SubmitButton from "../button/SubmitButton";
 import Input from "../Input";
+import { addPTMemberApi } from '../../../store/api/user/member/MemberApi';
 
 interface BottomSheetProps {
   onClose: () => void;
@@ -9,6 +10,7 @@ interface BottomSheetProps {
 }
 
 function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
+  const [email, setEmail] = useState("");
   useEffect(() => {
     // BottomSheet가 열릴 때 스크롤을 비활성화
     if (isOpen) {
@@ -21,6 +23,23 @@ function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
       document.body.style.overflow = 'auto';
     };
   }, [isOpen]);
+  
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  }
+
+  
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault(); 
+  
+    const response = await addPTMemberApi(email);
+    if (response?.success) {
+      window.alert("회원이 추가되었습니다.");
+      onClose(); // 추가 후 BottomSheet 닫기
+    } else {
+      console.log("회원 추가 실패");
+    }
+  };
 
   return (
     <>
@@ -37,12 +56,14 @@ function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
           />
           <span className="text-sm">추가할 회원의 이메일을 입력하세요</span>
         </div>
-        <div className="flex flex-col items-center p-7">
+        <form className="flex flex-col items-center p-7" onSubmit={handleSubmit}>
           <Input
             size="medium"
             placeholder="email"
             type="email"
             className="placeholder:text-custom-softgrey"
+            value={email}
+            onChange={handleEmailChange}
             required
           />
           <SubmitButton
@@ -50,7 +71,7 @@ function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
             size="small"
             className={`m-7 cursor-pointer bg-custom-blue`}
           />
-        </div>
+        </form>
       </div>
     </>
   );

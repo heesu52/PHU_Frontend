@@ -27,7 +27,7 @@ export const SignUpApi = async (formData: {
   
       if (res.status === 200) {
         console.log("회원가입 성공", res.data);
-        return res.data;
+        return {success:true};
       }
     } catch (error) {
        // AxiosError에 대한 처리

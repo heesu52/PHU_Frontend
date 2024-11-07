@@ -17,12 +17,11 @@ export const GoogleLoginApi = () => {
 // 로그인 api
 export const LoginApi = async (email: string, password: string) => {
   try {
-    const response = await axios.post(`${apiUrl}/login`, { email, password }, { withCredentials: true });
+    const res = await axios.post(`${apiUrl}/login`, { email, password }, { withCredentials: true });
 
-    if (response.status === 200) {
+    if (res.status === 200) {
       console.log("로그인 성공");
-      console.log(response.data);
-      const token = response.data.token;
+      const token = res.headers['authorization'];
       localStorage.setItem('token', token);
       return { success: true };
     }
@@ -45,23 +44,28 @@ export const LoginApi = async (email: string, password: string) => {
   }
 };
 
-// 리프레시 토큰 발급 api
+// 리프레시 토큰 발급 API
 export const RefreshTokenApi = async () => {
   try {
-    const res = await axios.post(`${apiUrl}/reissue`,
-       {}, { withCredentials: true });
+    const res = await axios.post(`${apiUrl}/reissue`, {}, { withCredentials: true });
 
-    if (res.status === 200) {
-      console.log("토큰 재발급 성공");
-      const newTocken = res.data.token;
-      localStorage.setItem('token', newTocken);
+    // 서버에서 새 액세스 토큰을 발급하여 응답 헤더에서 가져옴
+    const newToken = res.headers['authorization'];
+
+    if (newToken) {
+      // 'Bearer ' 포함된 새로운 액세스 토큰을 localStorage에 저장
+      localStorage.setItem('token', newToken); 
       return { success: true };
+    } else {
+      console.error("새 액세스 토큰을 발급받지 못했습니다.");
+      return { success: false };
     }
   } catch (error) {
-    console.error("리프레시 토큰 재발급 실패", error);
+    console.error("리프레시 토큰 발급 실패", error);
     return { success: false };
   }
 };
+
 
   
 
