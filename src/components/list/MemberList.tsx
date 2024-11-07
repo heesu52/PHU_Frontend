@@ -17,6 +17,7 @@ function MemberList() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isdeletebtnOpen, setIsdeletebtnOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [seletMemberId, setSelectMemberId] = useState<number | null>(null); 
   const [listData, setListData] = useState([
     {
       id: 0,
@@ -44,6 +45,11 @@ function MemberList() {
 
   const handleIconClick = (path: string) => {
     navigate(path);
+  };
+
+  const handleDeleteClick = (id: number) => {
+    setSelectMemberId(id);  
+    toggleModal();  
   };
 
    //회원리스트 가져오기
@@ -88,7 +94,7 @@ function MemberList() {
                     <span className="text-xs">{member.email}</span> {/* 회원 이메일 */}
                   </div>
                   {isdeletebtnOpen && (
-                    <img src={deletebtm} className="mr-5" onClick={toggleModal} />
+                    <img src={deletebtm} className="mr-5" onClick={() => handleDeleteClick(member.id)} /> 
                   )}
                 </div>
               </li>
@@ -106,7 +112,7 @@ function MemberList() {
       {/* BottomSheet */}
       <BottomSheet onClose={toggleBottomSheet} isOpen={isBottomSheetOpen} />
       {/* MemberDeleteModal */}
-      {isModalOpen && <MemberDeleteModal onClose={toggleModal} />}
+      {isModalOpen && <MemberDeleteModal onClose={toggleModal} memberId={seletMemberId} />}
       <NavigationBar />
     </div>
   );

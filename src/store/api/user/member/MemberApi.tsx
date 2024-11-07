@@ -58,3 +58,20 @@ export const getPTMemberApi = async (memberId: number) => {
       console.error("회원 조회 실패:", error);
     }
   };
+
+  // 트레이너의 회원 삭제 api
+export const deleteMemberApi = async (memberId: number) => {
+  try {
+    const access = localStorage.getItem('token')
+    const response = await axios.delete(`${apiUrl}/pt/member/${memberId}`,{
+      headers: {Authorization: access},
+    });
+    
+    if (response.status === 200) {
+      console.log(response.data);
+      return {success: true};
+    }
+  } catch (error) {
+    console.error("회원 삭제 실패:", error);
+  }
+};
