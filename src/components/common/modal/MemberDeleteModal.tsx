@@ -2,10 +2,11 @@ import { deleteMemberApi } from "../../../store/api/user/member/MemberApi";
 
 interface MemberDeleteModalProps {
   onClose: () => void; 
-  memberId: number | null;  // 선택된 회원의 ID를 prop으로 전달
+  memberId: number | null;  
+  memberName: string | null;  
 }
 
-function MemberDeleteModal({ onClose, memberId }: MemberDeleteModalProps) {
+function MemberDeleteModal({ onClose, memberId, memberName }: MemberDeleteModalProps) {
   // 삭제 API 호출 함수
   const handleDelete = async () => {
     if (memberId !== null) {
@@ -24,7 +25,7 @@ function MemberDeleteModal({ onClose, memberId }: MemberDeleteModalProps) {
       <div className="p-6 bg-white rounded-md shadow-lg w-80">
         <h2 className="mb-4 text-lg font-bold">회원 삭제</h2>
         <p className="text-sm text-gray-600">
-          정말로 이 회원을 삭제하시겠습니까?
+          정말로 '{memberName}' 님을 삭제하시겠습니까?
         </p>
         <p className="mb-6 text-sm text-gray-600">
           회원정보는 삭제되지 않습니다.
