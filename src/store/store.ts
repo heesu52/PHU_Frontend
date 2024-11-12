@@ -69,3 +69,33 @@ export const useMemberDataStore = create<MemberDataState>((set) => ({
     listData: [],
     setListData: (listData) => set({ listData }),
   }))
+
+
+    // 회원 상세정보 객체 형태로 수정
+    interface InfoDataState {
+      infoData: InfoData;  // InfoData를 객체로 설정
+      setInfoData: (infoData: InfoData) => void;
+    }
+
+    interface InfoData {
+      id: number;
+      memberName: string;
+      memberAge: number;
+      ptStartDate: string;
+      ptEndDate: string;
+      memberTarget: string;
+      significant: string;
+    }
+
+    export const memberInfoDataStore = create<InfoDataState>((set) => ({
+      infoData: {
+        id: 0,
+        memberName: '',
+        memberAge: 0,
+        ptStartDate: '',
+        ptEndDate: '',
+        memberTarget: '',
+        significant: '',
+      },
+      setInfoData: (infoData) => set({ infoData }),
+    }));

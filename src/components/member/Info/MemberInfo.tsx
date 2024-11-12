@@ -3,12 +3,14 @@ import meatball from "../../../assets/three-dots.svg"
 import NavigationBar from "../../common/bar/NavigationBar";
 import Dropdown from "../../common/DropDown";
 import { useState } from "react";
-import MemberInfoComponent from "./Member";
+import MemberInfoComponent from "./Info";
 import EditMemberCpmonent from "./EditMember";
+import { memberInfoDataStore } from "../../../store/store";
 
 function Info() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isEditInfo, setIsEditInfo] = useState(false);
+  const {infoData} = memberInfoDataStore();
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
@@ -26,7 +28,7 @@ function Info() {
   return (
     <div className="relative flex flex-col items-center justify-center">
       <TabBar
-        label="정우혁"
+        label={infoData.memberName}
         icon={meatball}
         onIconClick={toggleDropdown}
       />

@@ -23,7 +23,7 @@ const ERROR_CODES = {
 } as const;
 
 
-// 회원추가 조회 API
+// 회원추가 API
 export const addPTMemberApi = async (email: string) => {
   try {
     const response = await axios.post(
@@ -33,7 +33,7 @@ export const addPTMemberApi = async (email: string) => {
     );
 
     if (response.status === 200) {
-      console.log("회원추가 성공");
+      console.log("회원 추가 성공");
       getPTListApi();
       return {
         success: true,
@@ -51,7 +51,7 @@ export const addPTMemberApi = async (email: string) => {
         message
       };
     } else {
-      console.error("로그인 실패:", error);
+      console.error("회원 추가 실패:", error);
       return { success: false, message: ERROR_CODES.DEFAULT };
     }
   }
