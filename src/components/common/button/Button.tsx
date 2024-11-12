@@ -1,16 +1,16 @@
 interface RadioBtnProps {
     className?: string;
-    onChange?: (value: string) => void;
+    onClick?: (value: string) => void;
     label: string;
     name: string; 
     value: string; 
     checked?: boolean; 
 }
 
-function Button({ className, onChange, label, name, value, checked = false }: RadioBtnProps) {
+function Button({ className, onClick, label, name, value, checked = false }: RadioBtnProps) {
     const handleChange = () => {
-        if (onChange) {
-            onChange(value); // 선택된 값 전달
+        if (onClick) {
+            onClick(value); // 선택된 값 전달
         }
     };
 
@@ -22,7 +22,7 @@ function Button({ className, onChange, label, name, value, checked = false }: Ra
                 name={name}
                 value={value}
                 checked={checked}
-                onChange={handleChange}
+                onClick={handleChange}
                 className="hidden" // 기본 라디오 버튼 숨김
             />
             <div 

@@ -1,7 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import compactup from "../../../assets/compact-up.svg";
 import SubmitButton from "../button/SubmitButton";
 import Input from "../Input";
+import { addPTMemberApi, getPTListApi } from '../../../store/api/user/member/MemberApi';
+import { useListDataStore } from '../../../store/store';
 
 interface BottomSheetProps {
   onClose: () => void;
@@ -9,6 +11,9 @@ interface BottomSheetProps {
 }
 
 function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
+  const [email, setEmail] = useState("");
+  const [errormessage, setErrorMessage] = useState("");
+  const {listData, setListData} = useListDataStore();
   useEffect(() => {
     // BottomSheet가 열릴 때 스크롤을 비활성화
     if (isOpen) {
@@ -21,6 +26,36 @@ function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
       document.body.style.overflow = 'auto';
     };
   }, [isOpen]);
+  
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  }
+
+  
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault(); 
+  
+    const response = await addPTMemberApi(email);
+    if (response?.success) {
+      window.alert("회원이 추가되었습니다.");
+      setListData([...listData, response?.data]);
+      getPTListApi();
+      onClose(); // 추가 후 BottomSheet 닫기
+    } else {
+      if (response?.errorCode === "M003"){
+        setErrorMessage(response.message);
+      }
+      if (response?.errorCode === "M004"){
+        setErrorMessage(response.message);
+      }
+      if (response?.errorCode === "M005"){
+        setErrorMessage(response.message);
+      }
+      if (response?.errorCode === "M006"){
+        setErrorMessage(response.message);
+      }
+    } 
+  };
 
   return (
     <>
@@ -37,20 +72,25 @@ function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
           />
           <span className="text-sm">추가할 회원의 이메일을 입력하세요</span>
         </div>
-        <div className="flex flex-col items-center p-7">
+        <form className="flex flex-col items-center p-7" onSubmit={handleSubmit}>
           <Input
             size="medium"
             placeholder="email"
             type="email"
             className="placeholder:text-custom-softgrey"
+            value={email}
+            onChange={handleEmailChange}
             required
           />
+          {errormessage && (
+          <div className="text-red-500 ">{errormessage}</div>
+          )}
           <SubmitButton
             label="확인"
             size="small"
             className={`m-7 cursor-pointer bg-custom-blue`}
           />
-        </div>
+        </form>
       </div>
     </>
   );

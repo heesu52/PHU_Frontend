@@ -13,7 +13,7 @@ export const useApiUrlStore = create<ApiUrlState>((set) => ({
 }));
 
 
-/* 유저 리스트 */
+/* 유저 data */
 interface UserDataState {
     userData: UserData[]
     setUserData: (userData: UserData[]) => void
@@ -31,4 +31,41 @@ interface UserDataState {
   export const useUserDataStore = create<UserDataState>((set) => ({
     userData: [],
     setUserData: (userData) => set({ userData }),
+  }))
+
+  
+  /* 회원 정보 data */
+interface MemberDataState {
+  memberData: MemberData[]
+  setMemberData: (memberData: MemberData[]) => void
+}
+interface MemberData {
+  name: string,
+  age: number,
+  email: string,
+  gender: string;
+  tel: string,
+}
+
+export const useMemberDataStore = create<MemberDataState>((set) => ({
+  memberData: [],
+  setMemberData: (memberData) => set({ memberData }),
+}))
+
+
+  /* 회원 리스트 data */
+  interface ListDataState {
+    listData: ListData[]
+    setListData: (listData: ListData[]) => void
+  }
+  interface ListData {
+    id: number,
+    name: string,
+    email: string,
+    tel: string,
+  }
+  
+  export const useListDataStore = create<ListDataState>((set) => ({
+    listData: [],
+    setListData: (listData) => set({ listData }),
   }))

@@ -49,18 +49,18 @@ function SignUp() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    
     const response = await SignUpApi(formData);
     if (response?.success) {
       navigate('/login');
     } else {
-      setErrorMessage("중복된 이메일 입니다.");  
+      // 중복된 이메일 경우 에러메세지
+      setErrorMessage(response?.message || "회원가입에 실패했습니다");
     }
   };
 
   return (
     <div>
-      <HeaderBar label="회원가입"/>
+      <HeaderBar label="회원가입" />
       <form className="flex flex-col items-center mt-5" onSubmit={handleSubmit}>
         <div className="flex flex-col">
           <span className="text-[14px] text-[#858585] mb-1">이름</span>
@@ -85,6 +85,7 @@ function SignUp() {
             onChange={handleChange}
             required
           />
+        </div>
         <div className="flex flex-col">
           <span className="text-[14px] text-[#858585] mb-1">이메일</span>
           <Input
@@ -97,9 +98,8 @@ function SignUp() {
             required
           />
         </div>
-        </div>
         {errormessage && (
-          <div className="text-red-500 ">{errormessage}</div>
+          <div className="text-red-500">{errormessage}</div>
         )}
         <div className="flex flex-col">
           <span className="text-[14px] text-[#858585] mb-1">비밀번호</span>
@@ -126,40 +126,40 @@ function SignUp() {
             required
           />
         </div>
-        <div className="flex flex-col w-[550px]">
+        <div className="flex flex-col w-[500px]">
           <span className="text-[14px] text-[#858585] mb-1">성별</span>
           <div className="flex justify-center gap-20 mb-4">
             <Button
               label="여성"
               name="gender"
               value="FEMALE"
-              onChange={() => handleButtonClick("gender", "FEMALE")}
+              onClick={() => handleButtonClick("gender", "FEMALE")}
               checked={formData.gender === "FEMALE"}
             />
             <Button
               label="남성"
               name="gender"
               value="MALE"
-              onChange={() => handleButtonClick("gender", "MALE")}
+              onClick={() => handleButtonClick("gender", "MALE")}
               checked={formData.gender === "MALE"}
             />
           </div>
         </div>
-        <div className="flex flex-col w-[550px]">
+        <div className="flex flex-col w-[500px]">
           <span className="text-[14px] text-[#858585] mb-1">파트</span>
           <div className="flex justify-center gap-20">
             <Button
               label="트레이너"
               name="part"
               value="TRAINER"
-              onChange={() => handleButtonClick("part", "TRAINER")}
+              onClick={() => handleButtonClick("part", "TRAINER")}
               checked={formData.part === "TRAINER"}
             />
             <Button
               label="회원"
               name="part"
               value="MEMBER"
-              onChange={() => handleButtonClick("part", "MEMBER")}
+              onClick={() => handleButtonClick("part", "MEMBER")}
               checked={formData.part === "MEMBER"}
             />
           </div>
