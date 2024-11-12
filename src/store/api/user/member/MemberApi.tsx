@@ -22,6 +22,7 @@ const ERROR_CODES = {
   DEFAULT: "알 수 없는 오류가 발생했습니다."
 } as const;
 
+
 // 회원추가 조회 API
 export const addPTMemberApi = async (email: string) => {
   try {
@@ -33,7 +34,11 @@ export const addPTMemberApi = async (email: string) => {
 
     if (response.status === 200) {
       console.log("회원추가 성공");
-      return { success: true };
+      getPTListApi();
+      return {
+        success: true,
+        data: response.data
+       };
     }
   } catch (error) {
     if (axios.isAxiosError(error)) {

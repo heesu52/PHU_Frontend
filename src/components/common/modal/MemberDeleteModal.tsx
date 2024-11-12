@@ -1,4 +1,4 @@
-import { deleteMemberApi } from "../../../store/api/user/member/MemberApi";
+import { deleteMemberApi, getPTListApi} from "../../../store/api/user/member/MemberApi";
 
 interface MemberDeleteModalProps {
   onClose: () => void; 
@@ -13,6 +13,7 @@ function MemberDeleteModal({ onClose, memberId, memberName }: MemberDeleteModalP
       const response = await deleteMemberApi(memberId);  // 회원 삭제 API 호출
       if (response?.success) {
         alert('회원이 삭제되었습니다.');
+        getPTListApi();
         onClose(); 
       } else {
         console.log('회원 삭제에 실패했습니다.');
