@@ -8,7 +8,7 @@ import MyPage from './pages/my/Profile';
 import SettingPage from "./pages/my/Setting"
 import EditPage from './pages/my/Edit';
 import MemberListPage from './pages/list/List';
-import MemberInfoPage from './pages/member/Info';
+import MemberInfoPage from './pages/member/info/Info';
 import DaliyChartListPage from './pages/member/dailychart/DailyChartList';
 import DailyChartPage from './pages/member/dailychart/Chart';
 import DailyChartEditChartPage from './components/member/DailyChart/EditChart';
@@ -35,12 +35,12 @@ function App() {
 
             <Route path='/member' element={<MemberListPage/>} />
 
-            <Route path='/member/info' element={<MemberInfoPage/>} />
+            <Route path='/member/info/:memberid' element={<MemberInfoPage/>} />
             <Route path='/member/daily' element={<DaliyChartListPage/>} />
-            <Route path='/member/daily/:id' element={<DailyChartPage/>} />
+            <Route path='/member/daily/:memberid' element={<DailyChartPage/>} />
             <Route path='/member/daily/edit' element={<DailyChartEditChartPage/>} />
             <Route path='/member/summary' element={<AISummaryListPage/>} />
-            <Route path='/member/summary/:id' element={<SummaryPage/>} />
+            <Route path='/member/summary/:memberid' element={<SummaryPage/>} />
             <Route path='/member/summary/edit' element={<EditSummaryPage/>} />
 
             <Route path='/calendar' element={<CalendarPage/>} />

@@ -23,7 +23,7 @@ const ERROR_CODES = {
 } as const;
 
 
-// 회원추가 조회 API
+// 회원추가 API
 export const addPTMemberApi = async (email: string) => {
   try {
     const response = await axios.post(
@@ -33,7 +33,7 @@ export const addPTMemberApi = async (email: string) => {
     );
 
     if (response.status === 200) {
-      console.log("회원추가 성공");
+      console.log("회원 추가 성공");
       getPTListApi();
       return {
         success: true,
@@ -51,7 +51,7 @@ export const addPTMemberApi = async (email: string) => {
         message
       };
     } else {
-      console.error("로그인 실패:", error);
+      console.error("회원 추가 실패:", error);
       return { success: false, message: ERROR_CODES.DEFAULT };
     }
   }
@@ -74,22 +74,6 @@ export const getPTListApi = async () => {
   }
 };
 
-// 트레이너의 회원정보 조회 API
-export const getPTMemberApi = async (memberId: number) => {
-  try {
-    const response = await axios.get(`${apiUrl}/pt/member/${memberId}`, {
-      headers: getAuthHeaders()
-    });
-
-    if (response.status === 200) {
-      console.log(response.data);
-      return response.data;
-    }
-  } catch (error) {
-    console.error("회원 조회 실패:", error);
-    return { success: false, message: "회원 조회 실패" };
-  }
-};
 
 // 트레이너의 회원 삭제 API
 export const deleteMemberApi = async (memberId: number) => {

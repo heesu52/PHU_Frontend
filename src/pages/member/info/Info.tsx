@@ -1,4 +1,4 @@
-import InfoComponent from "../../components/member/Info/MemberInfo";
+import InfoComponent from "../../../components/member/Info/MemberInfo";
 
 function InfoPage() {
   return (

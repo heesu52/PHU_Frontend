@@ -8,12 +8,11 @@ import plusbtn from "../../assets/plus-circle-fill.svg";
 import deletebtm from "../../assets/dash-circle-fill.svg";
 import BottomSheet from "../common/modal/BottomSheet";
 import MemberDeleteModal from "../common/modal/MemberDeleteModal";
-import { useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { getPTListApi } from "../../store/api/user/member/MemberApi";
 import { useListDataStore } from "../../store/store";
 
 function MemberList() {
-  const navigate = useNavigate();
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isdeletebtnOpen, setIsdeletebtnOpen] = useState(false);
@@ -39,9 +38,7 @@ function MemberList() {
     setIsdeletebtnOpen(!isdeletebtnOpen);
   };
 
-  const handleIconClick = (path: string) => {
-    navigate(path);
-  };
+ 
 
   const handleDeleteClick = (id: number, name: string) => {
     setSelectMemberId(id);
@@ -85,9 +82,9 @@ function MemberList() {
                 key={index}
                 className="border-b h-[55px] flex items-center justify-between hover:bg-custom-softblue"
               >
-                <div
+                <Link
                   className="flex items-center justify-center p-3 ml-5 cursor-pointer"
-                  onClick={() => handleIconClick(`/member/info/${member.id}`)}
+                  to={`/member/info/${member.id}`}                  
                 >
                   <img
                     src={profile}
@@ -95,7 +92,7 @@ function MemberList() {
                     className="w-[30px] h-[30px] mr-3"
                   />
                   <span>{member.name}</span> {/* 회원 이름 */}
-                </div>
+                </Link>
                 <div className="flex">
                   <div className="w-[215px] h-[30px] border border-custom-blue rounded-lg mr-5 flex items-center justify-center">
                     <span className="text-xs">{member.tel}</span> {/* 회원 전화번호 */}
