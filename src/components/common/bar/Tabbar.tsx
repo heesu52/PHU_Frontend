@@ -32,13 +32,13 @@ interface HeaderBarProps {
         </div>
         <div className="flex w-[360px] h-10  ml-5">
             <div className={`w-[120px] h-full flex justify-center items-center cursor-pointer hover:text-custom-orange
-            ${location.pathname === '/member/info' ? 'text-custom-orange font-bold border-b border-custom-orange' : 'text-custom-softgrey'}`}
+            ${location.pathname.includes('/member/info') ? 'text-custom-orange font-bold border-b border-custom-orange' : 'text-custom-softgrey'}`}
             onClick={() => handleIconClick('/member/info')}>회원정보</div>
             <div className={`w-[120px] h-full flex justify-center items-center cursor-pointer hover:text-custom-orange
-            ${location.pathname === '/member/daily' ? 'text-custom-orange font-bold border-b border-custom-orange' : 'text-custom-softgrey'}`}
+            ${location.pathname.includes('/member/daily') ? 'text-custom-orange font-bold border-b border-custom-orange' : 'text-custom-softgrey'}`}
             onClick={() => handleIconClick('/member/daily')}>데일리 차트</div>
             <div className={`w-[120px] h-full flex justify-center items-center cursor-pointer hover:text-custom-orange
-            ${location.pathname === '/member/summary' ? 'text-custom-orange font-bold border-b border-custom-orange' : 'text-custom-softgrey'}`}
+            ${location.pathname.includes('/member/summary') ? 'text-custom-orange font-bold border-b border-custom-orange' : 'text-custom-softgrey'}`}
             onClick={() => handleIconClick('/member/summary')}>AI 요약</div>
         </div>
       </div>

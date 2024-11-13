@@ -77,7 +77,7 @@ export const useMemberDataStore = create<MemberDataState>((set) => ({
       setInfoData: (infoData: InfoData) => void;
     }
 
-    interface InfoData {
+    export interface InfoData {
       id: number;
       memberName: string;
       memberAge: number;

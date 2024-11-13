@@ -74,22 +74,6 @@ export const getPTListApi = async () => {
   }
 };
 
-// 트레이너의 회원정보 조회 API
-export const getPTMemberApi = async (memberId: number) => {
-  try {
-    const response = await axios.get(`${apiUrl}/pt/member/${memberId}`, {
-      headers: getAuthHeaders()
-    });
-
-    if (response.status === 200) {
-      console.log(response.data);
-      return response.data;
-    }
-  } catch (error) {
-    console.error("회원 조회 실패:", error);
-    return { success: false, message: "회원 조회 실패" };
-  }
-};
 
 // 트레이너의 회원 삭제 API
 export const deleteMemberApi = async (memberId: number) => {
