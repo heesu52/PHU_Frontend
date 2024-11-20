@@ -1,5 +1,6 @@
 import './App.css';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import MainPage from './pages/main/Main';
 import LoginPage from './pages/auth/Login';
 import SignupPage from './pages/auth/Signup';
 import SocialSignupPage from './pages/auth/SocialSignup';
@@ -21,10 +22,11 @@ import CalendarPage from './pages/calendar/Calendar';
 function App() {
   return (
     <Router>
-      <div className='w-[600px] h-screen mx-auto font-[Pretendard] overflow-y-auto'>
+      <div className='w-[600px] h-screen mx-auto font-[Paperlogy] overflow-y-auto'>
         <div className="h-screen border border-custom-softgrey ">
           <Routes>
             {/* <Route element={<PublicLayout/>}/>   */}
+            <Route path="/" element={<MainPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/social/sign-up" element={<SocialSignupPage />} />
