@@ -22,14 +22,17 @@ function SummaryList () {
             <li className="w-[80%] h-[55px] bg-white shadow-md rounded-xl flex items-center justify-center cursor-default">
                 <div className="flex w-full" onClick={() => handleIconClick(':id')}>
                     <p className="flex-0.5 text-center ml-3">2024.11.01</p> 
-                    <p className="flex-1 text-center">2023. 12. 05 오전 9:48 녹음</p> 
+                    <p className="flex-1 text-center">파일제목</p> 
+                    <p className="flex-1 text-center">텍스트 추출</p> 
+                    <p className="flex-1 text-center">대화 요약</p> 
                 </div>
                 <img className="mr-2 rotate-90 cursor-pointer" src={threedots} />
             </li>
             <li className="w-[80%] h-[55px] bg-white shadow-md rounded-xl flex items-center justify-center cursor-default">
                 <div className="flex w-full" onClick={() => handleIconClick(':id')}>
                     <p className="flex-0.5 text-center ml-3">2024.11.01</p> 
-                    <p className="flex-1 text-center">2023. 12. 05 오전 9:48 녹음</p> 
+                    <p className="flex-1 text-center">파일제목</p> 
+                    <p className="flex-1 text-center">텍스트 추출</p> 
                 </div>
                 <img className="mr-2 rotate-90 cursor-pointer" src={threedots} />
             </li>
