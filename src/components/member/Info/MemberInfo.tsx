@@ -9,6 +9,7 @@ import { memberInfoDataStore, } from "../../../store/store";
 import { getPTInfoApi } from "../../../store/api/user/member/MemberInfoApi";
 import { useParams } from "react-router-dom";
 
+
 function Info() {
   const {memberid} = useParams();
   //const {listData} = useListDataStore();

@@ -16,6 +16,20 @@ module.exports = {
         "custom-indigo" : "#1E4061",
         "custom-yellow" : "#F6D468"
       },
+      keyframes: {
+        slideUpDown: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+      },
+      animation: {
+        slideUpDown: 'slideUpDown 1.5s infinite',
+        fadeIn: 'fadeIn 2s ease-in-out',
+      },
     },
   },
   plugins: [],

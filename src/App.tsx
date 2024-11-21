@@ -1,5 +1,6 @@
 import './App.css';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import MainPage from './pages/main/Main';
 import LoginPage from './pages/auth/Login';
 import SignupPage from './pages/auth/Signup';
 import SocialSignupPage from './pages/auth/SocialSignup';
@@ -17,6 +18,7 @@ import SummaryPage from './pages/member/AISummary/Summary'
 import EditSummaryPage from './components/member/AISummary/EditSummary';
 import ChatPage from './pages/chat/Chat';
 import CalendarPage from './pages/calendar/Calendar';
+import VoicePage from './pages/voice/Voice';
 
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
         <div className="h-screen border border-custom-softgrey ">
           <Routes>
             {/* <Route element={<PublicLayout/>}/>   */}
+            <Route path="/" element={<MainPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/social/sign-up" element={<SocialSignupPage />} />
@@ -42,6 +45,8 @@ function App() {
             <Route path='/member/summary' element={<AISummaryListPage/>} />
             <Route path='/member/summary/:memberid' element={<SummaryPage/>} />
             <Route path='/member/summary/edit' element={<EditSummaryPage/>} />
+
+            <Route path='/member/voice' element={<VoicePage/>} />
 
             <Route path='/calendar' element={<CalendarPage/>} />
             
