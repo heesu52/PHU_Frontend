@@ -3,6 +3,7 @@ import arrow from "../../../assets/arrow.svg";
 import stopicon from "../../../assets/stop-circle.svg";
 import starticon from "../../../assets/voicestart.svg";
 import Dropdown from "../../common/DropDown";
+import SummaryModal from "../../common/modal/summaryModal"; // SummaryModal 임포트
 import voice from "../../lottie/voice.json";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
@@ -13,6 +14,7 @@ function Voice() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
     const [timer, setTimer] = useState(0); // 타이머 상태
+    const [isModalOpen, setIsModalOpen] = useState(false); // 모달 표시 상태
     const lottieRef = useRef<LottieRefCurrentProps>(null); // Lottie ref 추가
 
     useEffect(() => {
@@ -45,10 +47,16 @@ function Voice() {
                 setTimer(0); // 타이머 초기화
             } else {
                 lottieRef.current?.stop(); // 녹음 중지 시 정지
+                setIsModalOpen(true); // 녹음 중지 시 모달 표시
             }
 
             return nextState;
         });
+    };
+
+    // 모달 닫기 핸들러
+    const closeModal = () => {
+        setIsModalOpen(false);
     };
 
     // 타이머를 시:분:초 형식으로 변환
@@ -107,6 +115,11 @@ function Voice() {
                     />
                 </div>
             </div>
+
+            {/* 모달 */}
+            {isModalOpen && (
+                <SummaryModal onClose={closeModal} />
+            )}
         </div>
     );
 }
