@@ -18,11 +18,12 @@ import SummaryPage from './pages/member/AISummary/Summary'
 import EditSummaryPage from './components/member/AISummary/EditSummary';
 import ChatPage from './pages/chat/Chat';
 import CalendarPage from './pages/calendar/Calendar';
+import VoicePage from './pages/voice/Voice';
 
 function App() {
   return (
     <Router>
-      <div className='w-[600px] h-screen mx-auto font-[Paperlogy] overflow-y-auto'>
+      <div className='w-[600px] h-screen mx-auto font-[Pretendard] overflow-y-auto'>
         <div className="h-screen border border-custom-softgrey ">
           <Routes>
             {/* <Route element={<PublicLayout/>}/>   */}
@@ -44,6 +45,8 @@ function App() {
             <Route path='/member/summary' element={<AISummaryListPage/>} />
             <Route path='/member/summary/:memberid' element={<SummaryPage/>} />
             <Route path='/member/summary/edit' element={<EditSummaryPage/>} />
+
+            <Route path='/member/voice' element={<VoicePage/>} />
 
             <Route path='/calendar' element={<CalendarPage/>} />
             
