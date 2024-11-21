@@ -3,7 +3,7 @@ import arrow from "../../../assets/arrow.svg";
 import stopicon from "../../../assets/stop-circle.svg";
 import starticon from "../../../assets/voicestart.svg";
 import Dropdown from "../../common/DropDown";
-import SummaryModal from "../../common/modal/summaryModal"; // SummaryModal 임포트
+import ChangetoTextModal from "../../common/modal/ChangetoTextModal";
 import voice from "../../lottie/voice.json";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
@@ -18,8 +18,8 @@ function Voice() {
     const lottieRef = useRef<LottieRefCurrentProps>(null); // Lottie ref 추가
 
     useEffect(() => {
-        let timerInterval: NodeJS.Timeout | null = null;
-
+        let timerInterval: ReturnType<typeof setInterval> | null = null;
+    
         if (isRecording) {
             timerInterval = setInterval(() => {
                 setTimer((prev) => prev + 1);
@@ -27,11 +27,12 @@ function Voice() {
         } else if (!isRecording && timerInterval) {
             clearInterval(timerInterval);
         }
-
+    
         return () => {
             if (timerInterval) clearInterval(timerInterval);
         };
     }, [isRecording]);
+    
 
     const handleGoBack = () => navigate(-1);
     const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
@@ -118,7 +119,7 @@ function Voice() {
 
             {/* 모달 */}
             {isModalOpen && (
-                <SummaryModal onClose={closeModal} />
+                <ChangetoTextModal onClose={closeModal} />
             )}
         </div>
     );

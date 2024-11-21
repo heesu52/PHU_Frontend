@@ -11,10 +11,10 @@ function SummaryModal({ onClose }: { onClose: () => void }) {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <div className="p-6 bg-white rounded-lg shadow-lg">
-                <h2 className="mb-4 text-lg font-bold">녹음이 종료되었습니다</h2>
+                <h2 className="mb-4 text-lg font-bold">텍스트 변환이 완료되었습니다</h2>
                 <p className="mb-6 text-sm text-gray-600">
-                    대화 내용을 요약하시겠습니까?
-                    나중에 다시 요약할 수 있어요!
+                    AI를 이용해서 대화 내용을 요약할까요?
+                    나중에도 대화 내용을 요약할 수 있습니다!
                 </p>
                 <div className="flex justify-end space-x-3">
                     <button

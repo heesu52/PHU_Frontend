@@ -33,6 +33,7 @@ function SummaryList () {
                     <p className="flex-0.5 text-center ml-3">2024.11.01</p> 
                     <p className="flex-1 text-center">파일제목</p> 
                     <p className="flex-1 text-center">텍스트 추출</p> 
+                    <p className="flex-1 text-center">텍스트 추출</p> 
                 </div>
                 <img className="mr-2 rotate-90 cursor-pointer" src={threedots} />
             </li>
