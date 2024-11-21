@@ -53,28 +53,26 @@ const handleSubmit = async () => {
     // 기존 회원이면 editInfoApi 호출
     await editInfoApi(
       infoData.id,
-      memberTarget,  // memberTarget 전달
-      significant,   // significant 전달
-      ptStartDate,   // ptStartDate 전달
-      ptEndDate      // ptEndDate 전달
+      memberTarget,  
+      significant,   
+      ptStartDate,
+      ptEndDate      
     );
     toast.success("회원정보가 수정됐어요💪🏻");
   } else {
     // 신규 회원이면 addPTInforApi 호출
     await addPTInforApi(
       Number(memberid),
-      memberTarget,  // memberTarget 전달
-      significant,   // significant 전달
-      ptStartDate,   // ptStartDate 전달
-      ptEndDate      // ptEndDate 전달
+      memberTarget,  
+      significant,   
+      ptStartDate,  
+      ptEndDate     
     );
     toast.success("회원정보가 추가됐어요💪🏻");
   }
 
   onSubmit(); // 부모 컴포넌트의 onSubmit 호출
 };
-
-
 
   return (
     <div className="flex-col w-[80%] justify-between flex h-[90%]">

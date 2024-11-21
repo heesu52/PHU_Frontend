@@ -4,12 +4,13 @@ interface HeaderBarProps {
     label: string; 
     icon?: string; 
     onIconClick?: () => void; 
+    memberid?: number | null;
   }
   
-  function TabBar({ label, icon, onIconClick }: HeaderBarProps) {
+  function TabBar({ label, icon, memberid, onIconClick }: HeaderBarProps) {
     const navigate = useNavigate();
     const location = useLocation();
-    
+  
     const handleIconClick = (path: string) => {
         navigate(path);
     };
@@ -33,7 +34,7 @@ interface HeaderBarProps {
         <div className="flex w-[360px] h-10  ml-5">
             <div className={`w-[120px] h-full flex justify-center items-center cursor-pointer hover:text-custom-orange
             ${location.pathname.includes('/member/info') ? 'text-custom-orange font-bold border-b border-custom-orange' : 'text-custom-softgrey'}`}
-            onClick={() => handleIconClick('/member/info')}>회원정보</div>
+            onClick={() => handleIconClick(`/member/info/${memberid}`)}>회원정보</div>
             <div className={`w-[120px] h-full flex justify-center items-center cursor-pointer hover:text-custom-orange
             ${location.pathname.includes('/member/daily') ? 'text-custom-orange font-bold border-b border-custom-orange' : 'text-custom-softgrey'}`}
             onClick={() => handleIconClick('/member/daily')}>데일리 차트</div>

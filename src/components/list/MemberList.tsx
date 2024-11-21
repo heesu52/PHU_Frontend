@@ -11,6 +11,7 @@ import MemberDeleteModal from "../common/modal/MemberDeleteModal";
 import { Link} from "react-router-dom";
 import { getPTListApi } from "../../store/api/user/member/MemberApi";
 import { useListDataStore } from "../../store/store";
+import { useMemberContext } from "../../context/MemberContext";
 
 function MemberList() {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
@@ -20,6 +21,7 @@ function MemberList() {
   const [seletMemberId, setSelectMemberId] = useState<number | null>(null);
   const [selectMemberName, setSelectMemberName] = useState<string | null>(null); // 선택한 회원의 이름 추가
   const { listData, setListData } = useListDataStore();
+  const { setMemberId } = useMemberContext(); 
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -38,7 +40,9 @@ function MemberList() {
     setIsdeletebtnOpen(!isdeletebtnOpen);
   };
 
- 
+  const handleMemberClick = (id: number) => {
+    setMemberId(id); 
+  };
 
   const handleDeleteClick = (id: number, name: string) => {
     setSelectMemberId(id);
@@ -81,10 +85,11 @@ function MemberList() {
               <li
                 key={index}
                 className="border-b h-[55px] flex items-center justify-between hover:bg-custom-softblue"
+                onClick={() => handleMemberClick(member.id)}
               >
                 <Link
                   className="flex items-center justify-center p-3 ml-5 cursor-pointer"
-                  to={`/member/info/${member.id}`}                  
+                  to={`/member/info/${member.id}`}               
                 >
                   <img
                     src={profile}
