@@ -4,6 +4,8 @@ import SubmitButton from "../button/SubmitButton";
 import Input from "../Input";
 import { addPTMemberApi, getPTListApi } from '../../../store/api/user/member/MemberApi';
 import { useListDataStore } from '../../../store/store';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface BottomSheetProps {
   onClose: () => void;
@@ -40,6 +42,7 @@ function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
       window.alert("회원이 추가되었습니다.");
       setListData([...listData, response?.data]);
       getPTListApi();
+      toast.success("회원추가가 완료됐어요💪🏻");
       onClose(); // 추가 후 BottomSheet 닫기
     } else {
       if (response?.errorCode === "M003"){
@@ -59,6 +62,7 @@ function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
 
   return (
     <>
+    <ToastContainer position='top-center'/>
       <div
         className={`fixed bottom-0 w-[600px] h-[250px] bg-white border shadow-lg rounded-md transition-transform duration-300 transform ${
           isOpen ? 'translate-y-0' : 'translate-y-full'
