@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import SubmitButton from "../../common/button/SubmitButton";
 import { memberInfoDataStore } from "../../../store/store";
 import { getPTInfoApi, addPTInforApi, editInfoApi } from "../../../store/api/user/member/MemberInfoApi";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface EditMemberInfoProps {
   onSubmit: () => void;
@@ -56,6 +58,7 @@ const handleSubmit = async () => {
       ptStartDate,   // ptStartDate 전달
       ptEndDate      // ptEndDate 전달
     );
+    toast.success("회원정보가 수정됐어요💪🏻");
   } else {
     // 신규 회원이면 addPTInforApi 호출
     await addPTInforApi(
@@ -65,6 +68,7 @@ const handleSubmit = async () => {
       ptStartDate,   // ptStartDate 전달
       ptEndDate      // ptEndDate 전달
     );
+    toast.success("회원정보가 추가됐어요💪🏻");
   }
 
   onSubmit(); // 부모 컴포넌트의 onSubmit 호출
@@ -74,6 +78,7 @@ const handleSubmit = async () => {
 
   return (
     <div className="flex-col w-[80%] justify-between flex h-[90%]">
+      <ToastContainer position="top-center"/>
       <div className="space-y-6">
         <div className="space-y-1">
           <div className="text-base">PT 날짜</div>

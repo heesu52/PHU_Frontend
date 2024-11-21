@@ -39,10 +39,9 @@ function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
   
     const response = await addPTMemberApi(email);
     if (response?.success) {
-      window.alert("회원이 추가되었습니다.");
       setListData([...listData, response?.data]);
       getPTListApi();
-      toast.success("회원추가가 완료됐어요💪🏻");
+      toast.success("회원이 추가됐어요💪🏻");
       onClose(); // 추가 후 BottomSheet 닫기
     } else {
       if (response?.errorCode === "M003"){

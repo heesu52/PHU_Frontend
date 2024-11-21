@@ -1,4 +1,6 @@
 import { deleteMemberApi, getPTListApi} from "../../../store/api/user/member/MemberApi";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface MemberDeleteModalProps {
   onClose: () => void; 
@@ -12,7 +14,7 @@ function MemberDeleteModal({ onClose, memberId, memberName }: MemberDeleteModalP
     if (memberId !== null) {
       const response = await deleteMemberApi(memberId);  // 회원 삭제 API 호출
       if (response?.success) {
-        alert('회원이 삭제되었습니다.');
+        toast.success("회원이 삭제됐어요💪🏻");
         getPTListApi();
         onClose(); 
       } else {
@@ -23,6 +25,7 @@ function MemberDeleteModal({ onClose, memberId, memberName }: MemberDeleteModalP
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
+      <ToastContainer position='top-center'/>
       <div className="p-6 bg-white rounded-md shadow-lg w-80">
         <h2 className="mb-4 text-lg font-bold">회원 삭제</h2>
         <p className="text-sm text-gray-600">
