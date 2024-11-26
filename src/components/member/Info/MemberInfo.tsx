@@ -1,23 +1,26 @@
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import TabBar from "../../common/bar/Tabbar";
 import meatball from "../../../assets/three-dots.svg";
 import NavigationBar from "../../common/bar/NavigationBar";
 import Dropdown from "../../common/DropDown";
-import { useState, useEffect } from "react";
 import MemberInfoComponent from "./Info";
-import EditMemberCpmonent from "./EditMember";
+import AddMemberCpmonent from "./AddMemberInfo";
+import NoMemberInfoModal from "../../common/modal/NoMemberInfoModal";
 import { memberInfoDataStore } from "../../../store/store";
 import { getPTInfoApi } from "../../../store/api/user/member/MemberInfoApi";
-import { useMemberContext } from "../../../context/MemberContext";
+import EditMemberInfo from "./EditMemberInfo";  // 오타 수정
 
 
 function Info() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isEditInfo, setIsEditInfo] = useState(false);
-  const { infoData, setInfoData } = memberInfoDataStore();
-  const { MemberId } = useMemberContext();
+  const [isAddInfo, setIsAddInfo] = useState(false);
+  const [isNoMemberModalOpen, setIsNoMemberModalOpen] = useState(false); // 모달 상태 추가
+  const { infoData } = memberInfoDataStore();
+  const { listid } = useParams();
 
-  console.log(MemberId);
-  
+
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
   };
@@ -26,36 +29,34 @@ function Info() {
     setIsEditInfo(true);
   };
 
-  const handleSubmit = () => {
-    setIsEditInfo(false);
+  const handleAddInfo = () => {
+    setIsAddInfo(true);
+  };
+
+
+  const handleCloseNoMemberModal = () => {
+    setIsNoMemberModalOpen(false); // 모달 닫기
   };
 
   useEffect(() => {
-    if (MemberId === null) {
-      console.error("No valid MemberId available.");
-      return;
-    }
-
     const fetchMemberInfo = async () => {
-      const response = await getPTInfoApi(MemberId);  
+      const response = await getPTInfoApi(Number(listid));
       if (response.errorCode === "M003") {
-        handleEditInfo();  // 오류 코드 M003 처리
-      } else if (response) {
-        setInfoData(response); 
+        setIsNoMemberModalOpen(true); 
+        handleAddInfo();
       }
     };
 
     fetchMemberInfo();
-  }, [MemberId, setInfoData]);  
+  }, [listid]);
 
-  
+
   return (
     <div className="relative flex flex-col items-center justify-center">
       <TabBar
         label={infoData.memberName}
         icon={meatball}
         onIconClick={toggleDropdown}
-        memberid={MemberId}
       />
       {isDropdownOpen && (
         <Dropdown
@@ -64,13 +65,20 @@ function Info() {
         />
       )}
       <div className="w-full h-[calc(100vh-185px)] bg-[#f6f6f6] flex justify-center items-center">
-        {isEditInfo ? (
-          <EditMemberCpmonent onSubmit={handleSubmit} />
+        {isAddInfo ? (
+          <AddMemberCpmonent onSubmit={()=>setIsAddInfo(false)} />
+        ) : isEditInfo ? (
+          <EditMemberInfo onSubmit={()=>setIsEditInfo(false)}/>
         ) : (
           <MemberInfoComponent />
         )}
       </div>
       <NavigationBar />
+
+      {/* NoMemberInfoModal이 열리는 조건 추가 */}
+      {isNoMemberModalOpen && (
+        <NoMemberInfoModal onClose={handleCloseNoMemberModal} />
+      )}
     </div>
   );
 }

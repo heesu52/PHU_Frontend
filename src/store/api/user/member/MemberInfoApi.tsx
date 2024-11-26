@@ -22,11 +22,12 @@ const ERROR_CODES = {
   DEFAULT: "알 수 없는 오류가 발생했습니다."
 } as const;
 
+
 // 회원 상세 정보 추가 API
-export const addPTInforApi = async (memberId: number, memberTarget: string, significant: string, ptStartDate: string, ptEndDate: string) => {
+export const addPTInforApi = async (listid: number, memberTarget: string, significant: string, ptStartDate: string, ptEndDate: string) => {
   try {
     const response = await axios.post(
-      `${apiUrl}/pt/add/info/${memberId}`,
+      `${apiUrl}/pt/add/info/${listid}`,
       { 
         memberTarget,
         significant,
@@ -52,9 +53,9 @@ export const addPTInforApi = async (memberId: number, memberTarget: string, sign
 
 
 // 트레이너의 회원 상세정보 조회 API
-export const getPTInfoApi = async (memberId: number) => {
+export const getPTInfoApi = async (listid: number) => {
   try {
-    const response = await axios.get(`${apiUrl}/pt/info/${memberId}`, {
+    const response = await axios.get(`${apiUrl}/pt/info/${listid}`, {
       headers: getAuthHeaders()
     });
 
@@ -81,9 +82,9 @@ export const getPTInfoApi = async (memberId: number) => {
 
 
 // 트레이너의 회원 상세정보 수정 API
-export const editInfoApi = async (memberId: number, memberTarget: string, significant: string, ptStartDate: string, ptEndDate: string) => {
+export const editInfoApi = async (memberid: number, memberTarget: string, significant: string, ptStartDate: string, ptEndDate: string) => {
     try {
-      const response = await axios.put(`${apiUrl}/pt/member/${memberId}`, 
+      const response = await axios.put(`${apiUrl}/pt/member/${memberid}`, 
         { 
           memberTarget,
           significant,
@@ -93,8 +94,12 @@ export const editInfoApi = async (memberId: number, memberTarget: string, signif
         {headers: getAuthHeaders()});
   
       if (response.status === 200) {
-        console.log(response.data);
-        return response.data;
+        console.log("회원 상세정보 수정 성공");
+        console.log(response);
+        return {
+          success: true,
+          data: response.data
+          };
       }
     } catch (error) {
       console.error("회원 상세정보 수정 실패:", error);
