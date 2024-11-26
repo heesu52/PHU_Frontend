@@ -12,7 +12,7 @@ interface AddMemberInfoProps {
 
 function AddMemberInfo({ onSubmit }: AddMemberInfoProps) {
   const { setInfoData } = memberInfoDataStore();
-  const { ListId } = useParams();
+  const { listid } = useParams();
 ;
 
   // 상태 변수 설정
@@ -32,7 +32,7 @@ function AddMemberInfo({ onSubmit }: AddMemberInfoProps) {
   // onSubmit에서 addPTInforApi 호출
   const handleSubmit = async () => {
     const response = await addPTInforApi(
-      Number(ListId), 
+      Number(listid), 
       memberTarget,
       significant,
       ptStartDate,
