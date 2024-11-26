@@ -39,7 +39,6 @@ export const addPTInforApi = async (listid: number, memberTarget: string, signif
 
     if (response.status === 200) {
       console.log("회원 상세정보 추가 성공");
-      console.log(response);
       return {
         success: true,
         data: response.data
@@ -60,7 +59,6 @@ export const getPTInfoApi = async (listid: number) => {
     });
 
     if (response.status === 200) {
-      console.log(response.data);
       return response.data;
     }
   } catch (error) {
@@ -95,7 +93,6 @@ export const editInfoApi = async (memberid: number, memberTarget: string, signif
   
       if (response.status === 200) {
         console.log("회원 상세정보 수정 성공");
-        console.log(response);
         return {
           success: true,
           data: response.data

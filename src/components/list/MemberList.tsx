@@ -49,13 +49,13 @@ function MemberList() {
   //회원리스트 가져오기
   useEffect(() => {
     const fetchPTlistInfo = async () => {
-      const listData = await getPTListApi();
-      if (listData) {
-        setListData(listData);
+      const response = await getPTListApi();
+      if (response?.success) {
+        setListData(response.data);
       }
     };
     fetchPTlistInfo();
-  }, []);
+  }, [setListData]);
 
   return (
     <div className="relative flex flex-col items-center justify-center">

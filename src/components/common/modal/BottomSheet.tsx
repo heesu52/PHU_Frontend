@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import compactup from "../../../assets/compact-up.svg";
 import SubmitButton from "../button/SubmitButton";
 import Input from "../Input";
-import { addPTMemberApi, getPTListApi } from '../../../store/api/user/member/MemberApi';
+import { addPTMemberApi } from '../../../store/api/user/member/MemberApi';
 import { useListDataStore } from '../../../store/store';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,6 +16,7 @@ function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
   const [email, setEmail] = useState("");
   const [errormessage, setErrorMessage] = useState("");
   const {listData, setListData} = useListDataStore();
+  
   useEffect(() => {
     // BottomSheet가 열릴 때 스크롤을 비활성화
     if (isOpen) {
@@ -39,8 +40,7 @@ function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
   
     const response = await addPTMemberApi(email);
     if (response?.success) {
-      setListData([...listData, response?.data]);
-      getPTListApi();
+      setListData([...listData, response.data])
       toast.success("회원이 추가됐어요💪🏻");
       onClose(); // 추가 후 BottomSheet 닫기
     } else {
