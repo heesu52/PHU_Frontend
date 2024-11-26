@@ -1,13 +1,15 @@
 import React, { createContext, useContext, useState } from "react";
 
-export const MemberContext = createContext<{
+// MemberContextType 인터페이스 정의
+interface MemberContextType {
   MemberId: number | null;
-  setMemberId: React.Dispatch<React.SetStateAction<number | null>>;
-}>({
-  MemberId: null,
-  setMemberId: () => {},
-});
+  setMemberId: (value: number | null) => void;
+}
 
+// 회원 id Context 생성 (초기값은 null로 설정)
+export const MemberContext = createContext<MemberContextType | null>(null);
+
+// Provider 컴포넌트
 export const MemberProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
@@ -20,4 +22,13 @@ export const MemberProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 };
 
-export const useMemberContext = () => useContext(MemberContext);
+// Context 사용 훅
+export const useMemberContext = () => {
+  const context = useContext(MemberContext);
+
+  if (!context) {
+    throw new Error("useMemberContext must be used within a MemberProvider");
+  }
+
+  return context;
+};
