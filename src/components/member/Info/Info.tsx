@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { memberInfoDataStore } from "../../../store/store";
 import { getPTInfoApi } from "../../../store/api/user/member/MemberInfoApi";
 import { useParams } from "react-router-dom";
+import Loadinglottie from "../../lottie/LoadingLottie";
 
 function MemberInfo() {
   const { listid } = useParams();
@@ -26,7 +27,12 @@ function MemberInfo() {
   }, [listid, setInfoData]); 
 
   if (!infoData) {
-    return <div>Loading...</div>; // infoData가 없으면 로딩 표시
+    return( 
+    <div className="flex items-center justify-center h-full">
+      <Loadinglottie/>
+      <div className="ml-2">Loading...</div>; // infoData가 없으면 로딩 표시
+    </div>
+    )
   }
 
   return (

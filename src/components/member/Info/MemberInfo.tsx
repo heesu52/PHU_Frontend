@@ -57,6 +57,7 @@ function Info() {
         label={infoData.memberName}
         icon={meatball}
         onIconClick={toggleDropdown}
+        memberid={infoData.id}
       />
       {isDropdownOpen && (
         <Dropdown
