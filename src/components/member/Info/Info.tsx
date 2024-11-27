@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import { memberInfoDataStore } from "../../../store/store";
+import { useInfoDataStore } from "../../../store/store";
 import { getPTInfoApi } from "../../../store/api/user/member/MemberInfoApi";
 import { useParams } from "react-router-dom";
 import Loadinglottie from "../../lottie/LoadingLottie";
 
 function MemberInfo() {
   const { listid } = useParams();
-  const { infoData, setInfoData } = memberInfoDataStore();
+  const { infoData, setInfoData } = useInfoDataStore();
 
   // textarea의 높이를 자동조절하는 함수
   const adjustTextareaHeight = (e: React.FormEvent<HTMLTextAreaElement>) => {

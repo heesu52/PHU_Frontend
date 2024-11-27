@@ -29,7 +29,7 @@ export const addPTChartApi = async (id: number, branch: string, chartDate: strin
         `${apiUrl}/pt/chart`,
         { 
           id, //회원의 아이디
-          branch, //PT로 고정
+          branch, //PT일 경우 pt차트 생성 api 연결
           chartDate,
           weight,
           memo,

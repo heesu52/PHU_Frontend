@@ -7,7 +7,7 @@ import Dropdown from "../../common/DropDown";
 import MemberInfoComponent from "./Info";
 import AddMemberCpmonent from "./AddMemberInfo";
 import NoMemberInfoModal from "../../common/modal/NoMemberInfoModal";
-import { memberInfoDataStore } from "../../../store/store";
+import { useInfoDataStore } from "../../../store/store";
 import { getPTInfoApi } from "../../../store/api/user/member/MemberInfoApi";
 import EditMemberInfo from "./EditMemberInfo";  // 오타 수정
 
@@ -17,7 +17,7 @@ function Info() {
   const [isEditInfo, setIsEditInfo] = useState(false);
   const [isAddInfo, setIsAddInfo] = useState(false);
   const [isNoMemberModalOpen, setIsNoMemberModalOpen] = useState(false); // 모달 상태 추가
-  const { infoData } = memberInfoDataStore();
+  const { infoData } = useInfoDataStore();
   const { listid } = useParams();
 
 
