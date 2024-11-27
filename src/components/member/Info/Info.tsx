@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { memberInfoDataStore } from "../../../store/store";
 import { getPTInfoApi } from "../../../store/api/user/member/MemberInfoApi";
 import { useParams } from "react-router-dom";
+import Loadinglottie from "../../lottie/LoadingLottie";
 
 function MemberInfo() {
-  const { memberid } = useParams();
+  const { listid } = useParams();
   const { infoData, setInfoData } = memberInfoDataStore();
 
   // textarea의 높이를 자동조절하는 함수
@@ -17,16 +18,21 @@ function MemberInfo() {
   // 회원 상세정보 가져오기
   useEffect(() => {
     const fetchMemberInfo = async () => {
-      const response = await getPTInfoApi(Number(memberid));
+      const response = await getPTInfoApi(Number(listid));
       if (response) {
         setInfoData(response); 
       }
     };
     fetchMemberInfo();
-  }, [memberid, setInfoData]); 
+  }, [listid, setInfoData]); 
 
   if (!infoData) {
-    return <div>Loading...</div>; // infoData가 없으면 로딩 표시
+    return( 
+    <div className="flex items-center justify-center h-full">
+      <Loadinglottie/>
+      <div className="ml-2">Loading...</div>; // infoData가 없으면 로딩 표시
+    </div>
+    )
   }
 
   return (

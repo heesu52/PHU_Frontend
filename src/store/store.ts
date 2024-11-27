@@ -34,7 +34,7 @@ interface UserDataState {
   }))
 
   
-  /* 회원 정보 data */
+  /* 로그인하는 회원 정보 data */
 interface MemberDataState {
   memberData: MemberData[]
   setMemberData: (memberData: MemberData[]) => void
@@ -53,7 +53,7 @@ export const useMemberDataStore = create<MemberDataState>((set) => ({
 }))
 
 
-  /* 회원 리스트 data */
+  /* 회원 전체 정보 (리스트) data */
   interface ListDataState {
     listData: ListData[]
     setListData: (listData: ListData[]) => void

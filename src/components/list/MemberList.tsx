@@ -21,6 +21,7 @@ function MemberList() {
   const [selectMemberName, setSelectMemberName] = useState<string | null>(null); // 선택한 회원의 이름 추가
   const { listData, setListData } = useListDataStore();
 
+
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -38,7 +39,6 @@ function MemberList() {
     setIsdeletebtnOpen(!isdeletebtnOpen);
   };
 
- 
 
   const handleDeleteClick = (id: number, name: string) => {
     setSelectMemberId(id);
@@ -49,13 +49,13 @@ function MemberList() {
   //회원리스트 가져오기
   useEffect(() => {
     const fetchPTlistInfo = async () => {
-      const listData = await getPTListApi();
-      if (listData) {
-        setListData(listData);
+      const response = await getPTListApi();
+      if (response?.success) {
+        setListData(response.data);
       }
     };
     fetchPTlistInfo();
-  }, []);
+  }, [setListData]);
 
   return (
     <div className="relative flex flex-col items-center justify-center">
@@ -84,7 +84,7 @@ function MemberList() {
               >
                 <Link
                   className="flex items-center justify-center p-3 ml-5 cursor-pointer"
-                  to={`/member/info/${member.id}`}                  
+                  to={`/member/info/${member.id}`}               
                 >
                   <img
                     src={profile}

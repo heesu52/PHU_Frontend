@@ -34,7 +34,6 @@ export const addPTMemberApi = async (email: string) => {
 
     if (response.status === 200) {
       console.log("회원 추가 성공");
-      getPTListApi();
       return {
         success: true,
         data: response.data
@@ -63,10 +62,11 @@ export const getPTListApi = async () => {
     const response = await axios.get(`${apiUrl}/pt/member`, {
       headers: getAuthHeaders()
     });
-
     if (response.status === 200) {
-      console.log(response.data);
-      return response.data;
+      return {
+        success: true,
+        data: response.data
+      };
     }
   } catch (error) {
     console.error("회원 전체 조회 실패:", error);
@@ -83,8 +83,11 @@ export const deleteMemberApi = async (memberId: number) => {
     });
 
     if (response.status === 200) {
-      console.log(response.data);
-      return { success: true };
+      console.log("회원 삭제 성공");
+      return {
+        success: true,
+        data: response.data
+       };
     }
   } catch (error) {
     console.error("회원 삭제 실패:", error);
