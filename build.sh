@@ -5,6 +5,6 @@ cd ../
 
 mkdir output
 
-cp -R ./Fitee_Frontend/* ./output
+cp -R ./Frontend/* ./output
 
-cp -R ./output ./Fitee_Frontend/
+cp -R ./output ./Frontend/
