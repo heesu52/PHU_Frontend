@@ -3,8 +3,7 @@ import meatball from "../../assets/three-dots.svg";
 import NavigationBar from "../common/bar/NavigationBar";
 import Dropdown from "../common/DropDown";
 import { useState } from "react";
-import notfound from "../../assets/404notfound.jpg"
-import MemberDeleteModal from "../common/modal/MemberDeleteModal";
+import ChartDeleteModal from "../common/modal/ChartDeleteModal";
 
 function Chat() {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
@@ -51,7 +50,7 @@ function Chat() {
         </div>
       
       {/* MemberDeleteModal */}
-      {isModalOpen && <MemberDeleteModal onClose={toggleModal} />}
+      {isModalOpen && <ChartDeleteModal onClose={toggleModal} />}
       <NavigationBar />
     </div>
   );

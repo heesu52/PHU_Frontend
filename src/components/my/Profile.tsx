@@ -17,26 +17,25 @@ function Profile() {
     navigate(path);
   };
 
-  // 사용자의 이름과 트레이너 목록 가져오기
   useEffect(() => {
     const fetchUserInfo = async () => {
       const userName = await getUserApi();
-      
       if (userName) {
         setName(userName);
       }
     };
-
-    // getPTListApi에서 데이터 가져오고 상태 업데이트
-    const fetchPTList = async () => {
-      const ptList = await getPTListApi();
-      setListData(ptList); // 리스트 데이터 상태에 업데이트
+  
+    const fetchPTlistInfo = async () => {
+      const response = await getPTListApi();
+      if (response?.success) {
+        setListData(response.data);
+      }
     };
-
+  
     fetchUserInfo();
-    fetchPTList();
-  }, [setListData]);
-
+    fetchPTlistInfo();
+  }, []);  
+  
   return (
     <div>
       <HeaderBar
