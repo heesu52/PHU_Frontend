@@ -1,1 +1,1 @@
-Fitee_Frontend
+Fi-tee_Frontend
