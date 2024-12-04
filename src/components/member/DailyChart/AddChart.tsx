@@ -6,7 +6,7 @@ import RadioButton from "../../common/button/RadioButton";
 import CheckButton from "../../common/button/CheckButton";
 import SubmitButton from "../../common/button/SubmitButton";
 import ChartDeleteModal from "../../common/modal/ChartDeleteModal";
-import { addPTChartApi } from '../../../store/api/chart/DailyChartApi';
+import { addPTChartApi,addPrivateChartApi } from '../../../store/api/chart/DailyChartApi';
 import { useIdStore } from '../../../store/store';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -40,13 +40,21 @@ function AddChart() {
   // onSubmit에서 addPTChartApi 호출
   const handleSubmit = async () => {
     if (sessionType === "PT") {
-      const response = await addPTChartApi(memberId, "PT", chartDate, weight, memo, routines);  
-      if (response?.success) {
-        toast.success("데일리차트가 작성됐어요💪🏻");
-        navigate(-1);
-      } else {
-        toast.error("데일리차트 작성에 실패했어요. 다시 시도해 주세요.");
-      }
+        const response = await addPTChartApi(memberId, "PT", chartDate, weight, memo, routines);  
+        if (response?.success) {
+            toast.success("PT 차트가 작성됐어요💪🏻");
+            navigate(-1);
+        } else {
+            toast.error("PT 차트 작성에 실패했어요. 다시 시도해 주세요.");
+        }
+    } else if(sessionType ==="PRIVATE"){
+        const response = await addPrivateChartApi(chartDate, weight, memo, routines);  
+        if (response?.success) {
+          toast.success("개인운동 차트가 작성됐어요💪🏻");
+          navigate(-1);
+        } else {
+          toast.error("개인운동 차트 작성에 실패했어요. 다시 시도해 주세요.");
+        } 
     }
   };
 
