@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { getChartListApi } from "../../../store/api/chart/DailyChartApi";
 import { useChartListDataStore, useIdStore } from "../../../store/store";
 
+
 function ChartList () {
   const navigate = useNavigate();
   const { chartlistData, setChartListData } = useChartListDataStore();
@@ -13,22 +14,21 @@ function ChartList () {
   // 정렬 기준 상태 추가
   const [sortOrder, setSortOrder] = useState<'latest' | 'oldest'>('latest');
 
+  // 운동 부위 매핑 객체 생성
+  const routineLabels: { [key: string]: string } = {
+    SHOLDER: "어깨",
+    CHEST: "가슴",
+    ABS: "복근",
+    ARM: "팔",
+    LEG: "하체",
+    BACK: "등",
+    CARDIO: "유산소",
+  };
+
   const handleIconClick = (path: string) => {
     navigate(path);
   };
-
-  // 차트 리스트 가져오기
-  useEffect(() => {
-    const fetchChartList = async () => {
-      if (memberId) { 
-        const response = await getChartListApi(memberId);
-        if (response?.success) {
-          setChartListData(response.data);
-        }
-      }
-    };
-    fetchChartList();
-  }, [memberId, setChartListData]);
+  
 
   // 차트 데이터 정렬 함수
   const sortedChartList = [...chartlistData].sort((a, b) => {
@@ -41,6 +41,20 @@ function ChartList () {
       return dateA - dateB;  // 오름차순
     }
   });
+
+
+    // 차트 리스트 가져오기
+    useEffect(() => {
+      const fetchChartList = async () => {
+        if (memberId) { 
+          const response = await getChartListApi(memberId);
+          if (response?.success) {
+            setChartListData(response.data);
+          }
+        }
+      };
+      fetchChartList();
+    }, [memberId, setChartListData]);
 
   return (
     <div className="w-[80%] flex flex-col space-y-5">
@@ -64,7 +78,9 @@ function ChartList () {
             >
               <div className="flex w-full" onClick={() => handleIconClick(`/member/chart/detail/${chart.id}`)}>
                 <p className="flex-1 text-center">{chart.chartDate}</p>
-                <p className="flex-1 text-center">{chart.routines}</p>
+                <p className="flex-1 text-center">
+                  {chart.routines.map((routine: string) => routineLabels[routine] || routine).join(", ")}
+                </p>
                 <p className="flex-1 text-center">{chart.branch}</p>
               </div>
               <img

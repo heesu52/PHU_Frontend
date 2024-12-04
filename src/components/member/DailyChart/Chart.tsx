@@ -70,7 +70,7 @@ function Chart() {
             {isDropdownOpen && (
                 <Dropdown
                     options={[
-                        { label: "차트 수정", onClick: () => navigate(`/member/chart/edit/${chartid}`)},
+                        { label: "차트 수정", onClick: handleIconClick},
                         { label: "차트 삭제", onClick: toggleModal },
                     ]}
                     onClose={() => setIsDropdownOpen(false)}
