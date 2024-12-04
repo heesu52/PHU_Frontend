@@ -87,27 +87,19 @@ function Edit() {
           <span className="text-[14px] text-[#858585] mb-1">성별</span>
           <div className="flex justify-center gap-20 mb-4">
             <Button
-              label="여성"
-              size="medium"
-              value="FEMALE"
-              onClick={() => handleButtonClick("gender", "FEMALE")}
-              className={
-                formData.gender === "FEMALE"
-                  ? "bg-custom-blue text-white"
-                  : "border border-custom-softgrey text-custom-softgrey"
-              }
-            />
-            <Button
-              label="남성"
-              size="medium"
-              value="MALE"
-              onClick={() => handleButtonClick("gender", "MALE")}
-              className={
-                formData.gender === "MALE"
-                  ? "bg-custom-blue text-white"
-                  : "border border-custom-softgrey text-custom-softgrey"
-              }
-            />
+                label="여성"
+                name="gender"
+                value="FEMALE"
+                onClick={() => handleButtonClick("gender", "FEMALE")}
+                checked={formData.gender === "FEMALE"}
+              />
+              <Button
+                label="남성"
+                name="gender"
+                value="MALE"
+                onClick={() => handleButtonClick("gender", "MALE")}
+                checked={formData.gender === "MALE"}
+              />
           </div>
         </div>
       </form>

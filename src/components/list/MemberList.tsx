@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import HeaderBar from "../common/bar/HeaderBar";
 import meatball from "../../assets/three-dots.svg";
 import NavigationBar from "../common/bar/NavigationBar";

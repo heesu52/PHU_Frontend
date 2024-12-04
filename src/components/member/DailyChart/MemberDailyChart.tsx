@@ -1,7 +1,7 @@
 import { useState } from "react";
 import TabBar from "../../common/bar/Tabbar";
 import NavigationBar from "../../common/bar/NavigationBar";
-import MemberDeleteModal from "../../common/modal/MemberDeleteModal";
+import ChartDeleteModal from "../../common/modal/ChartDeleteModal";
 import ChartList from "./ChartList"
 
 function DailyChart() {
@@ -22,7 +22,7 @@ function DailyChart() {
       <div className="w-full h-[calc(100vh-185px)] bg-[#f6f6f6] justify-center flex py-4">
         <ChartList/>
       </div>
-      {isModalOpen && <MemberDeleteModal onClose={toggleModal} />}
+      {isModalOpen && <ChartDeleteModal onClose={toggleModal} />}
       <NavigationBar />
     </div>
   );
