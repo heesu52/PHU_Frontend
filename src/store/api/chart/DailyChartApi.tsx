@@ -40,7 +40,6 @@ export const addPTChartApi = async (id: number, branch: string, chartDate: strin
   
       if (response.status === 200) {
         console.log("PT 차트 생성 성공");
-        console.log(response.data)
         return {
           success: true,
           data: response.data
@@ -90,7 +89,11 @@ export const getChartListApi = async (memberId: number) => {
     });
 
     if (response.status === 200) {
-      return response.data;
+      console.log("차트 리스트 조회 성공");
+      return {
+        success: true,
+        data: response.data
+      };
     }
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -103,7 +106,7 @@ export const getChartListApi = async (memberId: number) => {
         message
       };
     } else {
-      console.error("데일리차트 전체조회 실패:", error);
+      console.error("차트 리스트 조회 실패:", error);
       return { success: false, message: ERROR_CODES.DEFAULT };
     }
   }
@@ -118,7 +121,12 @@ export const getChartApi = async (chartid: number) => {
       });
   
       if (response.status === 200) {
-        return response.data;
+        console.log("데일리차트 조회 성공");
+        console.log(response.data)
+        return {
+          success: true,
+          data: response.data
+        };
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {

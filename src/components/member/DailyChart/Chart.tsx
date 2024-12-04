@@ -5,11 +5,15 @@ import RadioButton from "../../common/button/RadioButton";
 import CheckButton from "../../common/button/CheckButton";
 import Dropdown from "../../common/DropDown";
 import ChartDeleteModal from "../../common/modal/ChartDeleteModal";
-import { useNavigate } from 'react-router-dom';
-import { useRef, useState } from "react";
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useRef, useState } from "react";
+import { getChartApi } from "../../../store/api/chart/DailyChartApi";
+import { useChartDataStore } from "../../../store/store";
 
 function Chart() {
     const navigate = useNavigate();
+    const { chartid } = useParams();
+    const {chartData, setChartData} = useChartDataStore();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -35,9 +39,22 @@ function Chart() {
     };
 
     const handleIconClick = () => {
-        navigate("/member/daily/edit");
+        navigate(`/member/chart/edit/${chartid}`);
       };
 
+      console.log(chartid)
+    // 데일리 차트 가져오기
+    useEffect(() => {
+        const fetchChart = async () => {
+        if (chartid) { 
+            const response = await getChartApi(Number(chartid));
+            if (response?.success) {
+                setChartData(response.data);
+              }
+        }
+        };
+        fetchChart();
+    }, [chartid, setChartData]);
 
     return (
        <div className="relative flex flex-col items-center w-full">
@@ -53,7 +70,7 @@ function Chart() {
             {isDropdownOpen && (
                 <Dropdown
                     options={[
-                        { label: "차트 수정", onClick: handleIconClick },
+                        { label: "차트 수정", onClick: () => navigate(`/member/chart/edit/${chartid}`)},
                         { label: "차트 삭제", onClick: toggleModal },
                     ]}
                     onClose={() => setIsDropdownOpen(false)}
@@ -66,10 +83,24 @@ function Chart() {
                 <div className="space-y-2">
                     <div className="text-base">PT 날짜</div>
                     <div className="flex items-center ml-5">
-                        <p className="p-2 text-sm">2024년 11월 21일</p>
+                        <p className="p-2 text-sm">{chartData.chartDate}</p>
                         <div className="flex p-2 ml-6 space-x-4">
-                            <RadioButton id="radio-pt" label="PT" value="PT" name="session-type" readOnly />
-                            <RadioButton id="radio-personal" label="개인운동" value="Private" name="session-type" readOnly />
+                        <RadioButton
+                            id="radio-pt"
+                            label="PT"
+                            value="PT"
+                            name="session-type"
+                            checked={chartData.branch === "PT"}
+                            readOnly
+                        />
+                        <RadioButton
+                            id="radio-personal"
+                            label="개인운동"
+                            value="Private"
+                            name="session-type"
+                            checked={chartData.branch === "PRIVATE"}
+                            readOnly
+                        />
                         </div>
                     </div>
                 </div>
@@ -78,8 +109,7 @@ function Chart() {
                 <div className="space-y-2">
                     <p>몸무게</p>
                     <div className="flex items-center gap-2 ml-7">
-                        <input type="number" className="w-[80px] h-8 border rounded-lg border-custom-skyblue flex text-center" disabled />
-                        <p className="text-sm">kg</p>
+                        <p className="text-sm">{chartData.weight} kg</p>
                     </div>
                 </div>
 
@@ -87,14 +117,32 @@ function Chart() {
                 <div className="space-y-2">
                 <p>운동부위</p>
                 <div className="flex items-center justify-center gap-5 p-2">
-                    <CheckButton id="shoulder" label="어깨" value="sholder" name="session-type" readOnly />
-                    <CheckButton id="chest" label="가슴" value="chest" name="session-type" readOnly />
-                    <CheckButton id="abs" label="복근" value="d" name="session-type" readOnly />
-                    <CheckButton id="arm" label="팔" value="arm" name="session-type" readOnly />
-                    <CheckButton id="leg" label="하체" value="leg" name="session-type" readOnly />
-                    <CheckButton id="back" label="등" value="back" name="session-type" readOnly />
-                    <CheckButton id="cardio" label="유산소" value="run" name="session-type" readOnly />
-                </div>
+                {["SHOLDER", "CHEST", "ABS", "ARM", "LEG", "BACK", "CARDIO"].map((part) => (
+                <CheckButton
+                    key={part}
+                    id={part}
+                    label={
+                    part === "SHOLDER"
+                        ? "어깨"
+                        : part === "CHEST"
+                        ? "가슴"
+                        : part === "ABS"
+                        ? "복근"
+                        : part === "ARM"
+                        ? "팔"
+                        : part === "LEG"
+                        ? "하체"
+                        : part === "BACK"
+                        ? "등"
+                        : "유산소"
+                    }
+                    value={part}
+                    name="session-type"
+                    checked={chartData.routines.includes(part)}
+                    readOnly
+              />
+            ))}
+          </div>
                 </div>
 
                 {/* 메모 */}
@@ -104,7 +152,7 @@ function Chart() {
                         ref={goalRef}
                         className="border w-[450px] min-h-[70px] rounded-lg text-sm border-custom-skyblue bg-white resize-none overflow-hidden indent-1 p-1 ml-7"
                         onInput={() => adjustTextareaHeight(goalRef)}
-                        placeholder="ex) 목표 몸무게, 감량하고 싶은 부위"
+                        value={chartData.memo}
                         maxLength={150}
                         disabled
                     />

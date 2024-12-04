@@ -17,17 +17,17 @@ function ChartList () {
     navigate(path);
   };
 
-  // 회원 차트 정보 가져오기
+  // 차트 리스트 가져오기
   useEffect(() => {
-    const fetchMemberInfo = async () => {
+    const fetchChartList = async () => {
       if (memberId) { 
         const response = await getChartListApi(memberId);
-        if (response) {
-          setChartListData(response);
+        if (response?.success) {
+          setChartListData(response.data);
         }
       }
     };
-    fetchMemberInfo();
+    fetchChartList();
   }, [memberId, setChartListData]);
 
   // 차트 데이터 정렬 함수

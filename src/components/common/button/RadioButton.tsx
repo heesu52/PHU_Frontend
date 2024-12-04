@@ -5,7 +5,7 @@ interface RadioBtnProps {
     readOnly?: boolean; 
     value: string;
     checked: boolean; 
-    onChange: () => void; 
+    onChange?: () => void; 
 }
 
 function RadioButton({ id, label, name, value, readOnly = false, checked, onChange }: RadioBtnProps) {
