@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import SubmitButton from "../../common/button/SubmitButton";
-import { memberInfoDataStore } from "../../../store/store";
+import { useInfoDataStore } from "../../../store/store";
 import { getPTInfoApi, editInfoApi } from "../../../store/api/user/member/MemberInfoApi";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,7 +11,7 @@ interface EditMemberInfoProps {
 }
 
 function EditMemberInfo({ onSubmit }: EditMemberInfoProps) {
-  const { infoData, setInfoData } = memberInfoDataStore();
+  const { infoData, setInfoData } = useInfoDataStore();
   const { listid } = useParams();
 
   // 상태 변수 설정

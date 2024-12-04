@@ -1,34 +1,33 @@
 import React, { createContext, useContext, useState } from "react";
 
-// MemberContextType 인터페이스 정의
-interface MemberContextType {
-  MemberId: number | null;
-  setMemberId: (value: number | null) => void;
+// Context 타입 정의
+interface IMemberContext {
+  listId: number | null;
+  memberId: number | null;
+  setListId: (id: number | null) => void;
+  setMemberId: (id: number | null) => void;
 }
 
-// 회원 id Context 생성 (초기값은 null로 설정)
-export const MemberContext = createContext<MemberContextType | null>(null);
+// Context 생성
+const MemberContext = createContext<IMemberContext | undefined>(undefined);
 
 // Provider 컴포넌트
-export const MemberProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const [MemberId, setMemberId] = useState<number | null>(null);
+export const MemberProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [listId, setListId] = useState<number | null>(null);
+  const [memberId, setMemberId] = useState<number | null>(null);
 
   return (
-    <MemberContext.Provider value={{ MemberId, setMemberId }}>
+    <MemberContext.Provider value={{ listId, memberId, setListId, setMemberId }}>
       {children}
     </MemberContext.Provider>
   );
 };
 
-// Context 사용 훅
-export const useMemberContext = () => {
+// 커스텀 훅
+export const useMemberContext = (): IMemberContext => {
   const context = useContext(MemberContext);
-
   if (!context) {
     throw new Error("useMemberContext must be used within a MemberProvider");
   }
-
   return context;
 };

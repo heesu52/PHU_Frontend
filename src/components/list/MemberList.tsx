@@ -77,31 +77,31 @@ function MemberList() {
         <ul className="w-full">
           {/* 회원 리스트 */}
           {listData && listData.length > 0 ? (
-            listData.map((member, index) => (
+            listData.map((list, index) => (
               <li
                 key={index}
                 className="border-b h-[55px] flex items-center justify-between hover:bg-custom-softblue"
               >
                 <Link
                   className="flex items-center justify-center p-3 ml-5 cursor-pointer"
-                  to={`/member/info/${member.id}`}               
+                  to={`/member/info/${list.id}`}               
                 >
                   <img
                     src={profile}
                     alt="icon"
                     className="w-[30px] h-[30px] mr-3"
                   />
-                  <span>{member.name}</span> {/* 회원 이름 */}
+                  <span>{list.name}</span> {/* 회원 이름 */}
                 </Link>
                 <div className="flex">
                   <div className="w-[215px] h-[30px] border border-custom-blue rounded-lg mr-5 flex items-center justify-center">
-                    <span className="text-xs">{member.tel}</span> {/* 회원 전화번호 */}
+                    <span className="text-xs">{list.tel}</span> {/* 회원 전화번호 */}
                   </div>
                   {isdeletebtnOpen && (
                     <img
                       src={deletebtm}
                       className="mr-5"
-                      onClick={() => handleDeleteClick(member.id, member.name)} // 클릭 시 id와 name 전달
+                      onClick={() => handleDeleteClick(list.id, list.name)} // 클릭 시 id와 name 전달
                     />
                   )}
                 </div>

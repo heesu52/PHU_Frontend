@@ -2,27 +2,24 @@ import { useState } from "react";
 import TabBar from "../../common/bar/Tabbar";
 import NavigationBar from "../../common/bar/NavigationBar";
 import ChartDeleteModal from "../../common/modal/ChartDeleteModal";
-import ChartList from "./ChartList"
+import ChartListComponent from "./ChartList"
+import { useInfoDataStore } from "../../../store/store";
 
 function DailyChart() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { infoData } = useInfoDataStore();
 
-
-  const toggleModal = () => {
-    setIsModalOpen((prev) => !prev);
-  };
-
- 
 
   return (
     <div className="relative flex flex-col items-center justify-center">
       <TabBar
-        label="정우혁"
+        label={infoData.memberName}
+        age={infoData.memberAge}
       />
       <div className="w-full h-[calc(100vh-185px)] bg-[#f6f6f6] justify-center flex py-4">
-        <ChartList/>
+        <ChartListComponent/>
       </div>
-      {isModalOpen && <ChartDeleteModal onClose={toggleModal} />}
+      {isModalOpen && <ChartDeleteModal onClose={()=>  setIsModalOpen((prev) => !prev)} />}
       <NavigationBar />
     </div>
   );

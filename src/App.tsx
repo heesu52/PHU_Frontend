@@ -1,7 +1,6 @@
 import './App.css';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { MemberProvider } from './context/MemberContext';
-import { ListProvider } from './context/ListContext';
 import MainPage from './pages/main/Main';
 import LoginPage from './pages/auth/Login';
 import SignupPage from './pages/auth/Signup';
@@ -14,7 +13,8 @@ import MemberListPage from './pages/list/List';
 import MemberInfoPage from './pages/member/info/Info';
 import DaliyChartListPage from './pages/member/dailychart/DailyChartList';
 import DailyChartPage from './pages/member/dailychart/Chart';
-import DailyChartEditChartPage from './components/member/DailyChart/EditChart';
+import AddDailyChartPage from './components/member/DailyChart/AddChart';
+import EditDailyChartPage from './components/member/DailyChart/EditChart';
 import AISummaryListPage from './pages/member/AISummary/SummaryList';
 import SummaryPage from './pages/member/AISummary/Summary'
 import EditSummaryPage from './components/member/AISummary/EditSummary';
@@ -25,7 +25,6 @@ import VoicePage from './pages/voice/Voice';
 function App() {
   return (
     <MemberProvider>
-      <ListProvider>
       <Router>
         <div className='w-[600px] h-screen mx-auto font-[Pretendard] overflow-y-auto'>
           <div className="h-screen border border-custom-softgrey ">
@@ -42,12 +41,15 @@ function App() {
 
               <Route path='/member' element={<MemberListPage/>} />
               <Route path='/member/info/:listid' element={<MemberInfoPage/>} />
-              <Route path='/member/daily/:memberid' element={<DaliyChartListPage/>} />
-              <Route path='/member/daily/:memberid/:chartid' element={<DailyChartPage/>} />
-              <Route path='/member/daily/:chartid/edit' element={<DailyChartEditChartPage/>} />
+              
+              <Route path='/member/chart/:memberid' element={<DaliyChartListPage/>} />
+              <Route path='/member/chart/detail/:chartid' element={<DailyChartPage/>} />
+              <Route path='/member/chart/detail' element={<AddDailyChartPage/>} />
+              <Route path='/member/chart/edit/:chartid' element={<EditDailyChartPage/>} />
+              
               <Route path='/member/summary/:memberid' element={<AISummaryListPage/>} />
-              <Route path='/member/summary/:memberid/:summaryid' element={<SummaryPage/>} />
-              <Route path='/member/summary/:summaryid/edit' element={<EditSummaryPage/>} />
+              <Route path='/member/summary/:summaryid' element={<SummaryPage/>} />
+              <Route path='/member/summary/edit/:summaryid' element={<EditSummaryPage/>} />
 
               <Route path='/member/voice' element={<VoicePage/>} />
 
@@ -58,7 +60,6 @@ function App() {
           </div>
         </div>
       </Router>
-      </ListProvider>
     </MemberProvider>
   );
 }

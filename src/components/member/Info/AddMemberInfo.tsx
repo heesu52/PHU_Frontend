@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import SubmitButton from "../../common/button/SubmitButton";
-import { memberInfoDataStore } from "../../../store/store";
+import { useInfoDataStore } from "../../../store/store";
 import { addPTInforApi } from "../../../store/api/user/member/MemberInfoApi";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,7 +11,7 @@ interface AddMemberInfoProps {
 }
 
 function AddMemberInfo({ onSubmit }: AddMemberInfoProps) {
-  const { setInfoData } = memberInfoDataStore();
+  const { setInfoData } = useInfoDataStore();
   const { listid } = useParams();
 ;
 
@@ -77,7 +77,7 @@ function AddMemberInfo({ onSubmit }: AddMemberInfoProps) {
               maxLength={150}
               value={memberTarget}
               onChange={(e) => setMemberTarget(e.target.value)}
-              placeholder="ex) 어깨가 불편함, 식단을 하지 않음"
+              placeholder="ex) 10kg감량"
             />
           </div>
 
