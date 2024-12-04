@@ -13,7 +13,8 @@ import MemberListPage from './pages/list/List';
 import MemberInfoPage from './pages/member/info/Info';
 import DaliyChartListPage from './pages/member/dailychart/DailyChartList';
 import DailyChartPage from './pages/member/dailychart/Chart';
-import DailyChartEditChartPage from './components/member/DailyChart/EditChart';
+import AddDailyChartPage from './components/member/DailyChart/AddChart';
+import EditDailyChartPage from './components/member/DailyChart/EditChart';
 import AISummaryListPage from './pages/member/AISummary/SummaryList';
 import SummaryPage from './pages/member/AISummary/Summary'
 import EditSummaryPage from './components/member/AISummary/EditSummary';
@@ -40,9 +41,12 @@ function App() {
 
               <Route path='/member' element={<MemberListPage/>} />
               <Route path='/member/info/:listid' element={<MemberInfoPage/>} />
+              
               <Route path='/member/chart/:memberid' element={<DaliyChartListPage/>} />
               <Route path='/member/chart/detail/:chartid' element={<DailyChartPage/>} />
-              <Route path='/member/chart/edit/:chartid' element={<DailyChartEditChartPage/>} />
+              <Route path='/member/chart/detail' element={<AddDailyChartPage/>} />
+              <Route path='/member/chart/edit/:chartid' element={<EditDailyChartPage/>} />
+              
               <Route path='/member/summary/:memberid' element={<AISummaryListPage/>} />
               <Route path='/member/summary/:memberid/:summaryid' element={<SummaryPage/>} />
               <Route path='/member/summary/:summaryid/edit' element={<EditSummaryPage/>} />

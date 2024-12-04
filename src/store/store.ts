@@ -72,15 +72,15 @@ export const useListDataStore = create<ListDataState>((set) => ({
 
 /* 리스트에서 클릭한 회원의 listid와 memberid를 저장*/
 interface IdStoreState {
-  listId: number | null;
-  memberId: number | null;
+  listId: number | 0;
+  memberId: number | 0;
   setListId: (id: number) => void;
   setMemberId: (id: number) => void;
 }
 
 export const useIdStore = create<IdStoreState>((set) => ({
-  listId: null,
-  memberId: null,
+  listId: 0,
+  memberId: 0,
   setListId: (id) => set({ listId: id }),
   setMemberId: (id) => set({ memberId: id }),
 }));

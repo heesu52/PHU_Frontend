@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import threedots from "../../../assets/three-dots.svg";
+import plusbtn from "../../../assets/plus-circle-fill.svg";
 import { useNavigate } from "react-router-dom";
 import { getChartListApi } from "../../../store/api/chart/DailyChartApi";
 import { useChartListDataStore, useIdStore } from "../../../store/store";
@@ -43,7 +44,7 @@ function ChartList () {
               key={index}
               className="w-[80%] h-[55px] bg-white shadow-md rounded-xl flex items-center justify-center cursor-default"
             >
-              <div className="flex w-full" onClick={() => handleIconClick(`/chart/detail/${chart.id}`)}>
+              <div className="flex w-full" onClick={() => handleIconClick(`/member/chart/detail/${chart.id}`)}>
                 <p className="flex-1 text-center">{chart.chartDate}</p>
                 <p className="flex-1 text-center">{chart.routines}</p>
                 <p className="flex-1 text-center">{chart.branch}</p>
@@ -59,6 +60,13 @@ function ChartList () {
           <p>데이터가 없습니다.</p>
         )}
       </ul>
+      <div>
+            <img 
+                src={plusbtn} 
+                className="fixed bottom-0 mb-20 transform -translate-x-1/2 cursor-pointer left-1/2 w-7 h-7"
+                onClick={() => handleIconClick(`/member/chart/detail`)}
+            />
+        </div>
     </div>
   );
 };

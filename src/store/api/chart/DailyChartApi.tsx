@@ -28,8 +28,8 @@ export const addPTChartApi = async (id: number, branch: string, chartDate: strin
       const response = await axios.post(
         `${apiUrl}/pt/chart`,
         { 
-          id, //회원의 아이디
-          branch, //PT일 경우 pt차트 생성 api 연결
+          id, 
+          branch, 
           chartDate,
           weight,
           memo,
@@ -40,6 +40,7 @@ export const addPTChartApi = async (id: number, branch: string, chartDate: strin
   
       if (response.status === 200) {
         console.log("PT 차트 생성 성공");
+        console.log(response.data)
         return {
           success: true,
           data: response.data
