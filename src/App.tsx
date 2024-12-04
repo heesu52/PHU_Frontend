@@ -1,7 +1,6 @@
 import './App.css';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { MemberProvider } from './context/MemberContext';
-import { ListProvider } from './context/ListContext';
 import MainPage from './pages/main/Main';
 import LoginPage from './pages/auth/Login';
 import SignupPage from './pages/auth/Signup';
@@ -25,7 +24,6 @@ import VoicePage from './pages/voice/Voice';
 function App() {
   return (
     <MemberProvider>
-      <ListProvider>
       <Router>
         <div className='w-[600px] h-screen mx-auto font-[Pretendard] overflow-y-auto'>
           <div className="h-screen border border-custom-softgrey ">
@@ -42,9 +40,9 @@ function App() {
 
               <Route path='/member' element={<MemberListPage/>} />
               <Route path='/member/info/:listid' element={<MemberInfoPage/>} />
-              <Route path='/member/daily/:memberid' element={<DaliyChartListPage/>} />
-              <Route path='/member/daily/:memberid/:chartid' element={<DailyChartPage/>} />
-              <Route path='/member/daily/:chartid/edit' element={<DailyChartEditChartPage/>} />
+              <Route path='/member/chart/:memberid' element={<DaliyChartListPage/>} />
+              <Route path='/member/chart/detail/:chartid' element={<DailyChartPage/>} />
+              <Route path='/member/chart/edit/:chartid' element={<DailyChartEditChartPage/>} />
               <Route path='/member/summary/:memberid' element={<AISummaryListPage/>} />
               <Route path='/member/summary/:memberid/:summaryid' element={<SummaryPage/>} />
               <Route path='/member/summary/:summaryid/edit' element={<EditSummaryPage/>} />
@@ -58,7 +56,6 @@ function App() {
           </div>
         </div>
       </Router>
-      </ListProvider>
     </MemberProvider>
   );
 }

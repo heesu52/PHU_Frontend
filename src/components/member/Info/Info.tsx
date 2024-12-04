@@ -1,12 +1,8 @@
-import { useEffect } from "react";
 import { useInfoDataStore } from "../../../store/store";
-import { getPTInfoApi } from "../../../store/api/user/member/MemberInfoApi";
-import { useParams } from "react-router-dom";
-import Loadinglottie from "../../lottie/LoadingLottie";
+import LoadingLottie from "../../lottie/LoadingLottie";
 
-function MemberInfo() {
-  const { listid } = useParams();
-  const { infoData, setInfoData } = useInfoDataStore();
+function Info() {
+  const { infoData } = useInfoDataStore(); // zustand 스토어에서 infoData 불러오기
 
   // textarea의 높이를 자동조절하는 함수
   const adjustTextareaHeight = (e: React.FormEvent<HTMLTextAreaElement>) => {
@@ -15,24 +11,14 @@ function MemberInfo() {
     textarea.style.height = `${textarea.scrollHeight}px`; // 내용에 맞춰서 높이 조정
   };
 
-  // 회원 상세정보 가져오기
-  useEffect(() => {
-    const fetchMemberInfo = async () => {
-      const response = await getPTInfoApi(Number(listid));
-      if (response) {
-        setInfoData(response); 
-      }
-    };
-    fetchMemberInfo();
-  }, [listid, setInfoData]); 
-
-  if (!infoData) {
-    return( 
-    <div className="flex items-center justify-center h-full">
-      <Loadinglottie/>
-      <div className="ml-2">Loading...</div>; // infoData가 없으면 로딩 표시
-    </div>
-    )
+  // infoData가 로딩 중일 때 표시
+  if (!infoData || Object.keys(infoData).length === 0) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <LoadingLottie />
+        <div className="ml-2">Loading...</div> {/* 로딩 상태 표시 */}
+      </div>
+    );
   }
 
   return (
@@ -67,4 +53,4 @@ function MemberInfo() {
   );
 }
 
-export default MemberInfo;
+export default Info;

@@ -82,9 +82,9 @@ export const addPrivateChartApi = async (chartDate: string, weight: number, memo
 
 
 // 데일리차트 전체 조회 API
-export const getChartListApi = async (listid: number) => {
+export const getChartListApi = async (memberId: number) => {
   try {
-    const response = await axios.get(`${apiUrl}/chart/all/${listid}`, {
+    const response = await axios.get(`${apiUrl}/chart/all/${memberId}`, {
       headers: getAuthHeaders()
     });
 

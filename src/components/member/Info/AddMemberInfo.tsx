@@ -77,7 +77,7 @@ function AddMemberInfo({ onSubmit }: AddMemberInfoProps) {
               maxLength={150}
               value={memberTarget}
               onChange={(e) => setMemberTarget(e.target.value)}
-              placeholder="ex) 어깨가 불편함, 식단을 하지 않음"
+              placeholder="ex) 10kg감량"
             />
           </div>
 

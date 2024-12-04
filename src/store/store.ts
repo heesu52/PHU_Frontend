@@ -70,6 +70,21 @@ export const useListDataStore = create<ListDataState>((set) => ({
   setListData: (listData) => set({ listData }),
 }));
 
+/* 리스트에서 클릭한 회원의 listid와 memberid를 저장*/
+interface IdStoreState {
+  listId: number | null;
+  memberId: number | null;
+  setListId: (id: number) => void;
+  setMemberId: (id: number) => void;
+}
+
+export const useIdStore = create<IdStoreState>((set) => ({
+  listId: null,
+  memberId: null,
+  setListId: (id) => set({ listId: id }),
+  setMemberId: (id) => set({ memberId: id }),
+}));
+
 
 // 회원 상세정보 객체 형태로 수정
 interface InfoDataState {
