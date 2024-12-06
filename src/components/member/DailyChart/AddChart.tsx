@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import { useRef, useState } from "react";
+import { useState } from "react";
 import arrow from "../../../assets/arrow.svg";
 import imageupload from "../../../assets/image.svg";
 import RadioButton from "../../common/button/RadioButton";
 import CheckButton from "../../common/button/CheckButton";
 import SubmitButton from "../../common/button/SubmitButton";
 import ChartDeleteModal from "../../common/modal/ChartDeleteModal";
+import { adjustTextareaHeight } from "../../common/adjustTextareaHeight";
 import { addPTChartApi,addPrivateChartApi } from '../../../store/api/chart/DailyChartApi';
 import { useIdStore } from '../../../store/store';
 import { ToastContainer, toast } from 'react-toastify';
@@ -13,7 +14,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function AddChart() {
   const navigate = useNavigate();
-  const goalRef = useRef<HTMLTextAreaElement | null>(null);
   const { memberId } = useIdStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [chartDate, setChartDate] = useState<string>(new Date().toISOString().split("T")[0]);  // 현재 날짜 기본값
@@ -22,12 +22,6 @@ function AddChart() {
   const [routines, setRoutines] = useState<string[]>([]);
   const [memo, setMemo] = useState<string>("");
 
-  const adjustTextareaHeight = (ref: React.RefObject<HTMLTextAreaElement>) => {
-    if (ref.current) {
-      ref.current.style.height = "auto";
-      ref.current.style.height = `${ref.current.scrollHeight}px`;
-    }
-  };
 
   const handleGoBack = () => {
     navigate(-1);
@@ -156,9 +150,8 @@ function AddChart() {
         <div className="space-y-2">
           <div className="text-base">메모</div>
           <textarea
-            ref={goalRef}
             className="border w-[450px] min-h-[70px] rounded-lg text-sm border-custom-skyblue bg-white resize-none overflow-hidden indent-1 p-1 ml-7"
-            onInput={() => adjustTextareaHeight(goalRef)}
+            onInput={adjustTextareaHeight}
             onChange={(e) => setMemo(e.target.value)}
             placeholder="ex) 목표 몸무게, 감량하고 싶은 부위"
             maxLength={150}

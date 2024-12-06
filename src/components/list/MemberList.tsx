@@ -8,7 +8,7 @@ import plusbtn from "../../assets/plus-circle-fill.svg";
 import deletebtm from "../../assets/dash-circle-fill.svg";
 import BottomSheet from "../common/modal/BottomSheet";
 import MemberDeleteModal from "../common/modal/MemberDeleteModal";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getPTListApi } from "../../store/api/info/MemberApi";
 import { useListDataStore } from "../../store/store";
 
@@ -21,7 +21,6 @@ function MemberList() {
   const [selectMemberName, setSelectMemberName] = useState<string | null>(null); // 선택한 회원의 이름 추가
   const { listData, setListData } = useListDataStore();
 
-
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -30,20 +29,14 @@ function MemberList() {
     setIsBottomSheetOpen(!isBottomSheetOpen);
   };
 
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-    setIsdeletebtnOpen(false);
-  };
-
   const toggledeleteBtn = () => {
     setIsdeletebtnOpen(!isdeletebtnOpen);
   };
 
-
   const handleDeleteClick = (id: number, name: string) => {
+    setIsModalOpen(true);
     setSelectMemberId(id);
     setSelectMemberName(name); // 회원 이름 설정
-    toggleModal();
   };
 
   //회원리스트 가져오기
@@ -84,7 +77,7 @@ function MemberList() {
               >
                 <Link
                   className="flex items-center justify-center p-3 ml-5 cursor-pointer"
-                  to={`/member/info/${list.id}`}               
+                  to={`/member/info/${list.id}`}
                 >
                   <img
                     src={profile}
@@ -124,13 +117,12 @@ function MemberList() {
       {/* BottomSheet */}
       <BottomSheet onClose={toggleBottomSheet} isOpen={isBottomSheetOpen} />
       {/* MemberDeleteModal */}
-      {isModalOpen && (
-        <MemberDeleteModal
-          onClose={toggleModal}
-          memberId={seletMemberId}
-          memberName={selectMemberName} // 모달에 memberName도 전달
-        />
-      )}
+      <MemberDeleteModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)} // 모달 닫기 시 선택된 회원 ID 초기화
+        memberId={seletMemberId}
+        memberName={selectMemberName} // 모달에 memberName도 전달
+      />
       <NavigationBar />
     </div>
   );

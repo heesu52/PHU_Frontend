@@ -14,10 +14,7 @@ export const getUserApi = async () => {
     
     if (response.status === 200) {
       console.log("사용자 정보 조회 성공");
-      return {
-        success: true,
-        data: response.data
-       };
+      return response.data.name
     }
   } catch (error) {
     console.error("사용자 정보 조회 실패:", error);

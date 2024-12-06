@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import SubmitButton from "../../common/button/SubmitButton";
+import { adjustTextareaHeight } from "../../common/adjustTextareaHeight";
 import { useInfoDataStore } from "../../../store/store";
 import { addPTInforApi } from "../../../store/api/info/MemberInfoApi";
 import { ToastContainer, toast } from 'react-toastify';
@@ -21,13 +22,7 @@ function AddMemberInfo({ onSubmit }: AddMemberInfoProps) {
   const [memberTarget, setMemberTarget] = useState("");
   const [significant, setSignificant] = useState("");
 
-
-  // textarea의 높이를 자동으로 조정하는 함수
-  const adjustTextareaHeight = (e: React.FormEvent<HTMLTextAreaElement>) => {
-    const textarea = e.target as HTMLTextAreaElement;
-    textarea.style.height = "auto"; // 기존 높이를 리셋
-    textarea.style.height = `${textarea.scrollHeight}px`; // 내용에 맞춰서 높이 조정
-  };
+  
 
   // onSubmit에서 addPTInforApi 호출
   const handleSubmit = async () => {
