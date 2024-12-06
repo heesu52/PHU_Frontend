@@ -1,7 +1,17 @@
 import axios, {AxiosError} from "axios";
 import { useApiUrlStore } from "../../store";
 
-const apiUrl = useApiUrlStore.getState().apiUrl; 
+// API URL을 가져오는 변수
+const apiUrl = useApiUrlStore.getState().apiUrl;
+
+// 공통 헤더 설정 함수
+const getAuthHeaders = () => {
+  const access = localStorage.getItem('token');
+  return {
+    Authorization: access,
+    "Content-Type": "application/json"
+  };
+};
 
 
 //회원가입Api
@@ -51,7 +61,7 @@ export const SignUpApi = async (formData: {
   };
   
 
-  //회원가입Api
+  //소셜 회원가입Api
 export const SocialSignUpApi = async (formData: {
   age: string;
   gender: string;
@@ -64,7 +74,9 @@ export const SocialSignUpApi = async (formData: {
       gender: formData.gender,
       tel: formData.tel,
       part: formData.part,
-    });
+    },
+    { headers: getAuthHeaders() }
+  );
 
     if (res.status === 200) {
       console.log("소셜 회원가입 성공", res.data);
