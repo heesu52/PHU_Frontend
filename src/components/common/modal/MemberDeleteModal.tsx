@@ -1,4 +1,4 @@
-import { deleteMemberApi } from "../../../store/api/user/member/MemberApi";
+import { deleteMemberApi } from "../../../store/api/info/MemberApi";
 import { useListDataStore } from '../../../store/store';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

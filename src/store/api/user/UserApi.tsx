@@ -4,7 +4,7 @@ import { useApiUrlStore } from "../../store";
 const apiUrl = useApiUrlStore.getState().apiUrl; 
 
 
-// 회원조회 api
+// 사용자 회원조회 api
 export const getUserApi = async () => {
   try {
     const access = localStorage.getItem('token')
@@ -13,7 +13,11 @@ export const getUserApi = async () => {
     });
     
     if (response.status === 200) {
-      return response.data.name;
+      console.log("사용자 정보 조회 성공");
+      return {
+        success: true,
+        data: response.data
+       };
     }
   } catch (error) {
     console.error("사용자 정보 조회 실패:", error);

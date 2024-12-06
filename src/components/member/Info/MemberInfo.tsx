@@ -9,7 +9,7 @@ import InfoComponent from "./Info";
 import AddMemberComponent from "./AddMemberInfo";
 import EditMemberInfoComponent from "./EditMemberInfo";
 import { useInfoDataStore, useIdStore } from "../../../store/store";  
-import { getPTInfoApi } from "../../../store/api/user/member/MemberInfoApi";
+import { getPTInfoApi } from "../../../store/api/info/MemberInfoApi";
 
 
 function MemberInfo() {

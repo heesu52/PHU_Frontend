@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import SubmitButton from "../../common/button/SubmitButton";
 import { useInfoDataStore } from "../../../store/store";
-import { addPTInforApi } from "../../../store/api/user/member/MemberInfoApi";
+import { addPTInforApi } from "../../../store/api/info/MemberInfoApi";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

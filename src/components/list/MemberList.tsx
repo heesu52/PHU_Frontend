@@ -9,7 +9,7 @@ import deletebtm from "../../assets/dash-circle-fill.svg";
 import BottomSheet from "../common/modal/BottomSheet";
 import MemberDeleteModal from "../common/modal/MemberDeleteModal";
 import { Link} from "react-router-dom";
-import { getPTListApi } from "../../store/api/user/member/MemberApi";
+import { getPTListApi } from "../../store/api/info/MemberApi";
 import { useListDataStore } from "../../store/store";
 
 function MemberList() {
