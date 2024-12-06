@@ -27,9 +27,6 @@ function Chart() {
         setIsDropdownOpen((prev) => !prev);
     };
 
-    const toggleModal = () => {
-        setIsModalOpen((prev) => !prev);
-    };
 
     const handleIconClick = () => {
         navigate(`/member/chart/edit/${chartid}`);
@@ -64,7 +61,7 @@ function Chart() {
                 <Dropdown
                     options={[
                         { label: "차트 수정", onClick: handleIconClick},
-                        { label: "차트 삭제", onClick: toggleModal },
+                        { label: "차트 삭제", onClick: ()=>setIsModalOpen(false) },
                     ]}
                     onClose={() => setIsDropdownOpen(false)}
                 />
@@ -161,7 +158,9 @@ function Chart() {
                 <img src={movetosummary} className="mt-10 ml-auto mr-7"></img>
             </div>
             {/* Modal */}
-            {isModalOpen && <ChartDeleteModal onClose={toggleModal} />}
+            <ChartDeleteModal
+            isOpen={isModalOpen}
+            onClose={()=>setIsModalOpen(false)} />
        </div>
     );
 }

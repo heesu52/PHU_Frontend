@@ -14,11 +14,6 @@ function EditSummary() {
         navigate(-1);
     };
     
-    const toggleModal = () => {
-        setIsModalOpen((prev) => !prev);
-    };
-
-
 
     return (
        <div className="relative flex flex-col items-center w-full">
@@ -55,7 +50,9 @@ function EditSummary() {
                 </div>
             </div>
             {/* Modal */}
-            {isModalOpen && <SummaryDeleteModal onClose={toggleModal} />}
+            <SummaryDeleteModal 
+            isOpen={isModalOpen}
+            onClose={()=>setIsModalOpen(false)} />
        </div>
     );
 }

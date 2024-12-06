@@ -20,9 +20,6 @@ function EditChart() {
     navigate(-1); 
   };
 
-  const toggleModal = () => {
-    setIsModalOpen((prev) => !prev);
-  };
 
   return (
     <div className="relative flex flex-col items-center w-full">
@@ -133,7 +130,9 @@ function EditChart() {
       </div>
 
       {/* Modal */}
-      {isModalOpen && <ChartDeleteModal onClose={toggleModal} />}
+      <ChartDeleteModal
+      isOpen={isModalOpen}
+      onClose={()=>setIsModalOpen(false)} />
     </div>
   );
 }

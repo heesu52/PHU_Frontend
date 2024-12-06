@@ -9,8 +9,7 @@ import ChartDeleteModal from "../../common/modal/ChartDeleteModal";
 import { adjustTextareaHeight } from "../../common/adjustTextareaHeight";
 import { addPTChartApi,addPrivateChartApi } from '../../../store/api/chart/DailyChartApi';
 import { useIdStore } from '../../../store/store';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { notify } from '../../common/ToastMessage/ToastMessageItem';
 
 function AddChart() {
   const navigate = useNavigate();
@@ -27,34 +26,29 @@ function AddChart() {
     navigate(-1);
   };
 
-  const toggleModal = () => {
-    setIsModalOpen((prev) => !prev);
-  };
-
   // onSubmit에서 addPTChartApi 호출
   const handleSubmit = async () => {
     if (sessionType === "PT") {
         const response = await addPTChartApi(memberId, "PT", chartDate, weight, memo, routines);  
         if (response?.success) {
-            toast.success("PT 차트가 작성됐어요💪🏻");
+          notify('success',"PT 차트가 작성됐어요💪🏻");
             navigate(-1);
         } else {
-            toast.error("PT 차트 작성에 실패했어요. 다시 시도해 주세요.");
+          notify('error', "PT 차트 작성에 실패했어요. 다시 시도해 주세요.");
         }
     } else if(sessionType ==="PRIVATE"){
         const response = await addPrivateChartApi(chartDate, weight, memo, routines);  
         if (response?.success) {
-          toast.success("개인운동 차트가 작성됐어요💪🏻");
+          notify('success',"개인운동 차트가 작성됐어요💪🏻");
           navigate(-1);
         } else {
-          toast.error("개인운동 차트 작성에 실패했어요. 다시 시도해 주세요.");
+          notify('error', "개인운동 차트 작성에 실패했어요. 다시 시도해 주세요.");
         } 
     }
   };
 
   return (
     <div className="relative flex flex-col items-center w-full">
-      <ToastContainer position="top-center" />
       
       {/* Header */}
       <div className="flex items-center justify-between w-full h-[55px]">
@@ -173,7 +167,9 @@ function AddChart() {
       </div>
 
       {/* Modal */}
-      {isModalOpen && <ChartDeleteModal onClose={toggleModal} />}
+      <ChartDeleteModal
+      isOpen={isModalOpen}
+      onClose={()=>setIsModalOpen(false)} />
     </div>
   );
 }

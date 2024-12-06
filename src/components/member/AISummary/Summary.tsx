@@ -66,7 +66,9 @@ function Summary() {
                 <img src={movetodailychart} className="mt-10 ml-auto mr-7"></img>
             </div>
             {/* Modal */}
-            {isModalOpen && <SummaryDeleteModal onClose={toggleModal} />}
+            <SummaryDeleteModal
+            isOpen={isModalOpen}
+            onClose={()=>setIsModalOpen(false)} />
        </div>
     );
 }
