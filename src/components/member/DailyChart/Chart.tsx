@@ -5,8 +5,9 @@ import RadioButton from "../../common/button/RadioButton";
 import CheckButton from "../../common/button/CheckButton";
 import Dropdown from "../../common/DropDown";
 import ChartDeleteModal from "../../common/modal/ChartDeleteModal";
+import { adjustTextareaHeight } from "../../common/adjustTextareaHeight";
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { getChartApi } from "../../../store/api/chart/DailyChartApi";
 import { useChartDataStore } from "../../../store/store";
 
@@ -17,14 +18,6 @@ function Chart() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const goalRef = useRef<HTMLTextAreaElement | null>(null);
-
-    const adjustTextareaHeight = (ref: React.RefObject<HTMLTextAreaElement>) => {
-        if (ref.current) {
-            ref.current.style.height = "auto";
-            ref.current.style.height = `${ref.current.scrollHeight}px`;
-        }
-    };
 
     const handleGoBack = () => {
         navigate(-1);
@@ -34,15 +27,12 @@ function Chart() {
         setIsDropdownOpen((prev) => !prev);
     };
 
-    const toggleModal = () => {
-        setIsModalOpen((prev) => !prev);
-    };
 
     const handleIconClick = () => {
         navigate(`/member/chart/edit/${chartid}`);
       };
 
-      console.log(chartid)
+
     // 데일리 차트 가져오기
     useEffect(() => {
         const fetchChart = async () => {
@@ -71,7 +61,7 @@ function Chart() {
                 <Dropdown
                     options={[
                         { label: "차트 수정", onClick: handleIconClick},
-                        { label: "차트 삭제", onClick: toggleModal },
+                        { label: "차트 삭제", onClick: ()=>setIsModalOpen(false) },
                     ]}
                     onClose={() => setIsDropdownOpen(false)}
                 />
@@ -149,9 +139,8 @@ function Chart() {
                 <div className="space-y-2">
                     <div className="text-base">메모</div>
                     <textarea
-                        ref={goalRef}
                         className="border w-[450px] min-h-[70px] rounded-lg text-sm border-custom-skyblue bg-white resize-none overflow-hidden indent-1 p-1 ml-7"
-                        onInput={() => adjustTextareaHeight(goalRef)}
+                        onInput={adjustTextareaHeight}
                         value={chartData.memo}
                         maxLength={150}
                         disabled
@@ -169,7 +158,9 @@ function Chart() {
                 <img src={movetosummary} className="mt-10 ml-auto mr-7"></img>
             </div>
             {/* Modal */}
-            {isModalOpen && <ChartDeleteModal onClose={toggleModal} />}
+            <ChartDeleteModal
+            isOpen={isModalOpen}
+            onClose={()=>setIsModalOpen(false)} />
        </div>
     );
 }

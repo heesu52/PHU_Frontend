@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useApiUrlStore } from "../../../store";
+import { useApiUrlStore } from "../../store";
 
 // API URL을 가져오는 변수
 const apiUrl = useApiUrlStore.getState().apiUrl;
@@ -51,7 +51,7 @@ export const addPTInforApi = async (listid: number, memberTarget: string, signif
 };
 
 
-// 트레이너의 회원 상세정보 조회 API
+// 회원 상세정보 조회 API
 export const getPTInfoApi = async (listid: number) => {
   try {
     const response = await axios.get(`${apiUrl}/pt/info/${listid}`, {
@@ -79,7 +79,7 @@ export const getPTInfoApi = async (listid: number) => {
 };
 
 
-// 트레이너의 회원 상세정보 수정 API
+// 회원 상세정보 수정 API
 export const editInfoApi = async (memberid: number, memberTarget: string, significant: string, ptStartDate: string, ptEndDate: string) => {
     try {
       const response = await axios.put(`${apiUrl}/pt/member/${memberid}`, 

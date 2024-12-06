@@ -40,6 +40,15 @@ function ChartList() {
       return chartYearMonth === selectedYearMonth;
     });
   };
+  
+  // 연도와 월을 기반으로 선택 가능한 월 목록 생성
+  const generateMonthOptions = () => {
+    const uniqueMonths = new Set(
+      chartlistData.map(chart => getYearMonth(new Date(chart.chartDate)))
+    );
+    return Array.from(uniqueMonths).sort().reverse(); // 최신 월부터 표시
+  };
+
 
   // 차트 데이터 정렬 함수
   const sortedChartList = [...filterChartDataByMonth()].sort((a, b) => {
@@ -68,14 +77,6 @@ function ChartList() {
 
   const handleIconClick = (path: string) => {
     navigate(path);
-  };
-
-  // 연도와 월을 기반으로 선택 가능한 월 목록 생성
-  const generateMonthOptions = () => {
-    const uniqueMonths = new Set(
-      chartlistData.map(chart => getYearMonth(new Date(chart.chartDate)))
-    );
-    return Array.from(uniqueMonths).sort().reverse(); // 최신 월부터 표시
   };
 
   return (

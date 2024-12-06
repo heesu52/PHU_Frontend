@@ -19,7 +19,9 @@ function DailyChart() {
       <div className="w-full h-[calc(100vh-185px)] bg-[#f6f6f6] justify-center flex py-4">
         <ChartListComponent/>
       </div>
-      {isModalOpen && <ChartDeleteModal onClose={()=>  setIsModalOpen((prev) => !prev)} />}
+      <ChartDeleteModal
+      isOpen={isModalOpen}
+      onClose={()=>setIsModalOpen(false)} />
       <NavigationBar />
     </div>
   );

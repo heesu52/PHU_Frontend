@@ -9,14 +9,14 @@ import InfoComponent from "./Info";
 import AddMemberComponent from "./AddMemberInfo";
 import EditMemberInfoComponent from "./EditMemberInfo";
 import { useInfoDataStore, useIdStore } from "../../../store/store";  
-import { getPTInfoApi } from "../../../store/api/user/member/MemberInfoApi";
+import { getPTInfoApi } from "../../../store/api/info/MemberInfoApi";
 
 
 function MemberInfo() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isEditInfo, setIsEditInfo] = useState(false);
   const [isAddInfo, setIsAddInfo] = useState(false);
-  const [isNoMemberModalOpen, setIsNoMemberModalOpen] = useState(false);
+  const [isModalOpen, setIsrModalOpen] = useState(false);
   
   const { infoData, setInfoData } = useInfoDataStore();
   const { setListId, setMemberId } = useIdStore();  
@@ -32,7 +32,7 @@ function MemberInfo() {
       const response = await getPTInfoApi(Number(listid)); 
     
       if (response.errorCode === "M003") {
-        setIsNoMemberModalOpen(true);
+        setIsrModalOpen(true);
         setIsAddInfo(true);  // 회원 정보 추가 모드로 변경
       } else {
         setInfoData(response);
@@ -67,11 +67,10 @@ function MemberInfo() {
         )}
       </div>
       <NavigationBar />
-
-      {/* NoMemberInfoModal이 열리는 조건 추가 */}
-      {isNoMemberModalOpen && (
-        <NoMemberInfoModal onClose={() => setIsNoMemberModalOpen(false)} />  // 모달 닫기
-      )}
+      
+        <NoMemberInfoModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsrModalOpen(false)} />  
     </div>
   );
 }

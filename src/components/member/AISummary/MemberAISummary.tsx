@@ -9,11 +9,7 @@ function AISummary() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { infoData } = useInfoDataStore();
 
-  const toggleModal = () => {
-    setIsModalOpen((prev) => !prev);
-  };
 
- 
 
   return (
     <div className="relative flex flex-col items-center justify-center">
@@ -24,7 +20,10 @@ function AISummary() {
       <div className="w-full h-[calc(100vh-185px)] bg-[#f6f6f6] justify-center flex py-4">
         <SummaryList/>
       </div>
-      {isModalOpen && <ChartDeleteModal onClose={toggleModal} />}
+      
+      <ChartDeleteModal 
+      isOpen={isModalOpen}
+      onClose={()=>setIsModalOpen(false)} />
       <NavigationBar />
     </div>
   );
