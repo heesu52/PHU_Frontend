@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import compactup from "../../../assets/compact-up.svg";
 import SubmitButton from "../button/SubmitButton";
 import Input from "../Input";
-import { addPTMemberApi } from '../../../store/api/user/member/MemberApi';
+import { addPTMemberApi } from '../../../store/api/info/MemberApi';
 import { useListDataStore } from '../../../store/store';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

@@ -1,30 +1,19 @@
 import arrow from "../../../assets/arrow.svg";
 import SubmitButton from "../../common/button/SubmitButton";
 import SummaryDeleteModal from "../../common/modal/SummaryDeleteModal";
+import { adjustTextareaHeight } from "../../common/adjustTextareaHeight";
 import { useNavigate } from 'react-router-dom';
-import { useState, useRef } from "react";
+import { useState} from "react";
 
 function EditSummary() {
     const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const summartRef = useRef<HTMLTextAreaElement | null>(null);
 
-    const adjustTextareaHeight = (ref: React.RefObject<HTMLTextAreaElement>) => {
-      if (ref.current) {
-        ref.current.style.height = "auto"; 
-        ref.current.style.height = `${ref.current.scrollHeight}px`;
-      }
-    };
 
     const handleGoBack = () => {
         navigate(-1);
     };
     
-    const toggleModal = () => {
-        setIsModalOpen((prev) => !prev);
-    };
-
-
 
     return (
        <div className="relative flex flex-col items-center w-full">
@@ -43,18 +32,16 @@ function EditSummary() {
                     <li>
                         <h4 >요약1</h4>
                         <textarea 
-                            ref = {summartRef}
                             className="border w-[500px] min-h-[70px] rounded-lg text-sm border-custom-skyblue bg-white resize-none overflow-hidden indent-1 p-1"
                             maxLength={300}
-                            onInput={() => adjustTextareaHeight(summartRef)}>가나다라마사 아자차카 칸예는 N!에서 뒤에서부터 처음 0이 아닌 숫자가 나올 때까지 0의 개수를 구하는 프로그램을 작성하시오</textarea>
+                            onInput={adjustTextareaHeight}>가나다라마사 아자차카 칸예는 N!에서 뒤에서부터 처음 0이 아닌 숫자가 나올 때까지 0의 개수를 구하는 프로그램을 작성하시오</textarea>
                     </li>
                     <li>
                         <h4>요약2</h4>
                         <textarea
-                            ref = {summartRef}
                             className="border w-[500px] min-h-[70px] rounded-lg text-sm border-custom-skyblue bg-white resize-none overflow-hidden indent-1 p-1"
                             maxLength={300}
-                            onInput={() => adjustTextareaHeight(summartRef)}>가나다라마사 아자차카 칸예는 N!에서 뒤에서부터 처음 0이 아닌 숫자가 나올 때까지 0의 개수를 구하는 프로그램을 작성하시오</textarea>
+                            onInput={adjustTextareaHeight}>가나다라마사 아자차카 칸예는 N!에서 뒤에서부터 처음 0이 아닌 숫자가 나올 때까지 0의 개수를 구하는 프로그램을 작성하시오</textarea>
                     </li>
                     
                 </ul>
@@ -63,7 +50,9 @@ function EditSummary() {
                 </div>
             </div>
             {/* Modal */}
-            {isModalOpen && <SummaryDeleteModal onClose={toggleModal} />}
+            <SummaryDeleteModal 
+            isOpen={isModalOpen}
+            onClose={()=>setIsModalOpen(false)} />
        </div>
     );
 }

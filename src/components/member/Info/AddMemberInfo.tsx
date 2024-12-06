@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import SubmitButton from "../../common/button/SubmitButton";
+import { adjustTextareaHeight } from "../../common/adjustTextareaHeight";
 import { useInfoDataStore } from "../../../store/store";
-import { addPTInforApi } from "../../../store/api/user/member/MemberInfoApi";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { addPTInforApi } from "../../../store/api/info/MemberInfoApi";
+import { notify } from "../../common/ToastMessage/ToastMessageItem";
 
 interface AddMemberInfoProps {
   onSubmit: () => void;
@@ -21,13 +21,7 @@ function AddMemberInfo({ onSubmit }: AddMemberInfoProps) {
   const [memberTarget, setMemberTarget] = useState("");
   const [significant, setSignificant] = useState("");
 
-
-  // textarea의 높이를 자동으로 조정하는 함수
-  const adjustTextareaHeight = (e: React.FormEvent<HTMLTextAreaElement>) => {
-    const textarea = e.target as HTMLTextAreaElement;
-    textarea.style.height = "auto"; // 기존 높이를 리셋
-    textarea.style.height = `${textarea.scrollHeight}px`; // 내용에 맞춰서 높이 조정
-  };
+  
 
   // onSubmit에서 addPTInforApi 호출
   const handleSubmit = async () => {
@@ -39,17 +33,15 @@ function AddMemberInfo({ onSubmit }: AddMemberInfoProps) {
       ptEndDate
     );
     if (response?.success) {
-      toast.success("회원정보가 추가됐어요💪🏻");
+      notify('success',"회원정보가 추가됐어요💪🏻");
     } else {
-      toast.error("회원정보 추가에 실패했어요. 다시 시도해 주세요.");
+      notify('error',"회원정보 추가에 실패했어요. 다시 시도해 주세요.");
     }
     setInfoData(response?.data);
     onSubmit(); 
   };
 
   return (
-    <>
-      <ToastContainer position="top-center" />
       <div className="flex-col w-[80%] justify-between flex h-[90%]">
         <div className="space-y-6">
           <div className="text-lg font-semibold">회원 정보 추가</div>
@@ -98,7 +90,6 @@ function AddMemberInfo({ onSubmit }: AddMemberInfoProps) {
           <SubmitButton label="확인" size="small" onClick={handleSubmit} className="bg-blue-500" />
         </div>
       </div>
-    </>
   );
 }
 

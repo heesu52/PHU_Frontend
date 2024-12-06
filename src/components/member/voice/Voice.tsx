@@ -55,10 +55,6 @@ function Voice() {
         });
     };
 
-    // 모달 닫기 핸들러
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
 
     // 타이머를 시:분:초 형식으로 변환
     const formatTime = (time: number) => {
@@ -119,7 +115,9 @@ function Voice() {
 
             {/* 모달 */}
             {isModalOpen && (
-                <ChangetoTextModal onClose={closeModal} />
+                <ChangetoTextModal 
+                isOpen={isModalOpen}
+                onClose={()=>setIsModalOpen(false)} />
             )}
         </div>
     );

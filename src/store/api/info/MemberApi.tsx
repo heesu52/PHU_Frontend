@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useApiUrlStore } from "../../../store";
+import { useApiUrlStore } from "../../store";
 
 // API URL을 가져오는 변수
 const apiUrl = useApiUrlStore.getState().apiUrl;
@@ -23,7 +23,7 @@ const ERROR_CODES = {
 } as const;
 
 
-// 회원추가 API
+// 트레이너가 회원추가 API
 export const addPTMemberApi = async (email: string) => {
   try {
     const response = await axios.post(

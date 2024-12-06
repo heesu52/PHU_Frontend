@@ -53,7 +53,7 @@ export const addPTChartApi = async (id: number, branch: string, chartDate: strin
 
 
   // 회원이 개인운동 차트 생성 API
-export const addPrivateChartApi = async (chartDate: string, weight: number, memo: string, routines: string[]) => {
+  export const addPrivateChartApi = async (chartDate: string, weight: number, memo: string, routines: string[]) => {
     try {
       const response = await axios.post(
         `${apiUrl}/member/chart`,
@@ -80,8 +80,7 @@ export const addPrivateChartApi = async (chartDate: string, weight: number, memo
   };
   
 
-
-// 데일리차트 전체 조회 API
+// 데일리차트 리스트 조회 API
 export const getChartListApi = async (memberId: number) => {
   try {
     const response = await axios.get(`${apiUrl}/chart/all/${memberId}`, {

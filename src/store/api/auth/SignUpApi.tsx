@@ -1,7 +1,23 @@
-import axios, {AxiosError} from "axios";
+import axios from "axios";
 import { useApiUrlStore } from "../../store";
 
-const apiUrl = useApiUrlStore.getState().apiUrl; 
+// API URL을 가져오는 변수
+const apiUrl = useApiUrlStore.getState().apiUrl;
+
+// 공통 헤더 설정 함수
+const getAuthHeaders = () => {
+  const access = localStorage.getItem('token');
+  return {
+    Authorization: access,
+    "Content-Type": "application/json"
+  };
+};
+
+// 에러 코드 상수
+const ERROR_CODES = {
+  M001: "중복된 이메일 입니다." ,
+  DEFAULT: "알 수 없는 오류가 발생했습니다."
+} as const;
 
 
 //회원가입Api
@@ -15,7 +31,7 @@ export const SignUpApi = async (formData: {
     part: string;
   }) => {
     try {
-      const res = await axios.post(`${apiUrl}/sign-up`, {
+      const response = await axios.post(`${apiUrl}/sign-up`, {
         name: formData.name,
         age: formData.age,
         email: formData.email,
@@ -25,33 +41,32 @@ export const SignUpApi = async (formData: {
         part: formData.part,
       });
   
-      if (res.status === 200) {
-        console.log("회원가입 성공", res.data);
-        return {success:true};
+      if (response.status === 200) {
+        console.log("회원가입 성공");
+        return {
+          success: true,
+          data: response.data
+         };
       }
     } catch (error) {
-       // AxiosError에 대한 처리
-      if (error instanceof AxiosError) {
-        const errorCode = error.response?.data?.code; // 응답 코드 확인
-
-        if (errorCode === "M001"){
-          console.error(error.response?.data?.message);
-          return { 
-            success: false, 
-            errorCode: "M001", 
-            message: "중복된 이메일 입니다." 
-          };
-        }
+      if (axios.isAxiosError(error)) {
+        const errorCode = error.response?.data?.code as keyof typeof ERROR_CODES;  // errorCode 타입을 ERROR_CODES의 키로 지정
+        const message = ERROR_CODES[errorCode] || ERROR_CODES.DEFAULT;
+        console.log(message);
+        return {
+          success: false,
+          errorCode,
+          message
+        };
       } else {
-        // AxiosError가 아닌 경우 (예: 네트워크 오류, 기타 예외 처리)
         console.error("회원가입 실패:", error);
-        window.alert("회원가입에 실패했습니다. 다시 시도해주세요.")
+        return { success: false, message: ERROR_CODES.DEFAULT };
       }
     }
   };
   
 
-  //회원가입Api
+  //소셜 회원가입Api
 export const SocialSignUpApi = async (formData: {
   age: string;
   gender: string;
@@ -59,34 +74,35 @@ export const SocialSignUpApi = async (formData: {
   part: string;
 }) => {
   try {
-    const res = await axios.post(`${apiUrl}/sign-up/social`, {
+    const response = await axios.post(`${apiUrl}/sign-up/social`, {
       age: formData.age,
       gender: formData.gender,
       tel: formData.tel,
       part: formData.part,
-    });
+    },
+    { headers: getAuthHeaders() }
+  );
 
-    if (res.status === 200) {
-      console.log("소셜 회원가입 성공", res.data);
-      return res.data;
+    if (response.status === 200) {
+      console.log("소셜 회원가입 성공");
+      return {
+        success: true,
+        data: response.data
+       };
     }
   } catch (error) {
-     // AxiosError에 대한 처리
-    if (error instanceof AxiosError) {
-      const errorCode = error.response?.data?.code; // 응답 코드 확인
-
-      if (errorCode === "M001"){
-        console.error(error.response?.data?.message);
-        return { 
-          success: false, 
-          errorCode: "M001", 
-          message: "중복된 이메일 입니다." 
-        };
-      }
+    if (axios.isAxiosError(error)) {
+      const errorCode = error.response?.data?.code as keyof typeof ERROR_CODES;  // errorCode 타입을 ERROR_CODES의 키로 지정
+      const message = ERROR_CODES[errorCode] || ERROR_CODES.DEFAULT;
+      console.log(message);
+      return {
+        success: false,
+        errorCode,
+        message
+      };
     } else {
-      // AxiosError가 아닌 경우 (예: 네트워크 오류, 기타 예외 처리)
-      console.error("소셜 회원가입 실패:", error);
-      window.alert("회원가입에 실패했습니다. 다시 시도해주세요.")
+      console.error("회원가입 실패:", error);
+      return { success: false, message: ERROR_CODES.DEFAULT };
     }
   }
 };

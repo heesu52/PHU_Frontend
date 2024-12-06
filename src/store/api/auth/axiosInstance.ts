@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { RefreshTokenApi } from './LoginApi'; // 리프레시 토큰 발급 API 경로
+import { RefreshTokenApi } from './RefreshTokenApi'; // 리프레시 토큰 발급 API 경로
 
 const apiUrl = "https://fitee.site"; // 실제 API URL로 변경
 
