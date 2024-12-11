@@ -1,10 +1,12 @@
-import meatball from "../../../assets/three-dots.svg";
-import arrow from "../../../assets/arrow.svg";
-import stopicon from "../../../assets/stop-circle.svg";
-import starticon from "../../../assets/voicestart.svg";
-import Dropdown from "../../common/DropDown";
-import ChangetoTextModal from "../../common/modal/ChangetoTextModal";
-import voice from "../../lottie/voice.json";
+import meatball from "../../assets/three-dots.svg";
+import arrow from "../../assets/arrow.svg";
+import stopicon from "../../assets/stop.svg";
+import starticon from "../../assets/voicestart.svg";
+import pauseicon from "../../assets/pause.svg";
+import playicon from "../../assets/play.svg";
+import Dropdown from "../common/DropDown";
+import ChangetoTextModal from "../common/modal/ChangetoTextModal";
+import voice from "../lottie/voice.json";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
@@ -13,48 +15,87 @@ function Voice() {
     const navigate = useNavigate();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
+    const [isPaused, setIsPaused] = useState(false); // 녹음 일시 정지 상태
     const [timer, setTimer] = useState(0); // 타이머 상태
     const [isModalOpen, setIsModalOpen] = useState(false); // 모달 표시 상태
+    const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null); // MediaRecorder 인스턴스
+    const [audioChunks, setAudioChunks] = useState<Blob[]>([]); // 녹음된 데이터 조각
     const lottieRef = useRef<LottieRefCurrentProps>(null); // Lottie ref 추가
 
     useEffect(() => {
         let timerInterval: ReturnType<typeof setInterval> | null = null;
-    
-        if (isRecording) {
+
+        if (isRecording && !isPaused) {
             timerInterval = setInterval(() => {
                 setTimer((prev) => prev + 1);
             }, 1000); // 1초마다 타이머 증가
-        } else if (!isRecording && timerInterval) {
+        } else if (timerInterval) {
             clearInterval(timerInterval);
         }
-    
+
         return () => {
             if (timerInterval) clearInterval(timerInterval);
         };
-    }, [isRecording]);
-    
+    }, [isRecording, isPaused]);
 
     const handleGoBack = () => navigate(-1);
     const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
     const handleIconClick = () => navigate("/member/summary/edit");
 
-    const toggleRecording = () => {
-        setIsRecording((prev) => {
+    const startRecording = async () => {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const recorder = new MediaRecorder(stream);
+
+            recorder.ondataavailable = (event) => {
+                setAudioChunks((prev) => [...prev, event.data]);
+            };
+
+            recorder.onstop = () => {
+                console.log("녹음 종료");
+                const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+                const audioUrl = URL.createObjectURL(audioBlob);
+                console.log("Audio URL:", audioUrl);
+
+                // 모달 표시
+                setIsModalOpen(true);
+            };
+
+            recorder.start();
+            setMediaRecorder(recorder);
+            setIsRecording(true);
+            setAudioChunks([]);
+            setTimer(0);
+            console.log("녹음 시작");
+        } catch (error) {
+            console.error("마이크 권한 요청 실패 또는 오류 발생:", error);
+        }
+    };
+
+    const stopRecording = () => {
+        mediaRecorder?.stop();
+        setIsRecording(false);
+        setIsPaused(false);
+        console.log("녹음 중지");
+    };
+
+    const togglePause = () => {
+        if (!mediaRecorder) return;
+
+        setIsPaused((prev) => {
             const nextState = !prev;
 
-            // Lottie 애니메이션 상태 제어
             if (nextState) {
-                lottieRef.current?.play(); // 녹음 시작 시 재생
-                setTimer(0); // 타이머 초기화
+                mediaRecorder.pause();
+                lottieRef.current?.pause(); // 일시 정지
             } else {
-                lottieRef.current?.stop(); // 녹음 중지 시 정지
-                setIsModalOpen(true); // 녹음 중지 시 모달 표시
+                mediaRecorder.resume();
+                lottieRef.current?.play(); // 다시 시작
             }
 
             return nextState;
         });
     };
-
 
     // 타이머를 시:분:초 형식으로 변환
     const formatTime = (time: number) => {
@@ -104,12 +145,22 @@ function Voice() {
                             {formatTime(timer)}
                         </p>
                     )}
-                    <img 
-                        src={isRecording ? stopicon : starticon} 
-                        onClick={toggleRecording} 
-                        className="cursor-pointer w-[50px] h-[50px]"
-                        alt={isRecording ? "Stop Recording" : "Start Recording"}
-                    />
+                    <div className="flex space-x-4">
+                        <img 
+                            src={isRecording ? stopicon : starticon} 
+                            onClick={isRecording ? stopRecording : startRecording} 
+                            className="cursor-pointer w-[50px] h-[50px]"
+                            alt={isRecording ? "Stop Recording" : "Start Recording"}
+                        />
+                        {isRecording && (
+                            <img 
+                                src={isPaused ? playicon : pauseicon} 
+                                onClick={togglePause} 
+                                className="cursor-pointer w-[50px] h-[50px]"
+                                alt={isPaused ? "Resume Recording" : "Pause Recording"}
+                            />
+                        )}
+                    </div>
                 </div>
             </div>
 
@@ -117,7 +168,7 @@ function Voice() {
             {isModalOpen && (
                 <ChangetoTextModal 
                 isOpen={isModalOpen}
-                onClose={()=>setIsModalOpen(false)} />
+                onClose={() => setIsModalOpen(false)} />
             )}
         </div>
     );
