@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
 
+
 function Voice() {
     const navigate = useNavigate();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -20,6 +21,7 @@ function Voice() {
     const [isModalOpen, setIsModalOpen] = useState(false); // 모달 표시 상태
     const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null); // MediaRecorder 인스턴스
     const [audioChunks, setAudioChunks] = useState<Blob[]>([]); // 녹음된 데이터 조각
+    const [recordingIndex, setRecordingIndex] = useState(1); // 녹음 인덱스
     const lottieRef = useRef<LottieRefCurrentProps>(null); // Lottie ref 추가
 
     useEffect(() => {
@@ -40,37 +42,41 @@ function Voice() {
 
     const handleGoBack = () => navigate(-1);
     const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
-    const handleIconClick = () => navigate("/member/summary/edit");
 
     const startRecording = async () => {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
             const recorder = new MediaRecorder(stream);
-
+    
             recorder.ondataavailable = (event) => {
                 setAudioChunks((prev) => [...prev, event.data]);
             };
-
-            recorder.onstop = () => {
+    
+            recorder.onstop = async () => {
                 console.log("녹음 종료");
-                const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+                const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
+    
                 const audioUrl = URL.createObjectURL(audioBlob);
-                console.log("Audio URL:", audioUrl);
-
-                // 모달 표시
+                const link = document.createElement("a");
+                link.href = audioUrl;
+                link.download = `recording_${recordingIndex}.wav`;
+                link.click();
+    
                 setIsModalOpen(true);
+                setRecordingIndex((prev) => prev + 1);
             };
-
+    
             recorder.start();
             setMediaRecorder(recorder);
             setIsRecording(true);
-            setAudioChunks([]);
-            setTimer(0);
+            setAudioChunks([]); // 이전 데이터 클리어
+            setTimer(0); // 타이머 리셋
             console.log("녹음 시작");
         } catch (error) {
             console.error("마이크 권한 요청 실패 또는 오류 발생:", error);
         }
     };
+    
 
     const stopRecording = () => {
         mediaRecorder?.stop();
@@ -120,8 +126,8 @@ function Voice() {
 
             {isDropdownOpen && (
                 <Dropdown
-                    options={[
-                        { label: "요약 내용 수정", onClick: handleIconClick },
+                    options={[ 
+                        { label: "요약 내용 수정", onClick: () => navigate("/member/summary/edit") },
                     ]}
                     onClose={() => setIsDropdownOpen(false)}
                 />
@@ -134,28 +140,28 @@ function Voice() {
                     <p className="text-sm font-bold">녹음을 할 경우, 상대방에게 꼭 고지해주세요!</p>
                 </div>
                 <div className="flex flex-col items-center space-y-4">
-                    <Lottie 
-                        animationData={voice} 
-                        style={{ width: "200px", height: "200px" }} 
+                    <Lottie
+                        animationData={voice}
+                        style={{ width: "200px", height: "200px" }}
                         loop
-                        lottieRef={lottieRef} 
+                        lottieRef={lottieRef}
                     />
                     {isRecording && (
                         <p className="text-lg font-bold text-custom-indigo">
-                            {formatTime(timer)}
+                            Recording {recordingIndex} - {formatTime(timer)}
                         </p>
                     )}
                     <div className="flex space-x-4">
-                        <img 
-                            src={isRecording ? stopicon : starticon} 
-                            onClick={isRecording ? stopRecording : startRecording} 
+                        <img
+                            src={isRecording ? stopicon : starticon}
+                            onClick={isRecording ? stopRecording : startRecording}
                             className="cursor-pointer w-[50px] h-[50px]"
                             alt={isRecording ? "Stop Recording" : "Start Recording"}
                         />
                         {isRecording && (
-                            <img 
-                                src={isPaused ? playicon : pauseicon} 
-                                onClick={togglePause} 
+                            <img
+                                src={isPaused ? playicon : pauseicon}
+                                onClick={togglePause}
                                 className="cursor-pointer w-[50px] h-[50px]"
                                 alt={isPaused ? "Resume Recording" : "Pause Recording"}
                             />
@@ -165,11 +171,10 @@ function Voice() {
             </div>
 
             {/* 모달 */}
-            {isModalOpen && (
-                <ChangetoTextModal 
+            <ChangetoTextModal
                 isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)} />
-            )}
+                onClose={() => setIsModalOpen(false)}
+            />
         </div>
     );
 }
