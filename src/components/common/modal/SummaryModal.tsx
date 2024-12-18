@@ -18,9 +18,9 @@ function SummaryModal({ isOpen, onClose }: SummaryModalProps) {
         <BaseModal
         isOpen={isOpen}  
         onClose={onClose}
-        title="텍스트 변환이 완료되었습니다"
+        title="대화 내용 요약"
         message1={"AI를 이용해서 대화 내용을 요약할까요?"}
-        message2={"나중에도 대화 내용을 요약할 수 있습니다!"}
+        message2={"나중에도 대화 내용을 요약할 수 있어요!"}
         confirmText=" 네"
         cancelText="다음에 할게요"
         onConfirm={handleClose}  
