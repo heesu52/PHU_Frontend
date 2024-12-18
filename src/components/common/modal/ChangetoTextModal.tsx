@@ -1,5 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import BaseModal from "./BaseModal";  
+import { changeFiletoTextApi } from "../../../store/api";
+import { useTextDataStore,useIdStore } from "../../../store/store";
+import { notify } from "../ToastMessage/ToastMessageItem";
+import { useParams } from "react-router-dom";
 
 interface ChangetoTextModalProps {
   isOpen: boolean;
@@ -7,11 +10,21 @@ interface ChangetoTextModalProps {
 }
 
 function ChangetoTextModal({ isOpen, onClose }: ChangetoTextModalProps) {
-  const navigate = useNavigate();
+  const {textData, setTextData} = useTextDataStore();
+  const { fileid } = useParams();
+  const { memberId } = useIdStore();
 
-  const handleClose = () => {
-    onClose(); 
-    navigate("/member/summary"); 
+
+  // 텍스트 추출 API 함수
+  const fetchFileToText = async () => {
+    if (memberId !== null) {
+      const response = await changeFiletoTextApi(memberId, Number(fileid));  
+      if (response?.success) {
+        setTextData(response.data);
+        notify('success', "텍스트가 추출됐어요💪🏻"); 
+        onClose();
+      }
+    }
   };
 
   return (
@@ -23,7 +36,7 @@ function ChangetoTextModal({ isOpen, onClose }: ChangetoTextModalProps) {
     message2={"나중에도 대화 내용을 텍스트로 변환할 수 있어요!"}
     confirmText=" 네"
     cancelText="다음에 할게요"
-    onConfirm={handleClose}  
+    onConfirm={fetchFileToText}  
   />
   );
 }

@@ -53,7 +53,7 @@ export const getVoicetoTextFileApi = async (fileid: number, textid: string) => {
     }
   };
   
-  // 음성녹음 텍스트 추출 조회 API
+  // 음성녹음 텍스트 추출 API
   export const changeFiletoTextApi = async (memberid: number, fileid: number) => {
     try {
       const response = await axios.get(

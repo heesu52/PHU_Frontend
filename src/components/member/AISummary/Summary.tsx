@@ -84,7 +84,7 @@ function Summary() {
                         textData.list.map((item, index) => (
                             <li key={index}>
                                 <h4>요약{index + 1}</h4>
-                                <p className="text-sm">{item.text}</p> {/* text 부분을 화면에 출력 */}
+                                <p className="text-sm">{item.text}</p> 
                             </li>
                         ))
                     )}
