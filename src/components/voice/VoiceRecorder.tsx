@@ -4,25 +4,31 @@ import stopicon from "../../assets/stop.svg";
 import starticon from "../../assets/voicestart.svg";
 import pauseicon from "../../assets/pause.svg";
 import playicon from "../../assets/play.svg";
+import downloadIcon from "../../assets/download.svg"
 import Dropdown from "../common/DropDown";
-import ChangetoTextModal from "../common/modal/ChangetoTextModal";
+import UploadRecordFileModal from "../common/modal/UploadRecordFileModal";
 import voice from "../lottie/voice.json";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
-import { formatTime } from "../utils/formatTime";
+import { formatTime } from "../utils/formatTimeUtils";
+import { VoiceFileUploadApi } from "../../store/api";
+import { useIdStore, useVoiceDataStore } from "../../store/store";
+
 
 function Voice() {
     const navigate = useNavigate();
+    const { memberId } = useIdStore();
+    const { voiceData, setVoiceData } = useVoiceDataStore();
+    
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isRecording, setIsRecording] = useState(false); // 녹음 진행 여부
-    const [isPaused, setIsPaused] = useState(false); // 녹음 일시 정지 상태
-    
-    const [timer, setTimer] = useState(0); // 타이머 상태
-    const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null); // MediaRecorder 인스턴스
-    const [audioChunks, setAudioChunks] = useState<Blob[]>([]); // 녹음된 오디오 조각
-    const [audioUrl, setAudioUrl] = useState<string | null>(null); // 오디오 URL
+    const [isRecording, setIsRecording] = useState(false);
+    const [isPaused, setIsPaused] = useState(false);
+    const [timer, setTimer] = useState(0);
+    const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
+    const [audioChunks, setAudioChunks] = useState<Blob[]>([]);
+    const [audioUrl, setAudioUrl] = useState<string | null>(null);
 
     const lottieRef = useRef<LottieRefCurrentProps>(null);
 
@@ -33,7 +39,7 @@ function Voice() {
         if (isRecording && !isPaused) {
             timerInterval = setInterval(() => {
                 setTimer((prev) => prev + 1);
-            }, 1000); // 1초마다 타이머 증가
+            }, 1000);
         } else if (timerInterval) {
             clearInterval(timerInterval);
         }
@@ -56,24 +62,39 @@ function Voice() {
             recorder.onstop = () => {
                 const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
                 const audioUrl = URL.createObjectURL(audioBlob);
-                setAudioUrl(audioUrl); // 녹음이 끝난 후 오디오 URL 생성
+                setAudioUrl(audioUrl);
+                setIsModalOpen(true); // 녹음 종료 후 모달 열기
             };
 
             recorder.start();
             setMediaRecorder(recorder);
-            setAudioChunks([]); // 새로 녹음할 때마다 초기화
+            setAudioChunks([]);
             setIsRecording(true);
             setIsPaused(false);
+            console.log("녹음 시작");
         } catch (err) {
             console.error("녹음 시작 실패:", err);
         }
     };
 
-    // 녹음 종료
-    const offRec = () => {
+    //녹음 종료
+    const offRec = async () => {
         if (mediaRecorder) {
             mediaRecorder.stop();
             setIsRecording(false);
+            setTimer(0);
+            console.log("녹음 중지");
+            
+            // 녹음 종료 후 파일 업로드
+            if (memberId) {
+                const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
+                const audioFile = new File([audioBlob], "recording.wav", { type: "audio/wav" });
+                const response = await VoiceFileUploadApi(audioFile, Number(memberId));
+                if (response?.success) {
+                    setVoiceData(response.data)
+                    console.log(voiceData)
+                } 
+            } 
         }
     };
 
@@ -106,7 +127,7 @@ function Voice() {
 
             {isDropdownOpen && (
                 <Dropdown
-                    options={[ 
+                    options={[
                         { label: "요약 내용 수정", onClick: () => navigate("/member/summary/edit") },
                     ]}
                     onClose={() => setIsDropdownOpen(false)}
@@ -128,7 +149,7 @@ function Voice() {
                     />
                     {isRecording && (
                         <p className="text-lg font-bold text-custom-indigo">
-                           {formatTime(timer)}
+                            {formatTime(timer)}
                         </p>
                     )}
                     <div className="flex space-x-4">
@@ -150,14 +171,19 @@ function Voice() {
 
                     {/* 녹음이 끝나면 오디오 재생 */}
                     {audioUrl && !isRecording && (
-                        <div className="mt-4">
+                        <div className="flex items-center justify-center mt-5">
                             <audio controls src={audioUrl}></audio>
                             <a
                                 href={audioUrl}
                                 download="recording.wav"
-                                className="mt-2 text-blue-600"
-                            >
-                                녹음 파일 다운로드
+                                className="mt-2 ml-3"
+                                >
+                                {/* 이미지 대신 텍스트를 이미지로 변경 */}
+                                <img
+                                    src={downloadIcon} 
+                                    alt="Download"
+                                    className="w-6 h-6 cursor-pointe"
+                                />
                             </a>
                         </div>
                     )}
@@ -165,7 +191,7 @@ function Voice() {
             </div>
 
             {/* 모달 */}
-            <ChangetoTextModal
+            <UploadRecordFileModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
             />

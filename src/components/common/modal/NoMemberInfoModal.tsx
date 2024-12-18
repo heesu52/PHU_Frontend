@@ -19,6 +19,7 @@ function NoMemberInfoModal({isOpen, onClose }: NoMemberInfoModalProps) {
     message1={"현재 저장되어있는 회원님의 정보가 없어요."}
     message2={"회원님의 정보를 추가해주세요!"}
     confirmText=" 확인"
+    cancelText="취소"
     onConfirm={handleClose}  
   />
   );

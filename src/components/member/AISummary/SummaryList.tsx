@@ -20,7 +20,6 @@ function SummaryList () {
                 const response = await getVoiceFileListApi(memberId);
                 if (response?.success) {
                     setVoiceListData(response.data);
-                    
                 }
             }
         };
@@ -30,7 +29,6 @@ function SummaryList () {
     
     const handleIconClick = (path: string, voiceTextId: string) => {
         setVoiceTextId(voiceTextId)
-        console.log(voiceTextId)
         navigate(path);
       };
       
@@ -94,7 +92,7 @@ function SummaryList () {
             <img 
                 src={plusbtn} 
                 className="fixed bottom-0 mb-20 transform -translate-x-1/2 cursor-pointer left-1/2 w-7 h-7"
-                onClick={() => navigate('/member/voice')}
+                onClick={() => navigate(`/member/voice/${memberId}`)}
             />
         </div>
        </div>

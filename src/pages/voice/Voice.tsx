@@ -1,4 +1,4 @@
-import VoiceComponent from "../../components/voice/Voice.tsx";
+import VoiceComponent from "../../components/voice/VoiceRecorder.tsx";
 
 function VoicePage() {
   return (

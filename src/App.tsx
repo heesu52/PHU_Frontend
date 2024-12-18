@@ -50,7 +50,7 @@ function App() {
             <Route path='/member/summary/file/:fileid' element={<SummaryPage/>} />
             <Route path='/member/summary/edit/:fileid' element={<EditSummaryPage/>} />
             
-            <Route path='/member/voice' element={<VoicePage/>} />
+            <Route path='/member/voice/:memberid' element={<VoicePage/>} />
             <Route path='/calendar' element={<CalendarPage/>} />
             <Route path='/chat' element={<ChatPage/>} />
           </Routes>

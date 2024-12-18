@@ -36,6 +36,7 @@ export const VoiceFileUploadApi = async (file: File, memberid: number) => {
 
     if (response.status === 200) {
       console.log("파일 업로드 성공");
+      console.log(response.data)
       return {
         success: true,
         data: response.data

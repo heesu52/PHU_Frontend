@@ -10,7 +10,7 @@ interface ChangetoTextModalProps {
 }
 
 function ChangetoTextModal({ isOpen, onClose }: ChangetoTextModalProps) {
-  const {textData, setTextData} = useTextDataStore();
+  const {setTextData} = useTextDataStore();
   const { fileid } = useParams();
   const { memberId } = useIdStore();
 
