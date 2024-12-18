@@ -160,3 +160,22 @@ export const useChartDataStore = create<ChartDataState>((set) => ({
   },
   setChartData: (chartData) => set({ chartData }),
 }));
+
+/* 음성파일 전체 (리스트) data */
+interface VoiceListDataState {
+  voicelistData: VoiceListData[]
+  setVoiceListData: (voicelistData: VoiceListData[]) => void
+}
+interface VoiceListData {
+  fileId: number,
+  memberId: number,
+  uploadFileUrl : string,
+  createAt : string,
+  voiceTextId: string,
+  isTransformation: boolean
+}
+  
+export const useVoiceListDataStore = create<VoiceListDataState>((set) => ({
+  voicelistData: [],
+  setVoiceListData: (voicelistData) => set({ voicelistData }),
+}));
