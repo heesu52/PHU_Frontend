@@ -27,9 +27,10 @@ function SummaryList () {
         fetchVoiceList();
     }, [memberId, setVoiceListData]);
   
-
+    
     const handleIconClick = (path: string, voiceTextId: string) => {
         setVoiceTextId(voiceTextId)
+        console.log(voiceTextId)
         navigate(path);
       };
       

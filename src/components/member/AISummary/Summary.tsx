@@ -5,6 +5,7 @@ import arrow from "../../../assets/arrow.svg";
 import movetodailychart from "../../../assets/movetodailychart.svg"
 import Dropdown from "../../common/DropDown";
 import SummaryDeleteModal from "../../common/modal/SummaryDeleteModal";
+import ChangetoTextModal from "../../common/modal/ChangetoTextModal";
 import { getVoicetoTextFileApi } from "../../../store/api";
 import { useVoiceListDataStore, useTextDataStore } from "../../../store/store";
 
@@ -26,9 +27,6 @@ function Summary() {
     };
 
 
-    const handleIconClick = () => {
-        navigate("/member/summary/edit");
-      };
 
     // 음성파일에서 추출된 텍스트 가져오기
     useEffect(() => {
@@ -43,9 +41,15 @@ function Summary() {
             }
         };
         fetchVoicetoText();
-    }, [fileid]); 
+    }, [fileid,voiceTextId]); 
 
-
+    
+     // voiceTextId가 "Before Conversion"이면 ChangetoTextModal 띄우기
+     useEffect(() => {
+        if (voiceTextId === "Before Conversion") {
+            setIsModalOpen(true); // 모달 열기
+        }
+    }, [voiceTextId]);
 
     return (
        <div className="relative flex flex-col items-center w-full">
@@ -61,7 +65,7 @@ function Summary() {
             {isDropdownOpen && (
                 <Dropdown
                     options={[
-                        { label: "요악 내용 수정", onClick: handleIconClick },
+                        { label: "요악 내용 수정", onClick: ()=> navigate("/member/summary/edit") },
                         { label: "요약 내용 삭제", onClick: ()=>setIsModalOpen(false) },
                     ]}
                     onClose={() => setIsDropdownOpen(false)}
@@ -69,26 +73,36 @@ function Summary() {
             )}
 
             {/* Component */}
-            <div className="flex flex-col items-center mt-5">
+            <div className="flex flex-col items-center w-full mt-5">
                 <ul className="w-[90%] space-y-4">
-                    {textData.list && textData.list.length > 0 ? (
+                    {(voiceTextId === "Before Conversion" || (textData.list && textData.list.length === 0)) ? (
+                        <div className="flex flex-col items-center justify-center w-full text-sm text-custom-grey">
+                            <p>변환된 텍스트가 없습니다. </p>
+                            <p>텍스트 추출을 진행해보세요!</p>
+                        </div>
+                    ) : (
                         textData.list.map((item, index) => (
                             <li key={index}>
                                 <h4>요약{index + 1}</h4>
                                 <p className="text-sm">{item.text}</p> {/* text 부분을 화면에 출력 */}
                             </li>
                         ))
-                    ) : (
-                        <p>변환된 텍스트가 없습니다. 텍스트 추출을 진행해보세요!</p>
                     )}
                 </ul>
-                <img src={movetodailychart} className="mt-10 ml-auto mr-7"></img>
+                <img src={movetodailychart} className="mt-10 ml-auto mr-7" />
             </div>
+
             
             {/* Modal */}
             <SummaryDeleteModal
             isOpen={isModalOpen}
             onClose={()=>setIsModalOpen(false)} />
+
+            {/* ChangetoTextModal */}
+            <ChangetoTextModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+            />
        </div>
     );
 }

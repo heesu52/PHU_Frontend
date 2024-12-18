@@ -32,7 +32,7 @@ function MemberDeleteModal({ isOpen, onClose, memberId, memberName }: MemberDele
       onClose={onClose}
       title="회원 삭제"
       message1={`'${memberName}' 님을 삭제할까요?`}
-      message2={"회원정보는 삭제되지 않습니다."}
+      message2={"회원정보는 삭제되지 않아요."}
       confirmText="삭제"
       cancelText="취소"
       onConfirm={handleDelete}  
