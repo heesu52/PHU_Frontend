@@ -22,10 +22,10 @@ const ERROR_CODES = {
 } as const;
 
 // 음성녹음 텍스트 추출 결과 조회 API
-export const getVoicetoTextFileApi = async (voicefileid: number, voicetextid: number) => {
+export const getVoicetoTextFileApi = async (fileid: number, textid: string) => {
     try {
       const response = await axios.get(
-        `${apiUrl}/pt/voice-file/result/${voicefileid}/${voicetextid}`,
+        `${apiUrl}/pt/voice-file/result/${fileid}/${textid}`,
         { headers: getAuthHeaders() }
       );
   

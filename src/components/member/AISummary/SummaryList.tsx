@@ -3,14 +3,13 @@ import threedots from "../../../assets/three-dots.svg";
 import plusbtn from "../../../assets/plus-circle-fill.svg";
 import { useNavigate } from "react-router-dom";
 import { getVoiceFileListApi } from "../../../store/api";
-import { useVoiceListDataStore, useIdStore } from "../../../store/store";
+import { useVoiceListDataStore, useIdStore} from "../../../store/store";
 import { getYearMonth, filterDataByMonth, generateMonthOptions, sortDataByDate } from "../../utils/dateUtils";
 
 function SummaryList () {
     const navigate = useNavigate();
     const { memberId } = useIdStore();
-    const { voicelistData, setVoiceListData } = useVoiceListDataStore();
-
+    const { voicelistData, setVoiceListData, setVoiceTextId } = useVoiceListDataStore();
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
     const [sortOrder, setSortOrder] = useState<'latest' | 'oldest'>('latest');
     
@@ -21,15 +20,19 @@ function SummaryList () {
                 const response = await getVoiceFileListApi(memberId);
                 if (response?.success) {
                     setVoiceListData(response.data);
+                    
                 }
             }
         };
         fetchVoiceList();
     }, [memberId, setVoiceListData]);
+  
 
-    const handleIconClick = (path: string) => {
+    const handleIconClick = (path: string, voiceTextId: string) => {
+        setVoiceTextId(voiceTextId)
         navigate(path);
-    };
+      };
+      
 
     // 선택된 월에 맞는 음성 파일 필터링
     const filteredVoiceList = filterDataByMonth(voicelistData, selectedDate);
@@ -68,14 +71,14 @@ function SummaryList () {
       </div>
 
         <ul className="flex flex-col items-center space-y-3 text-xs cursor-default">
-        {sortedVoiceList.length > 0 ? (
-          sortedVoiceList.map((file, index) => (
+        {voicelistData.length > 0 ? (
+          voicelistData.map((file, index) => (
             <li 
             key={index}
             className="w-[80%] h-[55px] bg-white shadow-md rounded-xl flex items-center justify-center cursor-default">
-                <div className="flex w-full" onClick={() => handleIconClick(':id')}>
+                <div className="flex w-full" onClick={() =>  handleIconClick(`/member/summary/file/${file.fileId}`, file.voiceTextId)}>
                     <p className="flex-1 ml-3 text-center">{file.createAt.split(" ")[0]}</p> 
-                    <p className="flex-1 text-center">{file.isTransformation ? "텍스트 추출 O" : "텍스트 추출 X"}</p> 
+                    <p className="flex-1 text-center">{file.isTransformation ? "텍스트 추출 O" : "텍스트 추출 X"}</p>
                     <p className="flex-1 ml-3 text-center">요약 여부</p>
                 </div>
                 <img className="mr-2 rotate-90 cursor-pointer" src={threedots} />
@@ -90,7 +93,7 @@ function SummaryList () {
             <img 
                 src={plusbtn} 
                 className="fixed bottom-0 mb-20 transform -translate-x-1/2 cursor-pointer left-1/2 w-7 h-7"
-                onClick={() => handleIconClick('/member/voice')}
+                onClick={() => navigate('/member/voice')}
             />
         </div>
        </div>
