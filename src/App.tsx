@@ -33,19 +33,24 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/social/sign-up" element={<SocialSignupPage />} />
+            
             <Route path="/my" element={<MyPage />} />
             <Route path="/my/setting" element={<SettingPage />} />
             <Route path='/my/edit' element={<EditPage/>} />
+            
             <Route path='/member' element={<MemberListPage/>} />
             <Route path='/member/info/:listid' element={<MemberInfoPage/>} />
+            
             <Route path='/member/chart/:memberid' element={<DaliyChartListPage/>} />
             <Route path='/member/chart/detail/:chartid' element={<DailyChartPage/>} />
             <Route path='/member/chart/detail' element={<AddDailyChartPage/>} />
             <Route path='/member/chart/edit/:chartid' element={<EditDailyChartPage/>} />
+            
             <Route path='/member/summary/:memberid' element={<AISummaryListPage/>} />
-            <Route path='/member/summary/:summaryid' element={<SummaryPage/>} />
-            <Route path='/member/summary/edit/:summaryid' element={<EditSummaryPage/>} />
-            <Route path='/member/voice' element={<VoicePage/>} />
+            <Route path='/member/summary/file/:fileid' element={<SummaryPage/>} />
+            <Route path='/member/summary/edit/:fileid' element={<EditSummaryPage/>} />
+            
+            <Route path='/member/voice/:memberid' element={<VoicePage/>} />
             <Route path='/calendar' element={<CalendarPage/>} />
             <Route path='/chat' element={<ChatPage/>} />
           </Routes>

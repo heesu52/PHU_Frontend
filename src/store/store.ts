@@ -160,3 +160,81 @@ export const useChartDataStore = create<ChartDataState>((set) => ({
   },
   setChartData: (chartData) => set({ chartData }),
 }));
+
+
+// VoiceListData와 VoiceData의 공통 구조를 정의하는 인터페이스
+interface VoiceDataCommon {
+  fileId: number;
+  memberId: number;
+  uploadFileUrl: string;
+  createAt: string;
+  voiceTextId: string;
+  isTransformation: boolean;
+}
+
+/* 음성파일 전체 (리스트) data & voiceTextId 저장 */
+interface VoiceListDataState {
+  voicelistData: VoiceDataCommon[];
+  setVoiceListData: (voicelistData: VoiceDataCommon[]) => void;
+  voiceTextId: string | null;
+  setVoiceTextId: (id: string) => void;
+}
+
+export const useVoiceListDataStore = create<VoiceListDataState>((set) => ({
+  voicelistData: [],
+  setVoiceListData: (voicelistData) => set({ voicelistData }),
+  voiceTextId: null,
+  setVoiceTextId: (id: string) => set({ voiceTextId: id }),
+}));
+
+
+/* 음성파일 개별 data 객체로 수정 */
+interface VoiceDataState {
+  voiceData: VoiceDataCommon;
+  setVoiceData: (voiceData: VoiceDataCommon) => void;
+}
+
+export const useVoiceDataStore = create<VoiceDataState>((set) => ({
+  voiceData: {
+    fileId: 0,
+    memberId: 0,
+    uploadFileUrl: '',
+    createAt: '',
+    voiceTextId: '',
+    isTransformation: false,
+  },
+  setVoiceData: (voiceData) => set({ voiceData }),
+}));
+
+
+
+/* 음성파일에서 추출한 텍스트 */
+// list 배열에 포함될 각 항목에 대한 구조 정의
+interface TextDataState {
+  textData: TextData;
+  setTextData: (textData: TextData) => void;
+}
+
+interface TextData {
+  voiceTextId: string;
+  createAt: string;
+  memberName: string;
+  list: TextItem[]; // list를 포함하도록 수정
+  tel: string;
+}
+
+interface TextItem {
+  speaker: string;  // 발화자
+  text: string;     // 발화 내용
+}
+
+export const useTextDataStore = create<TextDataState>((set) => ({
+  textData: {
+    voiceTextId: '',
+    createAt: '',
+    memberName: '',
+    list: [], // 초기값으로 빈 배열
+    tel: ''
+  },
+  setTextData: (textData) => set({ textData }),
+}));
