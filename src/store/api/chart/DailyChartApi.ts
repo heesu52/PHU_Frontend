@@ -143,3 +143,50 @@ export const getChartApi = async (chartid: number) => {
       }
     }
   };
+
+  // 데일리차트 수정 API
+export const editChartApi = async (chartid: number, chartDate: string, weight: number, memo: string, routines: string[]) => {
+  try {
+    const response = await axios.put(`${apiUrl}/chart/${chartid}`, 
+      {
+        chartDate,
+        weight,
+        memo,
+        routines
+      },
+      {headers: getAuthHeaders()});
+
+    if (response.status === 200) {
+      console.log("데일리차트 수정 성공");
+      return {
+        success: true,
+        data: response.data
+        };
+    }
+  } catch (error) {
+    console.error("데일리차트 수정 실패:", error);
+    return { success: false, message: "데일리차트 수정 실패" };
+  }
+};
+
+
+
+  //데일리차트 삭제 API
+export const deleteChartApi = async (chartid: number) => {
+  try {
+    const response = await axios.delete(`${apiUrl}/chart/${chartid}`, {
+      headers: getAuthHeaders()
+    });
+
+    if (response.status === 200) {
+      console.log("차트 삭제 성공");
+      return {
+        success: true,
+        data: response.data
+       };
+    }
+  } catch (error) {
+    console.error("차트 삭제 실패:", error);
+    return { success: false, message: "차트 삭제 실패" };
+  }
+};
