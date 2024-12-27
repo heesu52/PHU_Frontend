@@ -61,7 +61,7 @@ function Chart() {
                 <Dropdown
                     options={[
                         { label: "차트 수정", onClick: handleIconClick},
-                        { label: "차트 삭제", onClick: ()=>setIsModalOpen(false) },
+                        { label: "차트 삭제", onClick: ()=>setIsModalOpen(true) },
                     ]}
                     onClose={() => setIsDropdownOpen(false)}
                 />
@@ -160,7 +160,8 @@ function Chart() {
             {/* Modal */}
             <ChartDeleteModal
             isOpen={isModalOpen}
-            onClose={()=>setIsModalOpen(false)} />
+            onClose={()=>setIsModalOpen(false)} 
+            chartId={Number(chartid)}/>
        </div>
     );
 }

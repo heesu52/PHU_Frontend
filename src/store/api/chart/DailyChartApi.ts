@@ -23,12 +23,11 @@ const ERROR_CODES = {
 
 
 // 트레이너가 PT 차트 생성 API
-export const addPTChartApi = async (id: number, branch: string, chartDate: string, weight: number, memo: string, routines: string[]) => {
+export const addPTChartApi = async (memberId: number, branch: string, chartDate: string, weight: number, memo: string, routines: string[]) => {
     try {
       const response = await axios.post(
-        `${apiUrl}/pt/chart`,
+        `${apiUrl}/pt/chart/${memberId}`,
         { 
-          id, 
           branch, 
           chartDate,
           weight,
@@ -121,7 +120,6 @@ export const getChartApi = async (chartid: number) => {
   
       if (response.status === 200) {
         console.log("데일리차트 조회 성공");
-        console.log(response.data)
         return {
           success: true,
           data: response.data
