@@ -3,26 +3,66 @@ import imageupload from "../../../assets/image.svg";
 import RadioButton from "../../common/button/RadioButton";
 import CheckButton from "../../common/button/CheckButton";
 import SubmitButton from "../../common/button/SubmitButton";
-import ChartDeleteModal from "../../common/modal/ChartDeleteModal";
 import { adjustTextareaHeight } from "../../common/adjustTextareaHeight";
-import { useNavigate } from 'react-router-dom';
-import { useState } from "react";
-
+import { getChartApi, editChartApi } from "../../../store/api";
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useChartDataStore } from "../../../store/store";
+import { notify } from "../../common/ToastMessage/ToastMessageItem";
 
 
 function EditChart() {
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [routines, setRoutines] = useState<string[]>([]);
+  const {chartid} = useParams();
+  const {chartData, setChartData} = useChartDataStore();
   const [sessionType, setSessionType] = useState<string>("PT");
+  
+  // 상태 변수 설정
+  const [chartDate, setChartDate] = useState<string>(chartData?.chartDate || "");
+  const [weight, setWeight] = useState<string>(chartData?.weight || "");
+  const [routines, setRoutines] = useState<string[]>(chartData?.routines || []);
+  const [memo, setMemo] = useState<string>(chartData?.memo || "");
+
   
   const handleGoBack = () => {
     navigate(-1); 
   };
 
 
+  // 차트 정보 가져오기 
+  useEffect(() => {
+    const fetchChart = async () => {
+      const response = await getChartApi(Number(chartid));
+      // 받은 데이터로 상태 업데이트
+      setChartDate(response?.data.chartDate);
+      setWeight(response?.data.weight);
+      setRoutines(response?.data.routines);
+      setMemo(response?.data.memo);
+    };
+    fetchChart();
+  }, [chartid, setChartData]);
+
+  
+  
+  const handleSubmit = async () => {
+    const response = await editChartApi(
+      chartData.id,
+      chartDate,
+      Number(weight),
+      memo,
+      routines
+    );
+    if (response?.success) {
+      notify('success',"회원정보가 수정됐어요💪🏻");
+    } else {
+      notify('error',"회원정보 수정에 실패했어요. 다시 시도해 주세요.");
+    }
+    navigate(-1);
+  };
+  
   return (
     <div className="relative flex flex-col items-center w-full">
+      
       {/* Header */}
       <div className="flex items-center justify-between w-full h-[55px]">
         <div className="flex p-3 ml-3 space-x-4">
@@ -37,8 +77,13 @@ function EditChart() {
         <div className="space-y-2">
           <div className="text-base">PT 날짜</div>
           <div className="flex items-center ml-5">
-            <p className="p-2 text-sm">2024년 11월 21일</p>
-            
+            <input
+              type="date"
+              value={chartDate}
+              onChange={(e) => setChartDate(e.target.value)}
+              className="p-2 ml-5 text-sm"
+            />
+
             {/* 세션 타입 (PT/개인운동) */}
             <div className="flex p-2 ml-6 space-x-4">
               <RadioButton
@@ -65,7 +110,12 @@ function EditChart() {
         <div className="space-y-2">
           <p>몸무게</p>
           <div className="flex items-center gap-2 ml-7">
-            <input type="number" className="w-[80px] h-8 border rounded-lg border-custom-skyblue flex text-center" />
+            <input
+              type="number"
+              value={weight}
+              className="w-[80px] h-8 text-sm border rounded-lg border-custom-skyblue flex text-center"
+              onChange={(e) => setWeight(e.target.value)}
+            />
             <p className="text-sm">kg</p>
           </div>
         </div>
@@ -110,6 +160,8 @@ function EditChart() {
           <textarea
             className="border w-[450px] min-h-[70px] rounded-lg text-sm border-custom-skyblue bg-white resize-none overflow-hidden indent-1 p-1 ml-7"
             onInput={adjustTextareaHeight}
+            value={memo}
+            onChange={(e) => setMemo(e.target.value)}
             placeholder="ex) 목표 몸무게, 감량하고 싶은 부위"
             maxLength={150}
           />
@@ -125,16 +177,11 @@ function EditChart() {
         </div>
 
         <div className="flex justify-end mt-3 ml-auto">
-          <SubmitButton label="수정" size="small" className="bg-blue-500" />
+          <SubmitButton label="확인" size="small" className="bg-blue-500" onClick={handleSubmit} />
         </div>
       </div>
-
-      {/* Modal */}
-      <ChartDeleteModal
-      isOpen={isModalOpen}
-      onClose={()=>setIsModalOpen(false)} />
     </div>
-  );
+  )
 }
 
 export default EditChart;
