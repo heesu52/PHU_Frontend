@@ -15,42 +15,43 @@ export const useApiUrlStore = create<ApiUrlState>((set) => ({
 
 /* 유저 data */
 interface UserDataState {
-  userData: UserData[]
-  setUserData: (userData: UserData[]) => void
+  userData: UserData | null;
+  setUserData: (userData: UserData) => void;
 }
 interface UserData {
-  name: string,
-  age: number,
-  email: string,
-  password: string,
-  gender: string,
-  tel: string,
-  part: string,
+  name: string;
+  age: number;
+  email: string;
+  password: string;
+  gender: string;
+  tel: string;
+  part: string;
 }
 
 export const useUserDataStore = create<UserDataState>((set) => ({
-  userData: [],
+  userData: null,
   setUserData: (userData) => set({ userData }),
 }));
 
-  
+
 /* 로그인하는 회원 정보 data */
 interface MemberDataState {
-  memberData: MemberData[]
-  setMemberData: (memberData: MemberData[]) => void
+  memberData: MemberData | null;
+  setMemberData: (memberData: MemberData) => void;
 }
 interface MemberData {
-  name: string,
-  age: number,
-  email: string,
+  name: string;
+  age: number;
+  email: string;
   gender: string;
-  tel: string,
+  tel: string;
 }
 
 export const useMemberDataStore = create<MemberDataState>((set) => ({
-  memberData: [],
+  memberData: null,
   setMemberData: (memberData) => set({ memberData }),
 }));
+
 
 
 /* 회원 전체 정보 (리스트) data */

@@ -20,7 +20,8 @@ function EditMemberInfo({ onSubmit }: EditMemberInfoProps) {
   const [memberTarget, setMemberTarget] = useState<string>(infoData?.memberTarget || "");
   const [significant, setSignificant] = useState<string>(infoData?.significant || "");
 
-  // 회원 정보 가져오기 (getPTInfoApi 사용)
+  
+  // 회원 정보 가져오기 
   useEffect(() => {
     const fetchMemberInfo = async () => {
       const response = await getPTInfoApi(Number(listid));

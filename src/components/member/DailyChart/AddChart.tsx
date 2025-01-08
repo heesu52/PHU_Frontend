@@ -5,7 +5,6 @@ import imageupload from "../../../assets/image.svg";
 import RadioButton from "../../common/button/RadioButton";
 import CheckButton from "../../common/button/CheckButton";
 import SubmitButton from "../../common/button/SubmitButton";
-import ChartDeleteModal from "../../common/modal/ChartDeleteModal";
 import { adjustTextareaHeight } from "../../common/adjustTextareaHeight";
 import { addPTChartApi,addPrivateChartApi } from '../../../store/api/chart/DailyChartApi';
 import { useIdStore } from '../../../store/store';
@@ -14,7 +13,6 @@ import { notify } from '../../common/ToastMessage/ToastMessageItem';
 function AddChart() {
   const navigate = useNavigate();
   const { memberId } = useIdStore();
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [chartDate, setChartDate] = useState<string>(new Date().toISOString().split("T")[0]);  // 현재 날짜 기본값
   const [sessionType, setSessionType] = useState<string>("PT");
   const [weight, setWeight] = useState<number>(0);
@@ -165,11 +163,6 @@ function AddChart() {
           <SubmitButton label="확인" size="small" className="bg-blue-500" onClick={handleSubmit} />
         </div>
       </div>
-
-      {/* Modal */}
-      <ChartDeleteModal
-      isOpen={isModalOpen}
-      onClose={()=>setIsModalOpen(false)} />
     </div>
   );
 }
