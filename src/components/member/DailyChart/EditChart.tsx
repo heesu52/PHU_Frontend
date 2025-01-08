@@ -18,7 +18,6 @@ function EditChart() {
   const [sessionType, setSessionType] = useState<string>("PT");
   
   // 상태 변수 설정
-  
   const [chartDate, setChartDate] = useState<string>(chartData?.chartDate || "");
   const [weight, setWeight] = useState<string>(chartData?.weight || "");
   const [routines, setRoutines] = useState<string[]>(chartData?.routines || []);
@@ -29,9 +28,8 @@ function EditChart() {
     navigate(-1); 
   };
 
-  
 
-  // 회원 정보 가져오기 (getPTInfoApi 사용)
+  // 차트 정보 가져오기 
   useEffect(() => {
     const fetchChart = async () => {
       const response = await getChartApi(Number(chartid));

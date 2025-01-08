@@ -59,6 +59,7 @@ export const getPTInfoApi = async (listid: number) => {
     });
 
     if (response.status === 200) {
+      console.log("회원 상세정보 조회 성공");
       return response.data;
     }
   } catch (error) {
