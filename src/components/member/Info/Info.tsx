@@ -1,21 +1,11 @@
 import { useInfoDataStore } from "../../../store/store";
 import { adjustTextareaHeight } from "../../common/adjustTextareaHeight";
-import LoadingLottie from "../../lottie/LoadingLottie";
+
 
 function Info() {
   const { infoData } = useInfoDataStore(); // zustand 스토어에서 infoData 불러오기
 
   
-
-  // infoData가 로딩 중일 때 표시
-  if (!infoData || Object.keys(infoData).length === 0) {
-    return (
-      <div className="flex items-center justify-center h-full">
-        <LoadingLottie />
-        <div className="ml-2">Loading...</div> {/* 로딩 상태 표시 */}
-      </div>
-    );
-  }
 
   return (
     <div className="flex-col w-[80%] space-y-6 flex h-[90%]">

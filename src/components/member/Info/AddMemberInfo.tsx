@@ -3,8 +3,9 @@ import { useParams } from "react-router-dom";
 import SubmitButton from "../../common/button/SubmitButton";
 import { adjustTextareaHeight } from "../../common/adjustTextareaHeight";
 import { useInfoDataStore } from "../../../store/store";
-import { addPTInforApi } from "../../../store/api/info/MemberInfoApi";
+import { addPTInforApi} from "../../../store/api/info/MemberInfoApi";
 import { notify } from "../../common/ToastMessage/ToastMessageItem";
+
 
 interface AddMemberInfoProps {
   onSubmit: () => void;
