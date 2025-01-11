@@ -2,23 +2,23 @@ import { useEffect, useState } from 'react';
 import compactup from "../../../assets/compact-up.svg";
 import SubmitButton from "../button/SubmitButton";
 import Input from "../Input";
-import { addPTMemberApi } from '../../../store/api/info/MemberApi';
+import { addPTMemberApi, getPTListApi } from '../../../store/api/info/MemberApi';
 import { useListDataStore } from '../../../store/store';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { notify } from "../ToastMessage/ToastMessageItem";
 
 interface BottomSheetProps {
   onClose: () => void;
-  isOpen: boolean; 
+  isOpen: boolean;
 }
 
 function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
   const [email, setEmail] = useState("");
   const [errormessage, setErrorMessage] = useState("");
-  const {listData, setListData} = useListDataStore();
-  
+  const { setListData } = useListDataStore();
+  const [isMemberAdded, setIsMemberAdded] = useState(false); // 회원 추가 여부 상태 관리
+
+  // BottomSheet가 열릴 때 스크롤 비활성화
   useEffect(() => {
-    // BottomSheet가 열릴 때 스크롤을 비활성화
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -29,39 +29,41 @@ function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
       document.body.style.overflow = 'auto';
     };
   }, [isOpen]);
+
+  useEffect(() => {
+    // 회원 추가가 성공하면 리스트를 새로고침
+    if (isMemberAdded) {
+      const fetchPTList = async () => {
+        const listResponse = await getPTListApi();
+        if (listResponse?.success) {
+          setListData(listResponse.data);
+          notify('success',"회원이 추가됐어요💪🏻");
+        }
+      };
+      fetchPTList();
+      setIsMemberAdded(false);  // 추가 후 상태 초기화
+    }
+  }, [isMemberAdded, setListData]);
   
+
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
-  }
+  };
+  
 
-  
   const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault(); 
-  
+    event.preventDefault();
     const response = await addPTMemberApi(email);
+
     if (response?.success) {
-      setListData([...listData, response.data])
-      toast.success("회원이 추가됐어요💪🏻");
-      onClose(); // 추가 후 BottomSheet 닫기
+      setIsMemberAdded(true);  // 회원 추가 후 상태 변경
+      onClose();  // BottomSheet 닫기
     } else {
-      if (response?.errorCode === "M003"){
-        setErrorMessage(response.message);
-      }
-      if (response?.errorCode === "M004"){
-        setErrorMessage(response.message);
-      }
-      if (response?.errorCode === "M005"){
-        setErrorMessage(response.message);
-      }
-      if (response?.errorCode === "M006"){
-        setErrorMessage(response.message);
-      }
-    } 
+      setErrorMessage(response?.message || "알 수 없는 오류가 발생했습니다.");
+    }
   };
 
   return (
-    <>
-    <ToastContainer position='top-center'/>
       <div
         className={`fixed bottom-0 w-[600px] h-[250px] bg-white border shadow-lg rounded-md transition-transform duration-300 transform ${
           isOpen ? 'translate-y-0' : 'translate-y-full'
@@ -86,7 +88,7 @@ function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
             required
           />
           {errormessage && (
-          <div className="text-red-500 ">{errormessage}</div>
+            <div className="text-red-500 ">{errormessage}</div>
           )}
           <SubmitButton
             label="확인"
@@ -95,7 +97,6 @@ function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
           />
         </form>
       </div>
-    </>
   );
 }
 

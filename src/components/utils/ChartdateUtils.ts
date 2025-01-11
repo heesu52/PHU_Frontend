@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// 월을 yyyy-MM 형식으로 변환하는 함수 (월을 두 자리로 맞춤)
 export const getYearMonth = (date: Date): string => {
   const year = date.getFullYear();
-  const month = date.getMonth(); // 0-based (0 = January, 11 = December)
-  return `${year}-${month + 1}`; // '2024-11' 형식
+  const month = date.getMonth() + 1; // 0-based (0 = January, 11 = December)
+  return `${year}-${month < 10 ? `0${month}` : month}`; // '2024-01', '2024-11' 형식
 };
 
 export const filterDataByMonth = (

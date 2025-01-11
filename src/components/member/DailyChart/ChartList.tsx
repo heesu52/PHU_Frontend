@@ -1,19 +1,15 @@
 import { useEffect, useState } from "react";
-import threedots from "../../../assets/three-dots.svg";
 import plusbtn from "../../../assets/plus-circle-fill.svg";
 import { useNavigate } from "react-router-dom";
 import { getChartListApi } from "../../../store/api/chart/DailyChartApi";
-import ChartDeleteModal from "../../common/modal/ChartDeleteModal";
 import { useChartListDataStore, useIdStore } from "../../../store/store";
-import { getYearMonth, filterDataByMonth, generateMonthOptions, sortDataByDate } from "../../utils/dateUtils";
+import { getYearMonth, filterDataByMonth, generateMonthOptions, sortDataByDate } from "../../utils/ChartdateUtils";
 
 function ChartList() {
   const navigate = useNavigate();
   const { chartlistData, setChartListData } = useChartListDataStore();
   const { memberId } = useIdStore();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedChartId, setSelectedChartId] = useState<number | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [sortOrder, setSortOrder] = useState<'latest' | 'oldest'>('latest');
 
@@ -48,10 +44,6 @@ function ChartList() {
     navigate(path);
   };
 
-  const onThreeDotsClick = (chartId: number) => {
-    setSelectedChartId(chartId);
-    setIsModalOpen(true);
-  };
 
   return (
     <div className="w-[80%] flex flex-col space-y-5">
@@ -97,15 +89,6 @@ function ChartList() {
                 </p>
                 <p className="flex-1 text-center">{chart.branch}</p>
               </div>
-              <img
-                className="mr-2 rotate-90 cursor-pointer"
-                src={threedots}
-                alt="More options"
-                onClick={(e) => {
-                  e.stopPropagation(); // 이벤트 전파 방지
-                  onThreeDotsClick(chart.id);
-                }}
-              />
             </li>
           ))
         ) : (
@@ -120,11 +103,6 @@ function ChartList() {
           onClick={() => handleIconClick(`/member/chart/detail`)}
         />
       </div>
-      <ChartDeleteModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        chartId={selectedChartId}
-      />
     </div>
   );
 }

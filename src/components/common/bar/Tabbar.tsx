@@ -45,7 +45,7 @@ function TabBar({ label, age, icon, onIconClick }: HeaderBarProps) {
           onClick={() => handleIconClick(`/member/chart/${memberId}`)}>데일리 차트</div>
         <div className={`w-[120px] h-full flex justify-center items-center cursor-pointer hover:text-custom-orange
           ${location.pathname.includes('/member/summary') ? 'text-custom-orange font-bold border-b border-custom-orange' : 'text-custom-softgrey'}`}
-          onClick={() => handleIconClick(`/member/summary/${memberId}`)}>AI 요약</div>
+          onClick={() => handleIconClick(`/member/summary/${memberId}`)}>대화 녹음</div>
       </div>
     </div>
   );

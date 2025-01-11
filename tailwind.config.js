@@ -25,10 +25,19 @@ module.exports = {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
+        typing: {
+          '0%': { width: '0' },
+          '100%': { width: '100%' },
+        },
+        blink: {
+          '50%': { borderColor: 'transparent' },
+        },
       },
       animation: {
         slideUpDown: 'slideUpDown 1.5s infinite',
         fadeIn: 'fadeIn 2s ease-in-out',
+        typing: 'typing 3.5s steps(30) 1s forwards', // 타이핑 애니메이션
+        blink: 'blink 0.75s step-end infinite', // 깜빡임 애니메이션
       },
     },
   },
