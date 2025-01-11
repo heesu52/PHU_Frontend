@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import threedots from "../../../assets/three-dots.svg";
 import plusbtn from "../../../assets/plus-circle-fill.svg";
 import { useNavigate } from "react-router-dom";
 import { getVoiceFileListApi } from "../../../store/api";
@@ -81,7 +80,6 @@ function SummaryList () {
                     <p className="flex-1 text-center">{file.isTransformation ? "텍스트 추출 O" : "텍스트 추출 X"}</p>
                     <p className="flex-1 text-center">요약 여부</p>
                 </div>
-                <img className="mr-2 rotate-90 cursor-pointer" src={threedots} />
             </li>
           ))
         ) : (

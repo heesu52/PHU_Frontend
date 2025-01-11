@@ -1,12 +1,9 @@
-import { useState } from "react";
 import TabBar from "../../common/bar/Tabbar";
 import NavigationBar from "../../common/bar/NavigationBar";
-import ChartDeleteModal from "../../common/modal/ChartDeleteModal";
 import SummaryList from "./SummaryList";
 import { useInfoDataStore } from "../../../store/store";
 
 function AISummary() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const { infoData } = useInfoDataStore();
 
 
@@ -20,10 +17,6 @@ function AISummary() {
       <div className="w-full h-[calc(100vh-185px)] bg-[#f6f6f6] justify-center flex py-4">
         <SummaryList/>
       </div>
-      
-      <ChartDeleteModal 
-      isOpen={isModalOpen}
-      onClose={()=>setIsModalOpen(false)} />
       <NavigationBar />
     </div>
   );

@@ -3,9 +3,11 @@ import NavigationBar from "../common/bar/NavigationBar";
 import profile from "../../assets/basic-profile.svg"
 import mark from "../../assets/TRAINER 마크.svg"
 import { useNavigate } from "react-router-dom";
+import {useMemberDataStore } from "../../store/store";
 
 function Setting() {
     const navigate = useNavigate(); 
+const { memberData} = useMemberDataStore();
 
     const handleIconClick = (path: string) => {
         navigate(path);
@@ -19,7 +21,7 @@ function Setting() {
             <img src={profile} alt="icon" className="w-[70px] h-[70px] mr-3"/>
             <div className="flex flex-col">
             <div className="flex items-center mb-1">
-                <span className="text-lg">장희수</span>
+                <span className="text-lg">{memberData?.name}</span>
                 <img src={mark} className="w-[50px] h-[20px] ml-2"></img>
             </div>
             </div>
