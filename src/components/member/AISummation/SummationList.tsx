@@ -5,7 +5,7 @@ import { getVoiceFileListApi } from "../../../store/api";
 import { useVoiceListDataStore, useIdStore} from "../../../store/store";
 import { getYearMonth, filterDataByMonth, generateMonthOptions, sortDataByDate } from "../../utils/VoiceFiledateUtils";
 
-function SummaryList () {
+function SummationList () {
     const navigate = useNavigate();
     const { memberId } = useIdStore();
     const { voicelistData, setVoiceListData, setVoiceTextId } = useVoiceListDataStore();
@@ -97,4 +97,4 @@ function SummaryList () {
        </div>
     );
 }
-export default SummaryList;
+export default SummationList;

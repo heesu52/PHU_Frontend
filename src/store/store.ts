@@ -239,3 +239,32 @@ export const useTextDataStore = create<TextDataState>((set) => ({
   },
   setTextData: (textData) => set({ textData }),
 }));
+
+
+
+/* 요약된 텍스트 객체 */
+interface SummationState {
+  summationData: SummationData;
+  setSummationData: (summationData: SummationData) => void;
+}
+
+interface SummationData {
+  summarizationId: number;
+  trainerId: number;
+  memberId: number;
+  voiceListId : string;
+  texts : string;
+  createAt : string;
+}
+
+export const useSummationDataStore = create<SummationState>((set) => ({
+  summationData: {
+    summarizationId: 0,
+  trainerId: 0,
+  memberId: 0,
+  voiceListId : '',
+  texts : '',
+  createAt : ''
+  },
+  setSummationData: (summationData) => set({ summationData }),
+}));

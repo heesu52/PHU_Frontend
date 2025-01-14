@@ -6,10 +6,10 @@ import movetodailychart from "../../../assets/movetodailychart.svg"
 import Dropdown from "../../common/DropDown";
 import SummaryDeleteModal from "../../common/modal/SummaryDeleteModal";
 import ChangetoTextModal from "../../common/modal/ChangetoTextModal";
-import { getVoicetoTextFileApi } from "../../../store/api";
+import { getVoicetoTextFileApi, getSummationApi } from "../../../store/api";
 import { useVoiceListDataStore, useTextDataStore } from "../../../store/store";
 
-function Summary() {
+function Summation() {
     const navigate = useNavigate();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isChangetoTextModalOpen, setIsChangetoTextModalOpen] = useState(false);
@@ -109,4 +109,4 @@ function Summary() {
     );
 }
 
-export default Summary;
+export default Summation;

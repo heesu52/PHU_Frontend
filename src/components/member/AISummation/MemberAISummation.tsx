@@ -1,9 +1,9 @@
 import TabBar from "../../common/bar/Tabbar";
 import NavigationBar from "../../common/bar/NavigationBar";
-import SummaryList from "./SummaryList";
+import SummaryList from "./SummationList";
 import { useInfoDataStore } from "../../../store/store";
 
-function AISummary() {
+function MemberAISummation() {
   const { infoData } = useInfoDataStore();
 
 
@@ -22,4 +22,4 @@ function AISummary() {
   );
 }
 
-export default AISummary;
+export default MemberAISummation;
