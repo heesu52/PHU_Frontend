@@ -16,7 +16,8 @@ function SummationModal({ isOpen, onClose }: SummationModalProps) {
       // 텍스트 추출 API 함수
       const fetchSummaztionText = async () => {
         
-        const textid = textData.voiceTextId;
+        const textid = textData.voiceListId;
+        console.log(textid);
         const response = await SummaryTextApi(textid);  
         
         if (response?.success) {

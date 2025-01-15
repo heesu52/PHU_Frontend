@@ -31,6 +31,7 @@ export const SummaryTextApi = async (textid: string) => {
   
       if (response.status === 200) {
         console.log("텍스트 요약 성공");
+        console.log(response.data)
         return {
           success: true,
           data: response.data
@@ -63,6 +64,7 @@ export const SummaryTextApi = async (textid: string) => {
   
       if (response.status === 200) {
         console.log("요약한 텍스트 조회 성공");
+        console.log(response.data)
         return {
           success: true,
           data: response.data

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
-import movetodailychart from "../../../assets/movetodailychart.svg"
 import SummaryDeleteModal from "../../common/modal/SummaryDeleteModal";
 import ChangetoTextModal from "../../common/modal/ChangetoTextModal";
 import { getVoicetoTextFileApi } from "../../../store/api";
@@ -14,15 +13,13 @@ function Summation() {
     const { fileid } = useParams();
 
 
-
     // 음성파일에서 추출된 텍스트 가져오기
     useEffect(() => {
         const fetchVoicetoText = async () => {
             if (fileid && voiceTextId) {
                 const response = await getVoicetoTextFileApi(Number(fileid), voiceTextId);
                 if (response?.success && response.data) {
-                    setTextData(response.data);  // 텍스트 데이터 업데이트
-                    console.log(response.data)
+                    setTextData(response.data); 
                 } else {
                     console.error('텍스트 추출에 실패했습니다:', response?.message);
                 }
@@ -30,7 +27,6 @@ function Summation() {
         };
         fetchVoicetoText();
     }, [fileid, voiceTextId, setTextData]); 
-
     
     useEffect(() => {
         if (voiceTextId === "Before Conversion") {
@@ -45,7 +41,7 @@ function Summation() {
     return (
         <div className="relative flex flex-col items-center w-full">
             {/* Component */}
-            <div className="flex flex-col items-center w-full mt-5">
+            <div className="flex flex-col items-center w-full mt-2">
                 <ul className="w-[90%] space-y-4">
                     {(voiceTextId === "Before Conversion" || (textData.list && textData.list.length === 0)) ? (
                         <div className="flex flex-col items-center justify-center w-full text-sm text-custom-grey">
@@ -61,7 +57,6 @@ function Summation() {
                         ))
                     )}
                 </ul>
-                <img src={movetodailychart} className="mt-10 ml-auto mr-7" />
             </div>
 
             {/* SummaryDeleteModal */}

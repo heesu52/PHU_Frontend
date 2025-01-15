@@ -46,8 +46,8 @@ function App() {
             <Route path="/member/chart/detail" element={<AddDailyChartPage />}/>
             <Route path="/member/chart/edit/:chartid" element={<EditDailyChartPage />}/>
 
-            <Route path="/member/summation" element={<AISummationListPage />}/>
-            <Route path="/member/summation/file" element={<SummationPage />}/>
+            <Route path="/member/summation/:memberid" element={<AISummationListPage />}/>
+            <Route path="/member/summation/file/:fileid" element={<SummationPage />}/>
             <Route path="/member/summation/edit/:fileid" element={<EditSummationPage />}/>
 
             <Route path="/member/voice/:memberid" element={<VoicePage />} />
