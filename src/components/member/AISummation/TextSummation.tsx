@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import movetodailychart from "../../../assets/movetodailychart.svg"
 import SummaryDeleteModal from "../../common/modal/SummaryDeleteModal";
 import ChangetoTextModal from "../../common/modal/ChangetoTextModal";
-import { getVoicetoTextFileApi } from "../../../store/api";
+import { getVoicetoTextFileApi, getSummationApi } from "../../../store/api";
 import { useVoiceListDataStore, useTextDataStore } from "../../../store/store";
 
 function Summation() {
@@ -45,12 +45,12 @@ function Summation() {
     return (
         <div className="relative flex flex-col items-center w-full">
             {/* Component */}
-            <div className="flex flex-col items-center w-full mt-5">
+            <div className="flex flex-col items-center w-full mt-5 border border-purple-500">
                 <ul className="w-[90%] space-y-4">
                     {(voiceTextId === "Before Conversion" || (textData.list && textData.list.length === 0)) ? (
                         <div className="flex flex-col items-center justify-center w-full text-sm text-custom-grey">
-                            <p>변환된 텍스트가 없습니다. </p>
-                            <p>텍스트 추출을 진행해보세요!</p>
+                            <p>요약된 텍스트가 없습니다. </p>
+                            <p>대화내용을 요약 해보세요!</p>
                         </div>
                     ) : (
                         textData.list.map((item, index) => (

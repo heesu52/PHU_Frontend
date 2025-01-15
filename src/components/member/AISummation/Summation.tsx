@@ -1,22 +1,21 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from 'react-router-dom';
+import { SetStateAction, useState } from "react";
+import { useNavigate} from 'react-router-dom';
 import meatball from "../../../assets/three-dots.svg";
 import arrow from "../../../assets/arrow.svg";
-import movetodailychart from "../../../assets/movetodailychart.svg"
 import Dropdown from "../../common/DropDown";
+import Button from "../../common/button/Button";
 import SummaryDeleteModal from "../../common/modal/SummaryDeleteModal";
 import ChangetoTextModal from "../../common/modal/ChangetoTextModal";
-import { getVoicetoTextFileApi, getSummationApi } from "../../../store/api";
-import { useVoiceListDataStore, useTextDataStore } from "../../../store/store";
+import ChangeToText from "./ChangetToText";
+import TextSummation from "./TextSummation";
 
 function Summation() {
     const navigate = useNavigate();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isChangetoTextModalOpen, setIsChangetoTextModalOpen] = useState(false);
     const [isSummaryDeleteModalOpen, setIsSummaryDeleteModalOpen] = useState(false); // 삭제 모달 상태
-    const { voiceTextId } = useVoiceListDataStore();
-    const { textData, setTextData } = useTextDataStore();
-    const { fileid } = useParams();
+    const [value, setValue] = useState("change"); // 버튼 상태
+
 
     const handleGoBack = () => {
         navigate(-1);
@@ -26,31 +25,13 @@ function Summation() {
         setIsDropdownOpen((prev) => !prev);
     };
 
-    // 음성파일에서 추출된 텍스트 가져오기
-    useEffect(() => {
-        const fetchVoicetoText = async () => {
-            if (fileid && voiceTextId) {
-                const response = await getVoicetoTextFileApi(Number(fileid), voiceTextId);
-                if (response?.success && response.data) {
-                    setTextData(response.data);  // 텍스트 데이터 업데이트
-                    console.log(response.data)
-                } else {
-                    console.error('텍스트 추출에 실패했습니다:', response?.message);
-                }
-            }
-        };
-        fetchVoicetoText();
-    }, [fileid, voiceTextId, setTextData]); 
-
-    
-    useEffect(() => {
-        if (voiceTextId === "Before Conversion") {
-            setIsChangetoTextModalOpen(true); 
-        }
-    }, [voiceTextId]);
 
     const handleModalClose = () => {
         setIsChangetoTextModalOpen(false);
+    };
+
+    const handleButtonClick = (selectedValue: SetStateAction<string>) => {
+        setValue(selectedValue); // 버튼 상태 업데이트
     };
 
     return (
@@ -59,52 +40,56 @@ function Summation() {
             <div className="flex items-center justify-between w-full h-[55px]">
                 <div className="flex p-3 ml-3 space-x-4">
                     <img src={arrow} onClick={handleGoBack} />
-                    <p className="text-lg cursor-default">2023. 12. 05 오전 9:48 녹음</p>
                 </div>
                 <img src={meatball} className="mr-5" onClick={toggleDropdown} />
             </div>
-
+            <div className="flex w-[90%] gap-4 mt-2">
+                {/* 버튼 클릭 시 handleButtonClick 호출 */}
+                <Button
+                    label={"텍스트 추출"}
+                    name={"changeText"}
+                    value={"change"}
+                    onClick={() => handleButtonClick("change")}
+                    checked={value === "change"}
+                />
+                <Button
+                    label={"텍스트 요약"}
+                    name={"summation"}
+                    value={"summation"}
+                    onClick={() => handleButtonClick("summation")}
+                    checked={value === "summation"}
+                />
+            </div>
+            
             {isDropdownOpen && (
                 <Dropdown
                     options={[
                         { label: "요약 내용 수정", onClick: () => navigate("/member/summary/edit") },
-                        { label: "요약 내용 삭제", onClick: () => setIsSummaryDeleteModalOpen(true) }, // 삭제 모달 열기
+                        { label: "요약 내용 삭제", onClick: () => setIsSummaryDeleteModalOpen(true) },
                     ]}
                     onClose={() => setIsDropdownOpen(false)}
                 />
             )}
 
-            {/* Component */}
-            <div className="flex flex-col items-center w-full mt-5">
-                <ul className="w-[90%] space-y-4">
-                    {(voiceTextId === "Before Conversion" || (textData.list && textData.list.length === 0)) ? (
-                        <div className="flex flex-col items-center justify-center w-full text-sm text-custom-grey">
-                            <p>변환된 텍스트가 없습니다. </p>
-                            <p>텍스트 추출을 진행해보세요!</p>
-                        </div>
-                    ) : (
-                        textData.list.map((item, index) => (
-                            <li key={index}>
-                                <h4>내용{index + 1}</h4>
-                                <p className="text-sm">{item.text}</p>
-                            </li>
-                        ))
-                    )}
-                </ul>
-                <img src={movetodailychart} className="mt-10 ml-auto mr-7" />
+            {/* 조건부 렌더링 */}
+            <div className="w-full mt-4">
+                {value === "change" && <ChangeToText />}
+                {value === "summation" && <TextSummation />}
             </div>
 
             {/* SummaryDeleteModal */}
             <SummaryDeleteModal
                 isOpen={isSummaryDeleteModalOpen}
-                onClose={() => setIsSummaryDeleteModalOpen(false)}  // 모달 닫기
+                onClose={() => setIsSummaryDeleteModalOpen(false)} // 모달 닫기
             />
 
             {/* ChangetoTextModal */}
             <ChangetoTextModal
                 isOpen={isChangetoTextModalOpen}
-                onClose={handleModalClose}  // 모달 닫을 때 텍스트 상태 반영 후 이동
+                onClose={handleModalClose} // 모달 닫을 때 텍스트 상태 반영 후 이동
             />
+
+            
         </div>
     );
 }
