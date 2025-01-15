@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import SummaryDeleteModal from "../../common/modal/SummaryDeleteModal";
 import ChangetoTextModal from "../../common/modal/ChangetoTextModal";
+import DynamicSpeakerList from "./DynamicSpeakerList";
 import { getVoicetoTextFileApi } from "../../../store/api";
 import { useVoiceListDataStore, useTextDataStore } from "../../../store/store";
 
-function Summation() {
+function ChangeToText() {
     const [isChangetoTextModalOpen, setIsChangetoTextModalOpen] = useState(false);
     const [isSummaryDeleteModalOpen, setIsSummaryDeleteModalOpen] = useState(false); // 삭제 모달 상태
     const { voiceTextId } = useVoiceListDataStore();
     const { textData, setTextData } = useTextDataStore();
     const { fileid } = useParams();
-
 
     // 음성파일에서 추출된 텍스트 가져오기
     useEffect(() => {
@@ -26,8 +26,8 @@ function Summation() {
             }
         };
         fetchVoicetoText();
-    }, [fileid, voiceTextId, setTextData]); 
-    
+    }, [fileid, voiceTextId, setTextData]);
+
     useEffect(() => {
         if (voiceTextId === "Before Conversion") {
             setIsChangetoTextModalOpen(true); 
@@ -49,12 +49,7 @@ function Summation() {
                             <p>텍스트 추출을 진행해보세요!</p>
                         </div>
                     ) : (
-                        textData.list.map((item, index) => (
-                            <li key={index}>
-                                <h4>내용{index + 1}</h4>
-                                <p className="text-sm">{item.text}</p>
-                            </li>
-                        ))
+                        <DynamicSpeakerList list={textData.list}/>
                     )}
                 </ul>
             </div>
@@ -74,4 +69,4 @@ function Summation() {
     );
 }
 
-export default Summation;
+export default ChangeToText;
