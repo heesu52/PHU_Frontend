@@ -5,7 +5,7 @@ import { getVoiceFileListApi } from "../../../store/api";
 import { useVoiceListDataStore, useIdStore} from "../../../store/store";
 import { getYearMonth, filterDataByMonth, generateMonthOptions, sortDataByDate } from "../../utils/VoiceFiledateUtils";
 
-function SummaryList () {
+function SummationList () {
     const navigate = useNavigate();
     const { memberId } = useIdStore();
     const { voicelistData, setVoiceListData, setVoiceTextId } = useVoiceListDataStore();
@@ -75,7 +75,7 @@ function SummaryList () {
             <li 
             key={index}
             className="w-[80%] h-[55px] bg-white shadow-md rounded-xl flex items-center justify-center cursor-default">
-                <div className="flex w-full" onClick={() =>  handleIconClick(`/member/summary/file/${file.fileId}`, file.voiceTextId)}>
+                <div className="flex w-full" onClick={() =>  handleIconClick(`/member/summation/file/${file.fileId}`, file.voiceTextId)}>
                     <p className="flex-1 text-center">{file.createAt.split(" ")[0]}</p> 
                     <p className="flex-1 text-center">{file.isTransformation ? "텍스트 추출 O" : "텍스트 추출 X"}</p>
                     <p className="flex-1 text-center">요약 여부</p>
@@ -97,4 +97,4 @@ function SummaryList () {
        </div>
     );
 }
-export default SummaryList;
+export default SummationList;

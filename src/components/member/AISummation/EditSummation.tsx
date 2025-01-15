@@ -5,7 +5,7 @@ import { adjustTextareaHeight } from "../../common/adjustTextareaHeight";
 import { useNavigate } from 'react-router-dom';
 import { useState} from "react";
 
-function EditSummary() {
+function EditSummation() {
     const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -57,4 +57,4 @@ function EditSummary() {
     );
 }
 
-export default EditSummary;
+export default EditSummation;

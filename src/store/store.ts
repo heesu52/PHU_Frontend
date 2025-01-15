@@ -168,8 +168,9 @@ interface VoiceDataCommon {
   fileId: number;
   memberId: number;
   uploadFileUrl: string;
+  originalFileName: string;
   createAt: string;
-  voiceTextId: string;
+  voiceTextId: string; //텍스트 추출 여부 id
   isTransformation: boolean;
 }
 
@@ -200,6 +201,7 @@ export const useVoiceDataStore = create<VoiceDataState>((set) => ({
     fileId: 0,
     memberId: 0,
     uploadFileUrl: '',
+    originalFileName: '',
     createAt: '',
     voiceTextId: '',
     isTransformation: false,
@@ -217,11 +219,10 @@ interface TextDataState {
 }
 
 interface TextData {
-  voiceTextId: string;
+  voiceListId: string; //params로 들어가는 voiceTextId와 동일
   createAt: string;
   memberName: string;
   list: TextItem[]; // list를 포함하도록 수정
-  tel: string;
 }
 
 interface TextItem {
@@ -231,11 +232,39 @@ interface TextItem {
 
 export const useTextDataStore = create<TextDataState>((set) => ({
   textData: {
-    voiceTextId: '',
+    voiceListId: '',
     createAt: '',
     memberName: '',
     list: [], // 초기값으로 빈 배열
-    tel: ''
   },
   setTextData: (textData) => set({ textData }),
+}));
+
+
+
+/* 요약된 텍스트 객체 */
+interface SummationState {
+  summationData: SummationData;
+  setSummationData: (summationData: SummationData) => void;
+}
+
+interface SummationData {
+  summarizationId: number;
+  trainerId: number;
+  memberId: number;
+  voiceListId : string;
+  texts : string;
+  createAt : string;
+}
+
+export const useSummationDataStore = create<SummationState>((set) => ({
+  summationData: {
+    summarizationId: 0,
+  trainerId: 0,
+  memberId: 0,
+  voiceListId : '',
+  texts : '',
+  createAt : ''
+  },
+  setSummationData: (summationData) => set({ summationData }),
 }));

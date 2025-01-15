@@ -12,3 +12,4 @@ export * from './chart/DailyChartApi';
 
 export * from './voice/VoicefileApi';
 export * from './voice/VoicetoTextApi';
+export * from './voice/VoiceSummaryApi';

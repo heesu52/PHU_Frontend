@@ -44,8 +44,8 @@ function TabBar({ label, age, icon, onIconClick }: HeaderBarProps) {
           ${location.pathname.includes('/member/chart') ? 'text-custom-orange font-bold border-b border-custom-orange' : 'text-custom-softgrey'}`}
           onClick={() => handleIconClick(`/member/chart/${memberId}`)}>데일리 차트</div>
         <div className={`w-[120px] h-full flex justify-center items-center cursor-pointer hover:text-custom-orange
-          ${location.pathname.includes('/member/summary') ? 'text-custom-orange font-bold border-b border-custom-orange' : 'text-custom-softgrey'}`}
-          onClick={() => handleIconClick(`/member/summary/${memberId}`)}>대화 녹음</div>
+          ${location.pathname.includes('/member/summation') ? 'text-custom-orange font-bold border-b border-custom-orange' : 'text-custom-softgrey'}`}
+          onClick={() => handleIconClick(`/member/summation/${memberId}`)}>대화 녹음</div>
       </div>
     </div>
   );
