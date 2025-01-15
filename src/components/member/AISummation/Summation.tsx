@@ -1,7 +1,6 @@
 import { SetStateAction, useState } from "react";
 import { useNavigate} from 'react-router-dom';
 import meatball from "../../../assets/three-dots.svg";
-import movetodailychart from "../../../assets/movetodailychart.svg"
 import arrow from "../../../assets/arrow.svg";
 import Dropdown from "../../common/DropDown";
 import Button from "../../common/button/Button";
@@ -77,7 +76,6 @@ function Summation() {
                 {value === "change" && <ChangeToText />}
                 {value === "summation" && <TextSummation />}
             </div>
-            <img src={movetodailychart} className="mt-10 ml-auto mr-7" />
             {/* SummaryDeleteModal */}
             <SummaryDeleteModal
                 isOpen={isSummaryDeleteModalOpen}

@@ -1,6 +1,5 @@
 import meatball from "../../../assets/three-dots.svg";
 import arrow from "../../../assets/arrow.svg";
-import movetosummary from "../../../assets/movetosummary.svg"
 import RadioButton from "../../common/button/RadioButton";
 import CheckButton from "../../common/button/CheckButton";
 import Dropdown from "../../common/DropDown";
@@ -154,8 +153,6 @@ function Chart() {
                         <p className="text-xs text-custom-darkgrey">아직 인증샷이 없어요. 인증샷을 업로드 해보세요!</p>
                     </div>
                 </div>
-
-                <img src={movetosummary} className="mt-10 ml-auto mr-7"></img>
             </div>
             {/* Modal */}
             <ChartDeleteModal
