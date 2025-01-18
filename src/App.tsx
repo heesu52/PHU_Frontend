@@ -24,7 +24,7 @@ import Toast from "./components/common/ToastMessage/ToastMessageItem"; // Toast 
 function App() {
   return (
     <Router>
-      <div className="w-[600px] h-screen mx-auto font-[Pretendard] overflow-y-auto">
+      <div className="container">
         <div className="h-screen border border-custom-softgrey ">
           {/* ToastContainer를 한 번만 추가 */}
           <Toast />
