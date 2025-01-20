@@ -1,4 +1,4 @@
-import CalendarComponent from "../../components/calendar/MainCalendar";
+import CalendarComponent from "../../components/list/MemberList";
 
 function CalendarPage() {
   return (
