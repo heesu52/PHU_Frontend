@@ -39,6 +39,11 @@ module.exports = {
         typing: 'typing 3.5s steps(30) 1s forwards', // 타이핑 애니메이션
         blink: 'blink 0.75s step-end infinite', // 깜빡임 애니메이션
       },
+      screens: {
+        'sm': '640px',   // 작은 화면 (모바일)
+        'md': '768px',   // 중간 화면 (태블릿)
+        'lg': '1024px',  // 큰 화면 (데스크탑)
+      },
     },
   },
   plugins: [],

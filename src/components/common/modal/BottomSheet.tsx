@@ -65,7 +65,7 @@ function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
 
   return (
       <div
-        className={`fixed bottom-0 w-[600px] h-[250px] bg-white border shadow-lg rounded-md transition-transform duration-300 transform ${
+        className={`fixed bottom-0 w-[600px] h-64 bg-white border shadow-lg rounded-md transition-transform duration-300 transform ${
           isOpen ? 'translate-y-0' : 'translate-y-full'
         } z-50`}
       >
@@ -75,9 +75,9 @@ function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
             className="w-12 transform rotate-180 cursor-pointer"
             onClick={onClose}
           />
-          <span className="text-sm">추가할 회원의 이메일을 입력하세요</span>
+          <span className="text-sm lg:text-base">추가할 회원의 이메일을 입력하세요</span>
         </div>
-        <form className="flex flex-col items-center p-7" onSubmit={handleSubmit}>
+        <form className="flex flex-col items-center border border-red-400 p-7" onSubmit={handleSubmit}>
           <Input
             size="medium"
             placeholder="email"

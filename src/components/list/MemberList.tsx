@@ -73,7 +73,7 @@ function MemberList() {
             listData.map((list, index) => (
               <li
                 key={index}
-                className="border-b h-[55px] flex items-center justify-between hover:bg-custom-softblue"
+                className="flex items-center justify-between border-b h-14 hover:bg-custom-softblue"
               >
                 <Link
                   className="flex items-center justify-center p-3 ml-5 cursor-pointer"
@@ -84,10 +84,10 @@ function MemberList() {
                     alt="icon"
                     className="w-[30px] h-[30px] mr-3"
                   />
-                  <span>{list.name}</span> {/* 회원 이름 */}
+                  <span className="text-sm md:text-base lg:text-base">{list.name}</span> {/* 회원 이름 */}
                 </Link>
                 <div className="flex">
-                  <div className="w-[215px] h-[30px] border border-custom-blue rounded-lg mr-5 flex items-center justify-center">
+                  <div className="flex items-center justify-center w-48 mr-5 border rounded-lg h-7 border-custom-blue">
                     <span className="text-xs">{list.tel}</span> {/* 회원 전화번호 */}
                   </div>
                   {isdeletebtnOpen && (
@@ -105,7 +105,7 @@ function MemberList() {
       </div>
       <img
         src={plusbtn}
-        className="fixed bottom-0 mb-20 w-7 h-7"
+        className="fixed bottom-0 w-8 h-8 mb-20"
         onClick={toggleBottomSheet}
       />
       {isBottomSheetOpen && (

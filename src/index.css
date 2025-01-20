@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+.container{
+    width: 100%;
+    min-width: 320px;
+    max-width: var(--max-width);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-top: var(--layout-padding-top);
+    background-color: var(--layout-bg-color);
+}
+
 @font-face {
     font-family: 'Pretendard';
     src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
@@ -14,4 +26,9 @@
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
+}
+
+/* 기본 폰트 크기 설정 */
+body {
+    font-family: 'Pretendard', sans-serif;
 }

@@ -4,7 +4,7 @@ import NavigationBar from "../common/bar/NavigationBar";
 import profile from "../../assets/basic-profile.svg";
 import mark from "../../assets/TRAINER 마크.svg";
 import { To, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { getUserApi, getPTListApi } from "../../store/api";
 import { useListDataStore, useMemberDataStore } from "../../store/store";
 
@@ -12,7 +12,7 @@ function Profile() {
   const navigate = useNavigate();
   const { listData, setListData } = useListDataStore(); 
   const { memberData, setMemberData } = useMemberDataStore();
-  const [loading, setLoading] = useState(true); // 로딩 상태 관리
+
 
   // 아이콘 클릭 핸들러
   const handleIconClick = (path: To) => {
@@ -33,17 +33,12 @@ function Profile() {
         if (ptListResponse?.data) setListData(ptListResponse.data);
       } catch (error) {
         console.error("데이터를 불러오는 중 에러 발생:", error);
-      } finally {
-        setLoading(false);
-      }
+      } 
     };
 
     fetchData();
   }, [setListData, setMemberData]);
 
-  if (loading) {
-    return <div>로딩 중...</div>; // 로딩 상태 표시
-  }
 
   return (
     <div>

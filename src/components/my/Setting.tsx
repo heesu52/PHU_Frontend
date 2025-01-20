@@ -26,7 +26,7 @@ const { memberData} = useMemberDataStore();
             </div>
             </div>
         </div>
-        <div className="w-[200px] h-[35px] border flex items-center justify-center rounded-md mr-3">
+        <div className="flex items-center justify-center w-40 mr-3 bg-white border rounded-md h-9">
             <span className="text-xs cursor-pointer">프로필 이미지 변경</span>
         </div>
       </div>

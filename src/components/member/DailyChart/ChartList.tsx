@@ -92,7 +92,7 @@ function ChartList() {
             </li>
           ))
         ) : (
-          <p>데이터가 없습니다.</p>
+          <p className="text-custom-grey">데이터가 없습니다.</p>
         )}
       </ul>
 

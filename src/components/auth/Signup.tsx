@@ -62,116 +62,113 @@ function SignUp() {
     <div>
       <HeaderBar label="회원가입" />
       <form className="flex flex-col items-center mt-5" onSubmit={handleSubmit}>
-        <div className="flex flex-col">
-          <span className="text-[14px] text-[#858585] mb-1">이름</span>
-          <Input
-            size="large"
-            type="text"
-            name="name"
-            value={formData.name}
-            className="mb-4"
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="flex flex-col">
-          <span className="text-[14px] text-[#858585] mb-1">나이</span>
-          <Input
-            size="large"
-            type="number"
-            name="age"
-            value={formData.age}
-            className="mb-4"
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="flex flex-col">
-          <span className="text-[14px] text-[#858585] mb-1">이메일</span>
-          <Input
-            size="large"
-            type="email"
-            name="email"
-            value={formData.email}
-            className="mb-4"
-            onChange={handleChange}
-            required
-          />
-        </div>
-        {errormessage && (
-          <div className="text-red-500">{errormessage}</div>
-        )}
-        <div className="flex flex-col">
-          <span className="text-[14px] text-[#858585] mb-1">비밀번호</span>
-          <Input
-            size="large"
-            type="password"
-            name="password"
-            value={formData.password}
-            className="mb-4"
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="flex flex-col">
-          <span className="text-[14px] text-[#858585] mb-1">핸드폰 번호</span>
-          <Input
-            size="large"
-            type="text"
-            name="tel"
-            placeholder="( - 제외 )"
-            value={formData.tel}
-            className="mb-4"
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="flex flex-col w-[500px]">
-          <span className="text-[14px] text-[#858585] mb-1">성별</span>
-          <div className="flex justify-center gap-20 mb-4">
-            <Button
-              label="여성"
-              name="gender"
-              value="FEMALE"
-              onClick={() => handleButtonClick("gender", "FEMALE")}
-              checked={formData.gender === "FEMALE"}
-            />
-            <Button
-              label="남성"
-              name="gender"
-              value="MALE"
-              onClick={() => handleButtonClick("gender", "MALE")}
-              checked={formData.gender === "MALE"}
+        <div className="flex flex-col space-y-4">
+          <div className="flex flex-col">
+            <span className="text-sm text-[#858585] mb-1">이름</span>
+            <Input
+              size="large"
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
             />
           </div>
-        </div>
-        <div className="flex flex-col w-[500px]">
-          <span className="text-[14px] text-[#858585] mb-1">파트</span>
-          <div className="flex justify-center gap-20">
-            <Button
-              label="트레이너"
-              name="part"
-              value="TRAINER"
-              onClick={() => handleButtonClick("part", "TRAINER")}
-              checked={formData.part === "TRAINER"}
-            />
-            <Button
-              label="회원"
-              name="part"
-              value="MEMBER"
-              onClick={() => handleButtonClick("part", "MEMBER")}
-              checked={formData.part === "MEMBER"}
+          <div className="flex flex-col">
+            <span className="text-sm text-[#858585] mb-1 ">나이</span>
+            <Input
+              size="large"
+              type="number"
+              name="age"
+              value={formData.age}
+              onChange={handleChange}
+              required
             />
           </div>
+          <div className="flex flex-col">
+            <span className="text-sm text-[#858585] mb-1">이메일</span>
+            <Input
+              size="large"
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          {errormessage && (
+            <div className="text-xs text-red-500">{errormessage}</div>
+          )}
+          <div className="flex flex-col">
+            <span className="text-sm text-[#858585] mb-1">비밀번호</span>
+            <Input
+              size="large"
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="flex flex-col">
+            <span className="text-sm text-[#858585] mb-1">핸드폰 번호</span>
+            <Input
+              size="large"
+              type="text"
+              name="tel"
+              placeholder="( - 제외 )"
+              value={formData.tel}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="flex flex-col">
+            <span className="text-sm text-[#858585] mb-1  ">성별</span>
+            <div className="flex justify-center gap-20 mb-4">
+              <Button
+                label="여성"
+                name="gender"
+                value="FEMALE"
+                onClick={() => handleButtonClick("gender", "FEMALE")}
+                checked={formData.gender === "FEMALE"}
+              />
+              <Button
+                label="남성"
+                name="gender"
+                value="MALE"
+                onClick={() => handleButtonClick("gender", "MALE")}
+                checked={formData.gender === "MALE"}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-sm text-[#858585] mb-1">파트</span>
+            <div className="flex justify-center gap-20">
+              <Button
+                label="트레이너"
+                name="part"
+                value="TRAINER"
+                onClick={() => handleButtonClick("part", "TRAINER")}
+                checked={formData.part === "TRAINER"}
+              />
+              <Button
+                label="회원"
+                name="part"
+                value="MEMBER"
+                onClick={() => handleButtonClick("part", "MEMBER")}
+                checked={formData.part === "MEMBER"}
+              />
+            </div>
+          </div>
+          <SubmitButton
+            label="회원가입"
+            size="large"
+            className={`mt-6 ${
+              isFormValid ? "bg-custom-blue" : "bg-custom-skyblue"
+            }`}
+            disabled={!isFormValid} // 폼이 유효하지 않으면 버튼 비활성화
+          />
         </div>
-        <SubmitButton
-          label="회원가입"
-          size="large"
-          className={`mt-6 mb-3 ${
-            isFormValid ? "bg-custom-blue" : "bg-custom-skyblue"
-          }`}
-          disabled={!isFormValid} // 폼이 유효하지 않으면 버튼 비활성화
-        />
       </form>
     </div>
   );

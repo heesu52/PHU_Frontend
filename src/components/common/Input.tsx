@@ -2,10 +2,10 @@ interface InputProps {
     className?: string;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     placeholder?: string;
-    value?: string | number;  // string 또는 number 값 처리
-    type?: 'text' | 'password' | 'email' | 'number' | 'tel' | 'search'; 
+    value?: string | number;
+    type?: 'text' | 'password' | 'email' | 'number' | 'tel' | 'search';
     name?: string;
-    size?: 'large' | 'medium' | 'small';  // 크기 선택
+    size?: 'large' | 'medium' | 'small';
     required?: boolean;
     readOnly?: boolean;
     disabled?: boolean;
@@ -23,28 +23,30 @@ function Input({
     readOnly = false,
     disabled = false,
 }: InputProps) {
-    // 크기에 따른 너비 설정
+
     const sizeClasses = {
-        large: 'w-[500px]',
-        medium: 'w-[300px]',
-        small: 'w-[92px]',
+        large: 'w-80 sm:w-[25rem] md:w-[28rem] lg:w-[31rem]',
+        medium: 'w-60 sm:w-72 md:w-[25rem] lg:w-[28rem]',
+        small: 'w-40 sm:w-48 md:w-56 lg:w-64',
     };
 
     // 입력값의 존재 여부에 따른 배경 색상 결정
     const inputBgColor = value ? 'bg-custom-softblue' : 'bg-white';
 
     return (
-        <input 
-            type={type}
-            className={`text-[16px] h-[40px] p-4 border border-custom-softgrey rounded-[5px] ${sizeClasses[size]} ${inputBgColor} ${className}`}
-            placeholder={placeholder}
-            value={value}
-            name={name}
-            onChange={onChange}
-            required={required}
-            readOnly={readOnly}
-            disabled={disabled}
-        />
+        <div className={`w-full ${sizeClasses[size]} ${className}`}>
+            <input 
+                type={type}
+                className={`text-sm sm:text-sm md:text-base lg:text-base h-9 p-4 md:h-10 lg:h-11 border border-custom-softgrey rounded-[5px] ${inputBgColor} w-full`}
+                placeholder={placeholder}
+                value={value}
+                name={name}
+                onChange={onChange}
+                required={required}
+                readOnly={readOnly}
+                disabled={disabled}
+            />
+        </div>
     );
 }
 

@@ -18,7 +18,7 @@ function NavigationBar() {
     };
 
     return (
-        <div className="fixed w-full max-w-[var(--max-width)] h-[65px] border border-t-custom-softgrey flex items-center bottom-0 bg-white">
+        <div className="fixed w-full max-w-[var(--max-width)] h-[70px] border border-t-custom-softgrey flex items-center bottom-0 bg-white">
             <div className="flex items-center justify-between w-full ml-10 mr-10">
                 <div className='flex flex-col items-center justify-center cursor-pointer' onClick={() => handleIconClick('/member')}>
                     <img 
@@ -46,11 +46,11 @@ function NavigationBar() {
                 </div>
                 <div className='flex flex-col items-center justify-center cursor-pointer' onClick={() => handleIconClick('/my')}>
                     <img 
-                        src={location.pathname === '/my' ? clickmy : my} 
+                        src={location.pathname.includes('/my') ? clickmy : my} 
                         alt="마이" 
                         className={"w-[25px] h-[25px]"} 
                     />
-                    <span className={location.pathname === '/my' ? 'text-custom-indigo font-bold' : 'text-custom-softgrey'}>마이</span>
+                    <span className={location.pathname.includes('/my') ? 'text-custom-indigo font-bold' : 'text-custom-softgrey'}>마이</span>
                 </div>
             </div>
         </div>
