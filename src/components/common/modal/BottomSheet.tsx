@@ -75,7 +75,7 @@ function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
             className="w-12 transform rotate-180 cursor-pointer"
             onClick={onClose}
           />
-          <span className="text-sm">추가할 회원의 이메일을 입력하세요</span>
+          <span className="text-sm lg:text-base">추가할 회원의 이메일을 입력하세요</span>
         </div>
         <form className="flex flex-col items-center p-7" onSubmit={handleSubmit}>
           <Input

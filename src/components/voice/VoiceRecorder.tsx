@@ -119,36 +119,33 @@ function Voice() {
             {/* Header */}
             <div className="flex items-center justify-between w-full h-[55px]">
                 <div className="flex p-3 ml-3 space-x-4">
-                    <img src={arrow} onClick={handleGoBack} />
-                    <p className="text-lg cursor-default">음성녹음</p>
+                    <img src={arrow} onClick={handleGoBack} className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" />
                 </div>
-                <img src={meatball} className="mr-5" onClick={toggleDropdown} />
+                <img src={meatball} className="w-4 h-4 mr-5 md:w-5 md:h-5 lg:w-6 lg:h-6" onClick={toggleDropdown} />
             </div>
 
             {isDropdownOpen && (
                 <Dropdown
-                    options={[
-                        { label: "요약 내용 수정", onClick: () => navigate("/member/summary/edit") },
-                    ]}
+                    options={[{ label: "요약 내용 수정", onClick: () => navigate("/member/summary/edit") }]}
                     onClose={() => setIsDropdownOpen(false)}
                 />
             )}
 
             {/* Component */}
-            <div className="flex flex-col items-center justify-center mt-14 w-[90%] space-y-8">
+            <div className="flex flex-col items-center justify-center space-y-5 mt-14">
                 <div className="text-center">
-                    <p className="text-lg">음성녹음 후 대화 요약 및 전체본을 볼 수 있습니다.</p>
-                    <p className="text-sm font-bold">녹음을 할 경우, 상대방에게 꼭 고지해주세요!</p>
+                    <p className="text-sm md:text-lg lg:text-lg">음성녹음 후 대화 요약 및 전체본을 볼 수 있습니다.</p>
+                    <p className="text-xs font-bold md:text-sm lg:text-sm">녹음을 할 경우, 상대방에게 꼭 고지해주세요!</p>
                 </div>
                 <div className="flex flex-col items-center space-y-4">
                     <Lottie
                         animationData={voice}
-                        style={{ width: "200px", height: "200px" }}
+                        style={{ width: "40%", height: "auto" }}
                         loop
                         lottieRef={lottieRef}
                     />
                     {isRecording && (
-                        <p className="text-lg font-bold text-custom-indigo">
+                        <p className="text-base font-bold md:text-lg lg:text-lg text-custom-indigo">
                             {formatTime(timer)}
                         </p>
                     )}
@@ -156,14 +153,14 @@ function Voice() {
                         <img
                             src={isRecording ? stopicon : starticon}
                             onClick={isRecording ? offRec : onRec}
-                            className="cursor-pointer w-[50px] h-[50px]"
+                            className="w-12 h-12 cursor-pointer md:w-14 md:h-14 lg:w-15 lg:h-15"
                             alt={isRecording ? "Stop Recording" : "Start Recording"}
                         />
                         {isRecording && (
                             <img
                                 src={isPaused ? playicon : pauseicon}
                                 onClick={togglePause}
-                                className="cursor-pointer w-[50px] h-[50px]"
+                                className="w-12 h-12 cursor-pointer md:w-14 md:h-14 lg:w-15 lg:h-15"
                                 alt={isPaused ? "Resume Recording" : "Pause Recording"}
                             />
                         )}
@@ -171,18 +168,17 @@ function Voice() {
 
                     {/* 녹음이 끝나면 오디오 재생 */}
                     {audioUrl && !isRecording && (
-                        <div className="flex items-center justify-center mt-5">
+                        <div className="flex items-center justify-center mt-5 space-x-3">
                             <audio controls src={audioUrl}></audio>
                             <a
                                 href={audioUrl}
                                 download="recording.wav"
-                                className="mt-2 ml-3"
-                                >
-                                {/* 이미지 대신 텍스트를 이미지로 변경 */}
+                                className="flex items-center"
+                            >
                                 <img
-                                    src={downloadIcon} 
+                                    src={downloadIcon}
                                     alt="Download"
-                                    className="w-6 h-6 cursor-pointe"
+                                    className="w-6 h-6 cursor-pointer"
                                 />
                             </a>
                         </div>

@@ -52,50 +52,52 @@ function Edit() {
     <div>
       <HeaderBar label="내 정보 변경" />
       <div>
-        <form className="flex flex-col items-center mt-5" onSubmit={handleSubmit}>
+        <form className="flex flex-col items-center w-full mt-5" onSubmit={handleSubmit}>
           <div className="flex flex-col">
-            <span className="text-[14px] text-[#858585] mb-1">이름</span>
-            <Input
-              size="large"
-              type="text"
-              name="name"
-              value={name}
-              className="mb-4"
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[14px] text-[#858585] mb-1">나이</span>
-            <Input
-              size="large"
-              type="number"
-              name="age"
-              value={age}
-              className="mb-4"
-              onChange={(e) => setAge(Number(e.target.value))}
-              required
-            />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[14px] text-[#858585] mb-1">핸드폰 번호</span>
-            <Input
-              size="large"
-              type="text"
-              name="tel"
-              value={tel}
-              className="mb-4"
-              onChange={(e) => setTel(e.target.value)}
-              required
-            />
-          </div>
-          <div className="flex justify-center">
-            <SubmitButton
-              label="확인"
-              size="small"
-              className="bg-blue-500"
-              type="submit"
-            />
+            <div className="flex flex-col">
+              <span className="text-md text-[#858585] mb-1">이름</span>
+              <Input
+                size="large"
+                type="text"
+                name="name"
+                value={name}
+                className="mb-4"
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-md text-[#858585] mb-1">나이</span>
+              <Input
+                size="large"
+                type="number"
+                name="age"
+                value={age}
+                className="mb-4"
+                onChange={(e) => setAge(Number(e.target.value))}
+                required
+              />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-md text-[#858585] mb-1">핸드폰 번호</span>
+              <Input
+                size="large"
+                type="text"
+                name="tel"
+                value={tel}
+                className="mb-4"
+                onChange={(e) => setTel(e.target.value)}
+                required
+              />
+            </div>
+            <div className="flex justify-center ">
+              <SubmitButton
+                label="확인"
+                size="large"
+                className="mt-6 bg-custom-blue"
+                type="submit"
+              />
+            </div>
           </div>
         </form>
       </div>

@@ -83,7 +83,7 @@ function SummationList () {
             </li>
           ))
         ) : (
-            <p>음성파일이 없습니다.</p>
+            <p className="text-custom-grey">음성파일이 없습니다.</p>
         )}
         </ul>
 

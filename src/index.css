@@ -9,7 +9,7 @@
     margin: auto;
     display: flex;
     flex-direction: column;
-    min-height: 100%;
+    min-height: 100vh;
     padding-top: var(--layout-padding-top);
     background-color: var(--layout-bg-color);
 }
@@ -31,26 +31,4 @@
 /* 기본 폰트 크기 설정 */
 body {
     font-family: 'Pretendard', sans-serif;
-    font-size: 16px; /* 기본 폰트 크기 */
-}
-
-/* 작은 화면에서 폰트 크기 조정 */
-@media (max-width: 640px) {
-    body {
-        font-size: 14px; /* 작은 화면에서는 폰트 크기 14px */
-    }
-}
-
-/* 중간 화면에서 폰트 크기 조정 */
-@media (max-width: 768px) {
-    body {
-        font-size: 15px; /* 중간 화면에서는 폰트 크기 15px */
-    }
-}
-
-/* 큰 화면에서 폰트 크기 조정 */
-@media (min-width: 1024px) {
-    body {
-        font-size: 18px; /* 큰 화면에서는 폰트 크기 18px */
-    }
 }
