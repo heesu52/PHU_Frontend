@@ -1,10 +1,7 @@
 import LoadingLottie from "../../lottie/LoadingLottie";
 
-interface LoadingModalProps {
-    onClose: () => void; 
-}
 
-function LoadingModal({ onClose }: LoadingModalProps) {
+function LoadingModal() {
     return (
         <div className="flex items-center justify-center space-x-2">
           <LoadingLottie />

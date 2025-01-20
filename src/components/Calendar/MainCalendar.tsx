@@ -50,7 +50,7 @@ function Chat() {
         </div>
       
       {/* MemberDeleteModal */}
-      {isModalOpen && <ChartDeleteModal onClose={toggleModal} />}
+      {isModalOpen && <ChartDeleteModal onClose={toggleModal} isOpen={false} chartId={null} />}
       <NavigationBar />
     </div>
   );
