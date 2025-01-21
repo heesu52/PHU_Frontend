@@ -7,7 +7,7 @@ interface IntroModalProps {
 function IntroModal({ onClose }: IntroModalProps) {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
-            <div className="relative bg-white rounded-md shadow-lg w-80 p-7">
+            <div className="relative p-5 bg-white rounded-md shadow-lg md:p-7 lg:p-7 w-80 md:w-96 lg:w-96">
                 {/* Close Button */}
                 <img
                     src={ximg}
