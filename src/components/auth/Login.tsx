@@ -66,7 +66,7 @@ function Login() {
               }`}
               disabled={!isFormValid} // 폼이 유효하지 않으면 버튼 비활성화
             />
-            <div className="flex justify-center text-xs text-center sm:text-sm lg:text-base">
+            <div className="flex justify-center text-xs text-center">
               <span className="mr-2 text-custom-darkgrey">
                 아직 회원이 아니신가요?
               </span>
@@ -81,7 +81,7 @@ function Login() {
             <img
               src={googleLogin}
               onClick={onGoogleLogin}
-              className="h-8 cursor-pointer sm:h-10 lg:h-12"
+              className="h-8 cursor-pointer lg:h-9"
             />
           </div>
         </div>

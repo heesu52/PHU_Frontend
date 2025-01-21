@@ -1,18 +1,19 @@
+import { To, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getUserApi, getPTListApi } from "../../store/api";
 import HeaderBar from "../common/bar/HeaderBar";
 import settingimg from "../../assets/setting.svg";
 import NavigationBar from "../common/bar/NavigationBar";
+import DeleteIDModal from "../common/modal/deleteIDModal";
 import profile from "../../assets/basic-profile.svg";
 import mark from "../../assets/TRAINER 마크.svg";
-import { To, useNavigate } from "react-router-dom";
-import { useEffect} from "react";
-import { getUserApi, getPTListApi } from "../../store/api";
 import { useListDataStore, useMemberDataStore } from "../../store/store";
 
 function Profile() {
   const navigate = useNavigate();
-  const { listData, setListData } = useListDataStore(); 
+  const { listData, setListData } = useListDataStore();
   const { memberData, setMemberData } = useMemberDataStore();
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // 아이콘 클릭 핸들러
   const handleIconClick = (path: To) => {
@@ -33,12 +34,16 @@ function Profile() {
         if (ptListResponse?.data) setListData(ptListResponse.data);
       } catch (error) {
         console.error("데이터를 불러오는 중 에러 발생:", error);
-      } 
+      }
     };
 
     fetchData();
   }, [setListData, setMemberData]);
 
+  // 회원 탈퇴 클릭 핸들러
+  const handleMemberDeleteClick = () => {
+    setIsModalOpen(true);
+  };
 
   return (
     <div>
@@ -51,23 +56,35 @@ function Profile() {
 
       {/* 사용자 정보 */}
       <div className="flex items-center w-full p-5 mb-5">
-        <img src={profile} alt="icon" className="w-[60px] h-[60px] mr-3" />
+        <img src={profile} alt="icon" className="w-10 h-10 mr-3 lg:w-14 lg:h-14" />
         <div className="flex flex-col">
           <div className="flex items-center mb-1">
-            <span className="text-base">{memberData?.name || "사용자 이름"}</span>
-            <img src={mark} alt="Trainer Mark" className="w-[50px] h-[20px] ml-1" />
+            <span className="text-sm md:text-md lg:text-base">{memberData?.name || "사용자 이름"}</span>
+            <img src={mark} alt="Trainer Mark" className="w-12 h-5 ml-2" />
           </div>
           <span className="text-sm text-custom-darkgrey">{listData?.length || 0} 명</span>
         </div>
       </div>
 
-      {/* 그래프 영역 */}
-      <div className="flex flex-col items-center">
-        <div className="w-[360px] h-[245px] border border-custom-grey rounded-xl mb-10 flex items-center justify-center">
-          <span>그래프</span>
-        </div>
-      </div>
-
+      <ul className="m-6">
+        <li
+          className="p-3 mb-1 text-sm border-b cursor-default"
+          onClick={() => handleIconClick("/my/edit")}
+        >
+          내 정보 변경
+        </li>
+        <li className="p-3 mb-1 text-sm border-b cursor-default">로그아웃</li>
+        <li
+          className="p-3 mb-1 text-sm border-b cursor-default"
+          onClick={handleMemberDeleteClick} // 회원 탈퇴 클릭 시 모달 열기
+        >
+          회원 탈퇴
+        </li>
+      </ul>
+      <DeleteIDModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)} // 모달 닫기 시 상태 초기화
+      />
       {/* 네비게이션 바 */}
       <NavigationBar />
     </div>

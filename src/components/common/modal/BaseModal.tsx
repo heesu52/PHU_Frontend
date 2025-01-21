@@ -30,24 +30,24 @@ function Modal({
   if (!isOpen) return null; 
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="p-6 bg-white rounded-lg shadow-lg w-80">
-        <h2 className="mb-4 text-lg font-bold">{title}</h2>
-        <p className="text-sm text-gray-600">{message1}</p>
-        <p className="text-sm text-gray-600">{message2}</p>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="w-64 p-6 bg-white rounded-lg shadow-lg md:w-80 lg:w-80">
+        <h2 className="mb-4 text-base font-bold lg:text-lg">{title}</h2>
+        <p className="text-xs text-gray-600 md:text-sm lg:text-sm">{message1}</p>
+        <p className="text-xs text-gray-600 md:text-sm lg:text-sm">{message2}</p>
         {children && <div className="mt-4">{children}</div>} 
         <div className="flex justify-end gap-4 mt-4">
           {onConfirm && (
             <button
               onClick={onConfirm} 
-              className="px-4 py-2 text-sm text-white bg-red-500 rounded-md hover:bg-red-600"
+              className="px-4 py-2 text-xs text-white bg-red-500 rounded-md md:text-sm lg:text-sm hover:bg-red-600"
             >
               {confirmText}
             </button>
           )}
           <button
             onClick={onClose}  
-            className="px-4 py-2 text-sm text-gray-700 rounded-md bg-custom-softgrey hover:bg-custom-grey"
+            className="px-4 py-2 text-xs text-gray-700 rounded-md md:text-sm lg:text-sm bg-custom-softgrey hover:bg-custom-grey"
           >
             {cancelText}
           </button>

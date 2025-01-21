@@ -62,7 +62,7 @@ function SignUp() {
     <div>
       <HeaderBar label="회원가입" />
       <form className="flex flex-col items-center mt-5" onSubmit={handleSubmit}>
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-3">
           <div className="flex flex-col">
             <span className="text-sm text-[#858585] mb-1">이름</span>
             <Input
@@ -123,8 +123,8 @@ function SignUp() {
             />
           </div>
           <div className="flex flex-col">
-            <span className="text-sm text-[#858585] mb-1  ">성별</span>
-            <div className="flex justify-center gap-20 mb-4">
+            <span className="text-sm text-[#858585] mb-1 ">성별</span>
+            <div className="flex justify-center gap-20">
               <Button
                 label="여성"
                 name="gender"
@@ -143,7 +143,7 @@ function SignUp() {
           </div>
           <div className="flex flex-col">
             <span className="text-sm text-[#858585] mb-1">파트</span>
-            <div className="flex justify-center gap-20">
+            <div className="flex justify-center gap-20 mb-4">
               <Button
                 label="트레이너"
                 name="part"
@@ -163,7 +163,7 @@ function SignUp() {
           <SubmitButton
             label="회원가입"
             size="large"
-            className={`mt-6 ${
+            className={`${
               isFormValid ? "bg-custom-blue" : "bg-custom-skyblue"
             }`}
             disabled={!isFormValid} // 폼이 유효하지 않으면 버튼 비활성화
