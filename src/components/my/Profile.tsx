@@ -4,7 +4,7 @@ import { getUserApi, getPTListApi } from "../../store/api";
 import HeaderBar from "../common/bar/HeaderBar";
 import settingimg from "../../assets/setting.svg";
 import NavigationBar from "../common/bar/NavigationBar";
-import DeleteIDModal from "../common/modal/deleteIDModal";
+import DeleteIDModal from "../common/modal/DeleteIDModal";
 import profile from "../../assets/basic-profile.svg";
 import mark from "../../assets/TRAINER 마크.svg";
 import { useListDataStore, useMemberDataStore } from "../../store/store";
