@@ -39,7 +39,7 @@ function MemberList() {
     setSelectMemberName(name); // 회원 이름 설정
   };
 
-  //회원리스트 가져오기
+  // 회원 리스트 가져오기
   useEffect(() => {
     const fetchPTlistInfo = async () => {
       const response = await getPTListApi();
@@ -103,11 +103,14 @@ function MemberList() {
           ) : null}
         </ul>
       </div>
-      <img
-        src={plusbtn}
-        className="fixed bottom-0 w-8 h-8 mb-20"
-        onClick={toggleBottomSheet}
-      />
+      {/* plusbtn은 isDropdownOpen 상태에 따라 조건부 렌더링 */}
+      {!isDropdownOpen && (
+        <img
+          src={plusbtn}
+          className="fixed bottom-0 w-8 h-8 mb-20"
+          onClick={toggleBottomSheet}
+        />
+      )}
       {isBottomSheetOpen && (
         <div
           className="fixed inset-0 z-40 bg-black opacity-30"

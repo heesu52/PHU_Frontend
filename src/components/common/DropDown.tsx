@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface DropdownOption {
@@ -13,6 +14,7 @@ interface DropdownProps {
 
 function Dropdown({ options, onClose }: DropdownProps) {
   const navigate = useNavigate();
+  const dropdownRef = useRef<HTMLUListElement>(null);
 
   const handleNavigate = (path?: string, onClick?: () => void) => {
     if (onClick) {
@@ -24,8 +26,24 @@ function Dropdown({ options, onClose }: DropdownProps) {
     onClose();
   };
 
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        onClose(); // 드롭다운 외부 클릭 시 onClose 호출
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [onClose]);
+
   return (
-    <ul className="absolute z-10 bg-white border rounded-md shadow-md top-10 right-5 border-custom-softgrey">
+    <ul
+      ref={dropdownRef}
+      className="absolute z-10 bg-white border rounded-md shadow-md top-10 right-5 border-custom-softgrey"
+    >
       {options.map((option, index) => (
         <li
           key={index}
@@ -38,6 +56,5 @@ function Dropdown({ options, onClose }: DropdownProps) {
     </ul>
   );
 }
-
 
 export default Dropdown;

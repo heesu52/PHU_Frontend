@@ -53,7 +53,7 @@ function Edit() {
       <HeaderBar label="내 정보 변경" />
       <div>
         <form className="flex flex-col items-center w-full mt-5" onSubmit={handleSubmit}>
-          <div className="flex flex-col">
+          <div className="flex flex-col space-y-3">
             <div className="flex flex-col">
               <span className="text-md text-[#858585] mb-1">이름</span>
               <Input
@@ -61,7 +61,6 @@ function Edit() {
                 type="text"
                 name="name"
                 value={name}
-                className="mb-4"
                 onChange={(e) => setName(e.target.value)}
                 required
               />
@@ -73,7 +72,6 @@ function Edit() {
                 type="number"
                 name="age"
                 value={age}
-                className="mb-4"
                 onChange={(e) => setAge(Number(e.target.value))}
                 required
               />
@@ -85,7 +83,6 @@ function Edit() {
                 type="text"
                 name="tel"
                 value={tel}
-                className="mb-4"
                 onChange={(e) => setTel(e.target.value)}
                 required
               />
