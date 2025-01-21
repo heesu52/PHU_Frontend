@@ -50,7 +50,7 @@ function ChartList() {
       <div className="flex items-center justify-between">
         {/* 월 선택 드롭다운 */}
         <select
-          className="block p-2 text-sm text-gray-900 border rounded-lg border-custom-grey"
+          className="block p-2 text-xs text-gray-900 border rounded-lg md:text-sm border-custom-grey"
           value={getYearMonth(selectedDate)}
           onChange={(e) => {
             const [year, month] = e.target.value.split("-");
@@ -58,7 +58,7 @@ function ChartList() {
           }}
         >
           {generateMonthOptions(chartlistData).map((month) => (
-            <option key={month} value={month}>
+            <option key={month} value={month} className="text-xs md:text-md">
               {month.replace("-", "년 ")}월
             </option>
           ))}
@@ -66,12 +66,12 @@ function ChartList() {
 
         {/* 정렬 기준 드롭다운 */}
         <select
-          className="block p-2 text-sm text-gray-900 border rounded-lg border-custom-grey"
+          className="block p-2 text-xs text-gray-900 border rounded-lg md:text-sm border-custom-grey"
           value={sortOrder}
           onChange={(e) => setSortOrder(e.target.value as 'latest' | 'oldest')}
         >
-          <option value="latest">최신순</option>
-          <option value="oldest">오래된순</option>
+          <option value="latest" className="text-xs md:text-md">최신순</option>
+          <option value="oldest" className="text-xs md:text-md">오래된순</option>
         </select>
       </div>
 
@@ -80,14 +80,14 @@ function ChartList() {
           sortedChartList.map((chart, index) => (
             <li
               key={index}
-              className="w-[80%] h-[55px] bg-white shadow-md rounded-xl flex items-center justify-center cursor-default"
+              className="w-full md:w-[80%] h-11 md:h-14 bg-white shadow-md rounded-xl flex items-center justify-center cursor-default"
             >
-              <div className="flex w-full" onClick={() => handleIconClick(`/member/chart/detail/${chart.id}`)}>
-                <p className="flex-1 text-center">{chart.chartDate}</p>
-                <p className="flex-1 text-center">
+              <div className="flex w-full " onClick={() => handleIconClick(`/member/chart/detail/${chart.id}`)}>
+                <p className="flex-1 text-xs text-center md:text-md">{chart.chartDate}</p>
+                <p className="flex-1 text-xs text-center md:text-md">
                   {chart.routines.map((routine: string) => routineLabels[routine] || routine).join(", ")}
                 </p>
-                <p className="flex-1 text-center">{chart.branch}</p>
+                <p className="flex-1 text-xs text-center md:text-md">{chart.branch}</p>
               </div>
             </li>
           ))

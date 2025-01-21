@@ -18,7 +18,7 @@ function RadioButton({ id, label, name, value, readOnly = false, checked, onChan
                 value={value}
                 checked={checked} 
                 onChange={onChange} 
-                className={`w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 border border-gray-700 rounded-full appearance-none checked:bg-[url('/src/assets/checked.svg')] bg-no-repeat bg-center checked:border-none ${
+                className={`w-4 h-4  border border-gray-700 rounded-full appearance-none checked:bg-[url('/src/assets/checked.svg')] bg-no-repeat bg-center checked:border-none ${
                     readOnly ? 'pointer-events-none opacity-60' : ''
                 }`}
                 readOnly={readOnly} 

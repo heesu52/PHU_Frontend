@@ -42,10 +42,10 @@ interface SpeakerItem {
         {list.map((item, index) => {
           const { title, titleClass, bubbleClass } = getSpeakerStyle(item.speaker);
           return (
-            <li key={index} className="flex items-start space-x-2">
-              <div className="flex flex-col items-start w-full">
-                <h4 className={`font-semibold ${titleClass}`}>{title}</h4>
-                <p className={`p-2 text-sm rounded-lg ${bubbleClass}`}>{item.text}</p>
+            <li key={index} className="flex items-center">
+              <div className="flex flex-col items-start w-full ">
+                <h4 className={`text-sm md:text-base font-semibold ${titleClass}`}>{title}</h4>
+                <p className={`p-2 text-xs md:text-sm rounded-lg ${bubbleClass}`}>{item.text}</p>
               </div>
             </li>
           );

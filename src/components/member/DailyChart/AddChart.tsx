@@ -51,22 +51,22 @@ function AddChart() {
       {/* Header */}
       <div className="flex items-center justify-between w-full h-[55px]">
         <div className="flex p-3 ml-3 space-x-4">
-          <img src={arrow} onClick={handleGoBack} />
-          <p className="text-lg cursor-default">뒤로가기</p>
+          <img src={arrow} onClick={handleGoBack} className="w-3 h-3 md:w-4 md:h-4" />
+          <p className="cursor-default text-md md:text-lg">뒤로가기</p>
         </div>
       </div>
 
       {/* Component */}
-      <div className="w-[90%] mt-5 space-y-5 ml-6">
+      <div className="w-[90%] mt-3 space-y-5">
         {/* PT 날짜 */}
         <div className="space-y-2">
-          <div className="text-base">PT 날짜</div>
+          <div className="text-sm md:text-md lg:text-base">PT 날짜</div>
           <div className="flex items-center ml-5">
             <input
               type="date"
               value={chartDate}
               onChange={(e) => setChartDate(e.target.value)}
-              className="p-2 ml-5 text-sm"
+              className="p-2 ml-5 text-xs md:text-sm lg:text-sm"
             />
 
             {/* 세션 타입 (PT/개인운동) */}
@@ -93,20 +93,20 @@ function AddChart() {
 
         {/* 몸무게 */}
         <div className="space-y-2">
-          <p>몸무게</p>
+          <p className="text-sm md:text-md lg:text-base">몸무게</p>
           <div className="flex items-center gap-2 ml-7">
             <input
               type="number"
-              className="w-[80px] h-8 border rounded-lg border-custom-skyblue flex text-center"
+              className="flex w-16 h-8 text-xs text-center border rounded-lg md:text-sm md:w-20 border-custom-skyblue"
               onChange={(e) => setWeight(Number(e.target.value))}
             />
-            <p className="text-sm">kg</p>
+            <p className="text-xs md:text-sm lg:text-sm">kg</p>
           </div>
         </div>
 
         {/* 운동부위 */}
         <div className="space-y-2">
-          <p>운동부위</p>
+          <p className="text-sm md:text-md lg:text-base">운동부위</p>
           <div className="flex items-center justify-center gap-5 p-2">
             {["SHOLDER", "CHEST", "ABS", "ARM", "LEG", "BACK", "CARDIO"].map((part) => (
               <CheckButton
@@ -140,9 +140,9 @@ function AddChart() {
 
         {/* 메모 */}
         <div className="space-y-2">
-          <div className="text-base">메모</div>
+          <div className="text-sm md:text-md lg:text-base">메모</div>
           <textarea
-            className="border w-[450px] min-h-[70px] rounded-lg text-sm border-custom-skyblue bg-white resize-none overflow-hidden indent-1 p-1 ml-7"
+            className="border w-72 md:w-[450px] min-h-[70px] rounded-lg text-sm border-custom-skyblue bg-white resize-none overflow-hidden indent-1 p-1 ml-7"
             onInput={adjustTextareaHeight}
             onChange={(e) => setMemo(e.target.value)}
             placeholder="ex) 목표 몸무게, 감량하고 싶은 부위"
@@ -152,8 +152,8 @@ function AddChart() {
 
         {/* 인증샷 */}
         <div className="space-y-2">
-          <div className="text-base">인증샷</div>
-          <div className="border w-[450px] min-h-[150px] rounded-lg text-sm bg-[#f6f6f6] p-1 ml-7 flex flex-col items-center justify-center gap-2">
+          <div className="text-sm md:text-md lg:text-base">인증샷</div>
+          <div className="border w-72 md:w-[450px] min-h-[150px] rounded-lg text-sm bg-[#f6f6f6] p-1 ml-7 flex flex-col items-center justify-center gap-2">
             <img src={imageupload} alt="업로드 아이콘" />
             <p className="text-xs text-custom-darkgrey">사진 업로드</p>
           </div>

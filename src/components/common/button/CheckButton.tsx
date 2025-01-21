@@ -18,7 +18,7 @@ function CheckButton({
     onChange,
 }: CheckBtnProps) {
     return (
-        <div className="flex items-center gap-1">
+        <div className="flex items-center md:gap-1">
             <input
                 id={id}
                 type="checkbox"
@@ -26,12 +26,12 @@ function CheckButton({
                 value={value}
                 checked={checked} 
                 onChange={onChange} 
-                className={`w-4 h-4 border border-gray-700 rounded-full appearance-none checked:bg-[url('/src/assets/checked.svg')] bg-no-repeat bg-center checked:border-none ${
+                className={`w-2 h-2 md:w-4 md:h-4 border mr-0.5 border-gray-700 rounded-full appearance-none checked:bg-[url('/src/assets/checked.svg')] bg-no-repeat bg-center checked:border-none ${
                     readOnly ? 'pointer-events-none opacity-60' : ''
                 }`}
                 readOnly={readOnly}
             />
-            <label htmlFor={id} className="text-sm font-medium ms-1">{label}</label>
+            <label htmlFor={id} className="text-xs font-medium md:text-sm ">{label}</label>
         </div>
     );
 }
