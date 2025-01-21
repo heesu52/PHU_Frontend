@@ -69,33 +69,33 @@ function BottomSheet({ onClose, isOpen }: BottomSheetProps) {
           isOpen ? 'translate-y-0' : 'translate-y-full'
         } z-50`}
       >
-        <div className="flex flex-col items-center justify-between p-1">
+        <div className="flex flex-col items-center justify-between">
           <img
             src={compactup}
             className="w-12 transform rotate-180 cursor-pointer"
             onClick={onClose}
           />
-          <span className="text-sm lg:text-base">추가할 회원의 이메일을 입력하세요</span>
+          <span className="mb-3 text-sm lg:text-base">추가할 회원의 이메일을 입력하세요</span>
+          <form className="flex flex-col items-center p-2" onSubmit={handleSubmit}>
+            <Input
+              size="medium"
+              placeholder="email"
+              type="email"
+              className=" placeholder:text-custom-softgrey"
+              value={email}
+              onChange={handleEmailChange}
+              required
+            />
+            {errormessage && (
+              <div className="mt-1 text-xs text-red-500 md:text-sm lg:text-md ">{errormessage}</div>
+            )}
+            <SubmitButton
+              label="확인"
+              size="medium"
+              className={` mt-3 cursor-pointer bg-custom-blue`}
+            />
+          </form>
         </div>
-        <form className="flex flex-col items-center border border-red-400 p-7" onSubmit={handleSubmit}>
-          <Input
-            size="medium"
-            placeholder="email"
-            type="email"
-            className="placeholder:text-custom-softgrey"
-            value={email}
-            onChange={handleEmailChange}
-            required
-          />
-          {errormessage && (
-            <div className="text-red-500 ">{errormessage}</div>
-          )}
-          <SubmitButton
-            label="확인"
-            size="small"
-            className={`m-7 cursor-pointer bg-custom-blue`}
-          />
-        </form>
       </div>
   );
 }
